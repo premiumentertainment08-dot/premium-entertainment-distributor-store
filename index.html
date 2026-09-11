@@ -208,6 +208,19 @@ body{background:linear-gradient(180deg,#fff0f7 0%,#ffd8e8 48%,#fff5f9 100%)!impo
 .sidePurchase .spNote{font-size:10px;opacity:.86;margin-top:8px}
 @media(max-width:600px){.sidePurchase{right:10px;top:auto;bottom:145px;transform:translateX(120%)}.sidePurchase.show{transform:translateX(0)}}
 </style>
+<style id="final-visibility-fix">
+.floatWa{position:fixed!important;right:14px!important;bottom:24px!important;width:58px!important;height:58px!important;z-index:10000!important;display:grid!important;visibility:visible!important;opacity:1!important;pointer-events:auto!important}
+.cartBtn{position:fixed!important;right:14px!important;bottom:94px!important;z-index:9999!important;display:flex!important;visibility:visible!important;opacity:1!important;pointer-events:auto!important}
+.cartPanel{position:fixed!important;right:14px!important;bottom:158px!important;z-index:9998!important}
+.offer{z-index:9990!important;padding-right:76px!important}
+.sidePurchase{z-index:9997!important}
+#modalBack{position:fixed!important;inset:0!important;z-index:20000!important;display:none!important;align-items:center!important;justify-content:center!important;background:rgba(35,0,22,.55)!important;padding:14px!important;overflow:auto!important}
+#modalBack.show{display:flex!important}
+#modalBack .modal{position:relative!important;z-index:20001!important;display:block!important;visibility:visible!important;opacity:1!important;width:min(620px,100%)!important;max-height:calc(100vh - 28px)!important;overflow:auto!important;margin:auto!important;border:2px solid #ffd34f!important;border-radius:22px!important;background:linear-gradient(180deg,#fff,#fff4f9)!important;box-shadow:0 25px 80px rgba(0,0,0,.38)!important}
+#purchaseSuccess{z-index:21000!important;background:rgba(35,0,22,.38)!important}
+#purchaseSuccess>div{position:relative!important;z-index:21001!important}
+@media(max-width:650px){.floatWa{right:12px!important;bottom:18px!important;width:56px!important;height:56px!important}.cartBtn{right:12px!important;bottom:84px!important}.cartPanel{right:12px!important;bottom:146px!important}.sidePurchase{right:10px!important;bottom:150px!important;z-index:19999!important}.offer{bottom:5px!important;padding-right:70px!important}#modalBack{align-items:flex-end!important;padding:8px!important}#modalBack .modal{width:100%!important;max-height:92vh!important;border-radius:22px 22px 10px 10px!important}}
+</style>
 </head>
 <body>
 <div class="top">🔥 Distributor Special Pricing • Fast Digital Delivery • WhatsApp Support</div>
@@ -296,7 +309,7 @@ body{background:linear-gradient(180deg,#fff0f7 0%,#ffd8e8 48%,#fff5f9 100%)!impo
   <button class="join" onclick="openWhatsApp('Hello, I want to join the Premium Entertainment community and get the 10% extra offer.')">Join Free</button>
   <button class="close" onclick="document.getElementById('offer').remove()">×</button>
 </div>
-<a class="floatWa" href="#" onclick="openWhatsApp('Hello, I need help with a Premium Entertainment order.');return false" aria-label="WhatsApp"><svg class="waIcon" viewBox="0 0 32 32" aria-hidden="true"><path fill="currentColor" d="M19.11 17.22c-.27-.14-1.59-.78-1.83-.87-.25-.09-.43-.14-.61.14-.18.27-.7.87-.86 1.05-.16.18-.32.2-.59.07-.27-.14-1.14-.42-2.17-1.34-.8-.71-1.34-1.59-1.5-1.86-.16-.27-.02-.42.12-.56.12-.12.27-.32.41-.48.14-.16.18-.27.27-.45.09-.18.05-.34-.02-.48-.07-.14-.61-1.47-.84-2.01-.22-.53-.45-.46-.61-.47h-.52c-.18 0-.48.07-.73.34-.25.27-.95.93-.95 2.26s.98 2.62 1.11 2.8c.14.18 1.93 2.95 4.68 4.14.65.28 1.16.45 1.56.58.66.21 1.26.18 1.74.11.53-.08 1.59-.65 1.81-1.28.23-.63.23-1.17.16-1.28-.07-.11-.25-.18-.52-.32z"/><path fill="currentColor" d="M16.02 3.2A12.78 12.78 0 0 0 5.1 22.66L3.2 28.8l6.31-1.85A12.78 12.78 0 1 0 16.02 3.2zm0 23.27c-2.04 0-4.02-.55-5.75-1.59l-.41-.24-3.74 1.1 1.12-3.64-.27-.42a10.46 10.46 0 1 1 9.05 4.79z"/></svg></a>
+<a class="floatWa" title="Chat on WhatsApp" href="#" onclick="openWhatsApp('Hello, I need help with a Premium Entertainment order.');return false" aria-label="WhatsApp"><svg class="waIcon" viewBox="0 0 32 32" aria-hidden="true"><path fill="currentColor" d="M19.11 17.22c-.27-.14-1.59-.78-1.83-.87-.25-.09-.43-.14-.61.14-.18.27-.7.87-.86 1.05-.16.18-.32.2-.59.07-.27-.14-1.14-.42-2.17-1.34-.8-.71-1.34-1.59-1.5-1.86-.16-.27-.02-.42.12-.56.12-.12.27-.32.41-.48.14-.16.18-.27.27-.45.09-.18.05-.34-.02-.48-.07-.14-.61-1.47-.84-2.01-.22-.53-.45-.46-.61-.47h-.52c-.18 0-.48.07-.73.34-.25.27-.95.93-.95 2.26s.98 2.62 1.11 2.8c.14.18 1.93 2.95 4.68 4.14.65.28 1.16.45 1.56.58.66.21 1.26.18 1.74.11.53-.08 1.59-.65 1.81-1.28.23-.63.23-1.17.16-1.28-.07-.11-.25-.18-.52-.32z"/><path fill="currentColor" d="M16.02 3.2A12.78 12.78 0 0 0 5.1 22.66L3.2 28.8l6.31-1.85A12.78 12.78 0 1 0 16.02 3.2zm0 23.27c-2.04 0-4.02-.55-5.75-1.59l-.41-.24-3.74 1.1 1.12-3.64-.27-.42a10.46 10.46 0 1 1 9.05 4.79z"/></svg></a>
 
 <div class="modalBack" id="modalBack" onclick="if(event.target===this)closeOrder()">
   <div class="modal">
@@ -457,6 +470,7 @@ function render(){
 }
 
 function openOrder(i){
+  document.getElementById('cartPanel')?.classList.remove('open');
   selected=products[i];
   document.getElementById("modalTitle").textContent="Order • "+selected.name;
   document.getElementById("mPlan").textContent=selected.name;
