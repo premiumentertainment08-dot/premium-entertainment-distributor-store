@@ -506,14 +506,68 @@ img,video,iframe{max-width:100% !important}
         <div class="grid" id="grid"></div>
         <div class="empty" id="empty" style="display:none">No products found. Try another search/category.</div>
       </div>
-      <aside class="activityPanel" id="activityPanel">
-        <div class="activityHead"><div><b>🟢 Order Activity</b><span>Orders submitted on this device</span></div><button onclick="document.getElementById('activityPanel').classList.toggle('collapsed')">×</button></div>
-        <div id="activityList"><div class="activityEmpty">No orders submitted yet.</div></div>
-        <div class="activityFoot">Your real order confirmations will appear here after you submit an order.</div>
-      </aside>
     </div>
   </section>
 </main>
+
+
+<footer class="premiumFooter">
+  <div class="footerTitle">PREMIUM ENTERTAINMENT STORE</div>
+  <div class="footerTagline">Experience Excellence • Secure QR Checkout • WhatsApp Support</div>
+  <div class="footerSub">Premium Digital Entertainment at Distributor Prices</div>
+  <div class="footerMini">Fast Delivery • Trusted Service • Customer Support</div>
+</footer>
+<style id="premium-footer-final">
+.premiumFooter{
+  margin:34px 0 90px;
+  padding:42px 18px 46px;
+  text-align:center;
+  background:linear-gradient(180deg,#070b14,#03060c);
+  border-top:1px solid rgba(255,211,79,.28);
+  color:#fff;
+}
+.premiumFooter .footerTitle{
+  color:#ffd34f;
+  font-size:22px;
+  font-weight:900;
+  letter-spacing:5px;
+  line-height:1.35;
+}
+.premiumFooter .footerTagline{
+  margin-top:14px;
+  color:#eee7ed;
+  font-size:14px;
+  letter-spacing:2px;
+}
+.premiumFooter .footerSub{
+  margin-top:20px;
+  color:#fff;
+  font-size:15px;
+  font-weight:800;
+}
+.premiumFooter .footerMini{
+  margin-top:8px;
+  color:#c9c0c8;
+  font-size:12px;
+}
+@media(max-width:650px){
+  .premiumFooter{
+    margin:24px 0 90px;
+    padding:34px 14px 40px;
+  }
+  .premiumFooter .footerTitle{
+    font-size:18px;
+    letter-spacing:3.5px;
+  }
+  .premiumFooter .footerTagline{
+    font-size:12px;
+    letter-spacing:1px;
+    line-height:1.7;
+  }
+  .premiumFooter .footerSub{font-size:13px}
+  .premiumFooter .footerMini{font-size:11px}
+}
+</style>
 
 <div class="offer" id="offer">
   <div class="offerIcon">◉</div>
