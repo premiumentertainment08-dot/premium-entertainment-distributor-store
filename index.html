@@ -264,14 +264,29 @@ body{background:linear-gradient(180deg,#fff0f7 0%,#ffd8e8 48%,#fff5f9 100%)!impo
     <div class="categories" id="categoriesGrid"></div>
   </section>
 
+  <section class="pinkPromo wrapPromo">
+    <div class="promoGift">🎁</div>
+    <div class="promoCopy"><b>BIG SAVINGS</b><span>ON PREMIUM SUBSCRIPTIONS</span><small>ENTERTAIN MORE. SPEND LESS.</small></div>
+    <button onclick="scrollToId('products')">LIMITED TIME OFFER</button>
+  </section>
+
   <section class="section" id="products">
     <div class="secHead"><h2>🔥 Popular Products</h2><small id="result"></small></div>
     <div class="toolbar">
       <div class="search"><span>⌕</span><input id="search" placeholder="Search your favorite OTT, software, AI..." oninput="render()"></div>
       <div class="tabs" id="tabs"></div>
     </div>
-    <div class="grid" id="grid"></div>
-    <div class="empty" id="empty" style="display:none">No products found. Try another search/category.</div>
+    <div class="catalogArea">
+      <div>
+        <div class="grid" id="grid"></div>
+        <div class="empty" id="empty" style="display:none">No products found. Try another search/category.</div>
+      </div>
+      <aside class="activityPanel" id="activityPanel">
+        <div class="activityHead"><div><b>🟢 Order Activity</b><span>Orders submitted on this device</span></div><button onclick="document.getElementById('activityPanel').classList.toggle('collapsed')">×</button></div>
+        <div id="activityList"><div class="activityEmpty">No orders submitted yet.</div></div>
+        <div class="activityFoot">Your real order confirmations will appear here after you submit an order.</div>
+      </aside>
+    </div>
   </section>
 </main>
 
@@ -425,7 +440,7 @@ function card(p,i){
         <div class="detail"><b>Supported:</b> ${d.supported}</div>
       </div>
       <div class="priceRow"><span class="price">${money(p.price)}</span>${mrp}</div>
-      <div style="display:flex;gap:7px"><button class="buy" style="flex:1" onclick="openOrder(${i})">⚡ Buy Now</button><button class="buy" style="width:48px;padding:0" aria-label="Add to cart" onclick="addToCart(${i})">🛒</button></div>
+      <div class="cardActions"><button class="buy goldBuy" onclick="addToCart(${i})">🛒 Add to Cart</button><button class="buy" onclick="openOrder(${i})">⚡ Buy Now</button></div>
     </div>
   </article>`;
 }
@@ -471,7 +486,7 @@ function sendOrder(){
   const phone=document.getElementById("phone").value.trim();
   if(!name||!phone){alert("Please enter Full Name and WhatsApp Number first.");return;}
   openWhatsApp(orderMessage());
-  setTimeout(()=>{showPurchaseSuccess(name,phone,selected);showSidePurchase(name,phone,selected);},700);
+  setTimeout(()=>{showPurchaseSuccess(name,phone,selected);showSidePurchase(name,phone,selected);addActivity(name,phone,selected);},700);
 }
 
 function payUPI(){
@@ -517,6 +532,17 @@ renderCategories();renderRecent();render();
 </div>
 <script>
 const cart=[];
+const activity=[];
+function addActivity(name,phone,p){
+  activity.unshift({name,phone,product:p.name,plan:p.meta,amount:p.price,time:new Date()});
+  renderActivity();
+}
+function renderActivity(){
+  const box=document.getElementById('activityList'); if(!box)return;
+  if(!activity.length){box.innerHTML='<div class="activityEmpty">No orders submitted yet.</div>';return}
+  box.innerHTML=activity.slice(0,6).map(x=>`<div class="activityItem"><div class="activityAvatar">${initials(x.product)}</div><div><b>${escapeHtml(x.name)}</b><strong>${escapeHtml(x.product)}</strong><span>${escapeHtml(x.plan)} • ${money2(x.amount)}</span><small>${x.time.toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'})}</small></div></div>`).join('');
+}
+function escapeHtml(v){return String(v).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
 function money2(n){return '₹'+Number(n||0).toLocaleString('en-IN')}
 function addToCart(i){
   const p=products[i];
@@ -536,10 +562,11 @@ function renderCart(){
   let sum=0;
   box.innerHTML=cart.map(x=>{
     const p=products[x.i]; sum+=Number(p.price||0)*x.qty;
-    return '<div class="cartItem"><span>'+p.name+' × '+x.qty+'</span><b>'+money2(Number(p.price||0)*x.qty)+'</b></div>'
+    return '<div class="cartItem"><div><b>'+p.name+'</b><small>'+p.meta+'</small></div><div class="cartQty"><button onclick="changeCartQty('+x.i+',-1)">−</button><span>'+x.qty+'</span><button onclick="changeCartQty('+x.i+',1)">+</button></div><strong>'+money2(Number(p.price||0)*x.qty)+'</strong></div>'
   }).join('');
   total.textContent=money2(sum);
 }
+function changeCartQty(i,delta){const x=cart.find(v=>v.i===i);if(!x)return;x.qty+=delta;if(x.qty<=0)cart.splice(cart.indexOf(x),1);renderCart()}
 function toggleCart(){document.getElementById('cartPanel').classList.toggle('open')}
 function checkoutCart(){
   if(!cart.length){showPurchasePopup('Cart is empty');return}
@@ -565,6 +592,7 @@ function confirmPaid(){
   if(!name||!phone){alert("Please enter Full Name and WhatsApp Number first.");return;}
   showPurchaseSuccess(name,phone,selected);
   showSidePurchase(name,phone,selected);
+  addActivity(name,phone,selected);
 }
 function showPurchasePopup(text){
   const t=document.getElementById('purchaseToast'); t.textContent='🛍️ '+text; t.classList.remove('show'); void t.offsetWidth; t.classList.add('show');
@@ -573,7 +601,7 @@ function showPurchasePopup(text){
 
 <div class="sidePurchase" id="sidePurchase" aria-live="polite">
   <div class="spHead">
-    <div class="spTitle">🎉 New Purchase</div>
+    <div class="spTitle">🎉 Order Submitted</div>
     <button class="spClose" onclick="hideSidePurchase()">×</button>
   </div>
   <div class="spBody">
@@ -601,3 +629,25 @@ function hideSidePurchase(){document.getElementById("sidePurchase").classList.re
 </script>
 </body>
 </html>
+
+/* PREMIUM PINK-GOLD SCREENSHOT LOOK */
+:root{--bg:#8d0640;--ink:#24101b;--maroon:#e30068;--line:#ff8ebd;--gold:#ffd34f}
+body{background:radial-gradient(circle at 20% 0%,#d70b67 0,#9b0645 38%,#68032f 100%);color:#fff;min-height:100vh}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;background:radial-gradient(circle at 78% 8%,rgba(255,72,160,.35),transparent 28%),radial-gradient(circle at 8% 55%,rgba(255,184,46,.12),transparent 22%);z-index:-1}
+.top{background:#61042f;color:#ffe9a1}
+.header{background:rgba(119,3,54,.88)!important;backdrop-filter:blur(14px);box-shadow:0 5px 30px rgba(38,0,19,.28);border-bottom:1px solid rgba(255,211,79,.45)}
+.nav{min-height:76px}.brandMark{width:58px;height:58px;border:2px solid #ffd34f;border-radius:16px;box-shadow:0 0 24px rgba(255,211,79,.25)}
+.brandText b{color:#ffd85d;font-size:17px}.brandText span{color:#fff;letter-spacing:2px}.iconBtn{background:rgba(255,255,255,.05);border-color:rgba(255,211,79,.5);color:#fff;font-size:22px}
+.hero{margin-top:8px}.heroBox{background:linear-gradient(135deg,rgba(118,0,48,.9),rgba(185,6,78,.72));border:1px solid #ff9bc3;border-radius:20px;box-shadow:0 12px 35px rgba(35,0,19,.25);padding:15px}.heroKicker{color:#ffd35a}.hero h1{color:#fff}.hero h1 strong{color:#ffd34f}.hero p{color:#ffdce9}.goldBtn{background:linear-gradient(180deg,#ffe27a,#e7ad26);color:#3d2200}.waBtn{background:#10c864;color:#fff;border:0}
+.stats{background:rgba(89,0,40,.45);border-color:rgba(255,211,79,.4)}.stat{border-color:rgba(255,255,255,.14)}.stat b{color:#ffd45a}.stat span{color:#ffe6f0}
+.section{margin-top:15px}.secHead h2{color:#fff}.secHead small{color:#ffd3e5}
+.recent{scrollbar-width:none}.recentCard,.trustCard,.catCard,.toolbar{background:rgba(255,244,249,.97);border-color:#ff94bc;box-shadow:0 8px 24px rgba(40,0,20,.2)}
+.recentCard img{background:#350018}.recentCard b{color:#28121d}.recentCard span{color:#c7005a}.trustIcon,.catIcon{background:linear-gradient(145deg,#fff1b5,#ffd14c);color:#7b4d00}
+.toolbar{padding:9px;background:rgba(255,247,251,.98)}.search{background:#fff;border-color:#f2a6c7}.tab{background:#fff0f7;color:#8d1750;border-color:#f09ac0}.tab.active{background:linear-gradient(180deg,#ffcc4d,#e8a925);color:#351f00;border-color:#ffd65e}
+.pinkPromo{margin:16px 0 8px;display:flex;align-items:center;gap:14px;padding:10px 15px;border:2px solid #ffd45b;border-radius:18px;background:linear-gradient(100deg,#7d022f,#a9004e,#69002f);box-shadow:0 12px 30px rgba(0,0,0,.22)}.promoGift{font-size:44px}.promoCopy{flex:1;text-align:center}.promoCopy b{display:block;font-size:29px;line-height:1;color:#fff}.promoCopy span{display:block;font-size:17px;color:#ffd75d;font-weight:900}.promoCopy small{display:block;color:#ffe5ef;font-size:10px;margin-top:2px}.pinkPromo button{border:0;border-radius:999px;padding:11px 15px;background:linear-gradient(#ffe27a,#e8ad27);font-weight:950;color:#321d00;white-space:nowrap}
+.catalogArea{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:12px;align-items:start}.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.card{background:rgba(255,247,250,.98);border:2px solid #ff9ac1;border-radius:18px;box-shadow:0 12px 30px rgba(35,0,18,.28)}.pic{height:175px;background:#240012;padding:7px}.pic img{object-fit:cover}.badge{background:#ffd44d;color:#251600;border-radius:999px}.tag{background:#ffd44d;color:#351e00;border-color:#ffe28a;border-radius:999px}.body{padding:10px;color:#26131d}.cat{color:#a45b1a}.name{font-size:14px}.meta{color:#76626d}.details{color:#64525d}.price{color:#d70061;font-size:20px}.buy{background:linear-gradient(180deg,#f40071,#c50059);border-radius:11px;padding:10px 7px}.goldBuy{background:linear-gradient(180deg,#ffe071,#e7a923);color:#321d00}.cardActions{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:7px}
+.activityPanel{background:linear-gradient(180deg,rgba(113,0,49,.98),rgba(86,0,37,.98));border:2px solid #ff9ac1;border-radius:18px;padding:11px;position:sticky;top:88px;box-shadow:0 14px 36px rgba(30,0,15,.35)}.activityHead{display:flex;justify-content:space-between;align-items:center;color:#fff}.activityHead b{font-size:18px}.activityHead span{display:block;font-size:10px;color:#ffd8e7;margin-top:2px}.activityHead button{border:0;background:rgba(255,255,255,.13);color:#fff;border-radius:50%;width:28px;height:28px;font-size:18px}.activityItem{display:flex;gap:9px;background:#fff0f6;color:#2d1621;border-radius:13px;padding:9px;margin-top:8px}.activityAvatar{width:44px;height:44px;border-radius:11px;background:#1b1020;color:#ffd34f;display:grid;place-items:center;font-weight:1000;flex:none}.activityItem b,.activityItem strong,.activityItem span,.activityItem small{display:block}.activityItem b{font-size:11px}.activityItem strong{font-size:12px;margin-top:1px}.activityItem span{font-size:10px}.activityItem small{font-size:8px;color:#7f6c77;margin-top:2px}.activityEmpty{padding:25px 10px;text-align:center;color:#ffd5e6;font-size:11px}.activityFoot{font-size:8px;color:#e9b9cf;line-height:1.35;margin-top:8px}
+.offer{bottom:9px;background:linear-gradient(100deg,#4b0126,#8d0342);border:1px solid #ffcb45}.join{background:linear-gradient(#ffe071,#e7a923);color:#321d00}.floatWa{right:16px;bottom:20px;width:58px;height:58px;z-index:125;border:3px solid #fff;background:#12c966}.cartBtn{position:fixed;right:16px;bottom:90px;z-index:124;background:linear-gradient(180deg,#ffe071,#e7a923);color:#321d00;border:2px solid #fff;border-radius:999px;padding:12px 15px;font-weight:1000;box-shadow:0 10px 25px rgba(0,0,0,.3)}.cartCount{background:#ef0067;color:#fff;border-radius:50%;min-width:23px;height:23px;display:inline-grid;place-items:center;margin-left:5px;font-size:11px}.cartPanel{right:16px;bottom:150px;z-index:123;background:#fff5fa;border:2px solid #ffd34f;color:#2b1420;box-shadow:0 20px 60px rgba(0,0,0,.35)}.cartItem{display:grid;grid-template-columns:1fr auto auto;gap:7px;align-items:center;border-bottom:1px solid #f1d4e0;padding:9px 0;font-size:10px}.cartItem b,.cartItem small{display:block}.cartItem small{color:#8c7180;margin-top:2px}.cartQty{display:flex;align-items:center;border:1px solid #e8bfd1;border-radius:8px;overflow:hidden}.cartQty button{border:0;background:#ffe4ef;width:25px;height:25px}.cartQty span{width:24px;text-align:center;font-weight:900}.cartItem strong{color:#d00060;font-size:11px}.modalBack{background:rgba(42,0,23,.78)}.modal{background:linear-gradient(#fff,#fff5fa);border:2px solid #ffd34f}.modal h3{color:#bd0054}.payBtn.upi{background:linear-gradient(#ffe071,#e7a923)}
+.sidePurchase{right:14px;top:50%;width:min(310px,calc(100vw - 28px));background:linear-gradient(180deg,#7d0338,#4e0126);border:2px solid #ffd34f;box-shadow:0 18px 50px rgba(0,0,0,.38);z-index:130}.sidePurchase .spBody{background:#fff0f6}.sidePurchase .spTitle{color:#fff}.sidePurchase .spRow b{color:#b90058}
+@media(max-width:900px){.catalogArea{grid-template-columns:1fr}.activityPanel{position:relative;top:auto;order:-1}.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:650px){.wrap{padding:0 9px}.brandText b{font-size:12px}.brandMark{width:46px;height:46px}.heroBox{padding:12px}.hero h1{font-size:22px}.stats{grid-template-columns:repeat(4,1fr)}.stat b{font-size:15px}.recentCard{min-width:104px}.pinkPromo{margin-left:0;margin-right:0;padding:8px;gap:7px}.promoGift{font-size:30px}.promoCopy b{font-size:21px}.promoCopy span{font-size:11px}.promoCopy small{font-size:7px}.pinkPromo button{font-size:8px;padding:9px}.catalogArea{display:block}.activityPanel{margin-bottom:10px}.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}.pic{height:130px}.name{font-size:12px}.details{font-size:8px}.cardActions{grid-template-columns:1fr 1fr}.buy{font-size:9px;padding:9px 3px}.offer{bottom:5px;width:calc(100% - 10px)}.floatWa{right:12px;bottom:18px;width:55px;height:55px}.cartBtn{right:12px;bottom:82px;padding:10px 12px}.cartPanel{right:12px;bottom:142px}.sidePurchase{right:10px;bottom:148px;top:auto;transform:translateX(120%)}.sidePurchase.show{transform:translateX(0)}}
