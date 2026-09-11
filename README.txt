@@ -1,6 +1,4 @@
-PREMIUM ENTERTAINMENT DISTRIBUTOR STORE
-1. Open index.html in a browser.
-2. Edit the WHATSAPP number inside index.html.
-3. Edit the products array to change products/prices.
-4. Upload index.html to GitHub Pages, Netlify, Vercel, or your hosting.
-Note: use only products/services you are authorised to distribute and follow the relevant platform terms.
+Premium Entertainment Store
+
+Open index.html in a browser.
+Replace https://wa.me/91XXXXXXXXXX in index.html with your WhatsApp business number before publishing.
