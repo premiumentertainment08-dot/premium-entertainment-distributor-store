@@ -131,6 +131,58 @@ button,input{font:inherit}button{cursor:pointer}a{text-decoration:none;color:inh
   overflow:hidden;
 }
 </style>
+
+<style>
+:root{
+  --pink:#f7d9e8;--pink2:#fff0f7;--gold:#c79a2b;--gold2:#f3d37a;
+}
+body{background:linear-gradient(180deg,var(--pink2) 0%,#fff 42%,#f9e5ef 100%)}
+.announcement{background:linear-gradient(90deg,#7d163f,#b45a78,#7d163f)}
+.btn,.buy,.cartBtn{background:linear-gradient(135deg,#8b1748,var(--gold));border-color:var(--gold);color:#fff}
+.card,.trust,.category,.recentCard,.modalBox{border-color:rgba(199,154,43,.35)}
+.card{box-shadow:0 8px 25px rgba(126,40,78,.10)}
+.cartBtn{position:fixed;right:18px;bottom:82px;z-index:80;border:0;border-radius:999px;padding:12px 16px;font-weight:900;box-shadow:0 8px 25px rgba(126,40,78,.25);cursor:pointer}
+.cartCount{background:#fff;color:#7d163f;border-radius:999px;padding:2px 7px;margin-left:5px}
+.cartPanel{position:fixed;right:14px;bottom:140px;width:min(360px,calc(100vw - 28px));max-height:65vh;overflow:auto;background:#fff;border:2px solid rgba(199,154,43,.5);border-radius:18px;padding:16px;z-index:90;box-shadow:0 20px 60px rgba(55,20,35,.25);display:none}
+.cartPanel.open{display:block}
+.cartItem{display:flex;justify-content:space-between;gap:10px;padding:10px 0;border-bottom:1px solid #eee}
+.toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);background:#fff;border:1px solid var(--gold);color:#351b28;padding:11px 16px;border-radius:999px;box-shadow:0 8px 30px rgba(0,0,0,.18);z-index:120;font-weight:800;display:none}
+.toast.show{display:block;animation:fadeToast 4s ease forwards}
+@keyframes fadeToast{0%,75%{opacity:1}100%{opacity:0}}
+</style>
+
+<style id="pink-gold-theme">
+:root{
+ --maroon:#7d163f;
+ --gold:#c79a2b;
+ --gold2:#f0cf72;
+ --pink:#f7dce9;
+ --pink2:#fff2f8;
+ --ink:#321d29;
+}
+html,body{background:linear-gradient(180deg,#fff1f8 0%,#f9dfeb 45%,#fff 100%) !important;color:var(--ink)}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;background:radial-gradient(circle at 10% 0%,rgba(240,207,114,.18),transparent 28%),radial-gradient(circle at 90% 20%,rgba(125,22,63,.08),transparent 32%);z-index:-1}
+.announcement{background:linear-gradient(90deg,#7d163f,#a83e67,#c79a2b,#a83e67,#7d163f)!important}
+header,.header,.topbar{background:rgba(255,255,255,.94)!important;border-bottom:1px solid rgba(199,154,43,.35)!important}
+.card,.trust,.category,.recentCard,.modalBox,.modal,.cartPanel{
+ background:linear-gradient(180deg,#fff,#fff7fb)!important;
+ border-color:rgba(199,154,43,.42)!important;
+ box-shadow:0 8px 26px rgba(125,22,63,.10)!important;
+}
+.card:hover{box-shadow:0 12px 32px rgba(199,154,43,.22)!important}
+h1,h2,h3,.sectionTitle{color:#7d163f}
+.badge,.tag{background:linear-gradient(135deg,#c79a2b,#f0cf72)!important;color:#3b2410!important}
+.buy,.btn,.cartBtn,.payBtn{
+ background:linear-gradient(135deg,#7d163f,#b54470 48%,#c79a2b)!important;
+ border-color:#c79a2b!important;color:#fff!important;
+}
+.search,.input,input,textarea,select{
+ border-color:rgba(199,154,43,.45)!important;background:#fffafe!important;
+}
+.brandMark{border:2px solid rgba(199,154,43,.65)!important}
+.waIcon{color:#fff!important}
+#purchaseSuccess>div{border-color:#c79a2b!important;background:linear-gradient(180deg,#fff,#fff3f8)!important}
+</style>
 </head>
 <body>
 <div class="top">🔥 Distributor Special Pricing • Fast Digital Delivery • WhatsApp Support</div>
@@ -222,7 +274,7 @@ button,input{font:inherit}button{cursor:pointer}a{text-decoration:none;color:inh
     </div>
     <div class="note">Your order details will be sent to WhatsApp support. Please verify the plan, amount and terms before payment.</div>
     <div class="payBtns">
-      <button class="payBtn upi" onclick="payUPI()">▦ Pay via UPI</button>
+      <button class="payBtn upi" onclick="payUPI()">▦ Pay via UPI</button><button class="payBtn" style="width:100%;margin-top:7px;background:linear-gradient(135deg,#c79a2b,#8b1748);color:#fff" onclick="confirmPaid()">✅ I Have Paid / Confirm Order</button>
       <button class="payBtn whats" onclick="sendOrder()">◉ Order on WhatsApp</button>
     </div>
     <button class="payBtn" style="width:100%;margin-top:7px;background:#f0eaf3;color:#5b4d5d" onclick="closeOrder()">Close</button>
@@ -348,7 +400,7 @@ function card(p,i){
         <div class="detail"><b>Supported:</b> ${d.supported}</div>
       </div>
       <div class="priceRow"><span class="price">${money(p.price)}</span>${mrp}</div>
-      <button class="buy" onclick="openOrder(${i})">⚡ Buy Now</button>
+      <div style="display:flex;gap:7px"><button class="buy" style="flex:1" onclick="openOrder(${i})">⚡ Buy Now</button><button class="buy" style="width:48px;padding:0" aria-label="Add to cart" onclick="addToCart(${i})">🛒</button></div>
     </div>
   </article>`;
 }
@@ -390,7 +442,11 @@ Email: ${email||"Not provided"}`;
 
 function sendOrder(){
   if(!selected)return;
+  const name=document.getElementById("name").value.trim();
+  const phone=document.getElementById("phone").value.trim();
+  if(!name||!phone){alert("Please enter Full Name and WhatsApp Number first.");return;}
   openWhatsApp(orderMessage());
+  setTimeout(()=>showPurchaseSuccess(name,phone,selected),700);
 }
 
 function payUPI(){
@@ -406,6 +462,87 @@ function payUPI(){
 }
 
 renderCategories();renderRecent();render();
+</script>
+
+<button class="cartBtn" onclick="toggleCart()">🛒 Cart <span class="cartCount" id="cartCount">0</span></button>
+<div class="cartPanel" id="cartPanel">
+  <h3 style="margin:0 0 10px">Your Cart</h3>
+  <div id="cartItems"><div style="font-size:13px;color:#777">Your cart is empty.</div></div>
+  <div style="display:flex;justify-content:space-between;margin-top:14px;font-weight:900">
+    <span>Total</span><span id="cartTotal">₹0</span>
+  </div>
+  <button class="buy" style="width:100%;margin-top:12px" onclick="checkoutCart()">Proceed to Checkout</button>
+</div>
+
+<div class="toast" id="purchaseToast"></div>
+<div id="purchaseSuccess" style="display:none;position:fixed;inset:0;background:rgba(25,8,18,.58);z-index:200;align-items:center;justify-content:center;padding:18px">
+  <div style="width:min(390px,100%);background:linear-gradient(180deg,#fff,#fff7fb);border:2px solid #c79a2b;border-radius:22px;padding:22px;text-align:center;box-shadow:0 25px 80px rgba(0,0,0,.3)">
+    <div style="font-size:42px">🎉</div>
+    <h2 style="margin:6px 0;color:#7d163f">Purchase Successful!</h2>
+    <div id="successName" style="font-size:17px;font-weight:900"></div>
+    <div style="margin-top:10px;text-align:left;background:#fff;border:1px solid #ead8e2;border-radius:14px;padding:13px">
+      <div><b>Product:</b> <span id="successProduct"></span></div>
+      <div style="margin-top:5px"><b>Duration:</b> <span id="successDuration"></span></div>
+      <div style="margin-top:5px"><b>Amount:</b> <span id="successAmount"></span></div>
+      <div style="margin-top:5px"><b>WhatsApp:</b> <span id="successPhone"></span></div>
+    </div>
+    <div style="font-size:12px;color:#6f626b;margin:12px 0">Your order details have been recorded. Our support team will process your subscription.</div>
+    <button class="buy" style="width:100%" onclick="closePurchaseSuccess()">Done</button>
+  </div>
+</div>
+<script>
+const cart=[];
+function money2(n){return '₹'+Number(n||0).toLocaleString('en-IN')}
+function addToCart(i){
+  const p=products[i];
+  const found=cart.find(x=>x.i===i);
+  if(found) found.qty++;
+  else cart.push({i,qty:1});
+  renderCart();
+  showPurchasePopup(p.name+' added to cart');
+}
+function renderCart(){
+  const box=document.getElementById('cartItems');
+  const count=document.getElementById('cartCount');
+  const total=document.getElementById('cartTotal');
+  const qty=cart.reduce((a,x)=>a+x.qty,0);
+  count.textContent=qty;
+  if(!cart.length){box.innerHTML='<div style="font-size:13px;color:#777">Your cart is empty.</div>';total.textContent='₹0';return}
+  let sum=0;
+  box.innerHTML=cart.map(x=>{
+    const p=products[x.i]; sum+=Number(p.price||0)*x.qty;
+    return '<div class="cartItem"><span>'+p.name+' × '+x.qty+'</span><b>'+money2(Number(p.price||0)*x.qty)+'</b></div>'
+  }).join('');
+  total.textContent=money2(sum);
+}
+function toggleCart(){document.getElementById('cartPanel').classList.toggle('open')}
+function checkoutCart(){
+  if(!cart.length){showPurchasePopup('Cart is empty');return}
+  const first=cart[0]; openOrder(first.i);
+}
+
+function showPurchaseSuccess(name,phone,p){
+  document.getElementById("successName").textContent="Thank you, "+name+"!";
+  document.getElementById("successProduct").textContent=p.name;
+  document.getElementById("successDuration").textContent=p.meta;
+  document.getElementById("successAmount").textContent=money2(p.price);
+  document.getElementById("successPhone").textContent=phone;
+  document.getElementById("purchaseSuccess").style.display="flex";
+}
+function closePurchaseSuccess(){
+  document.getElementById("purchaseSuccess").style.display="none";
+  closeOrder();
+}
+function confirmPaid(){
+  if(!selected)return;
+  const name=document.getElementById("name").value.trim();
+  const phone=document.getElementById("phone").value.trim();
+  if(!name||!phone){alert("Please enter Full Name and WhatsApp Number first.");return;}
+  showPurchaseSuccess(name,phone,selected);
+}
+function showPurchasePopup(text){
+  const t=document.getElementById('purchaseToast'); t.textContent='🛍️ '+text; t.classList.remove('show'); void t.offsetWidth; t.classList.add('show');
+}
 </script>
 </body>
 </html>
