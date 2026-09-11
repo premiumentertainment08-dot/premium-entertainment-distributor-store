@@ -209,69 +209,125 @@ body{background:linear-gradient(180deg,#fff0f7 0%,#ffd8e8 48%,#fff5f9 100%)!impo
 @media(max-width:600px){.sidePurchase{right:10px;top:auto;bottom:145px;transform:translateX(120%)}.sidePurchase.show{transform:translateX(0)}}
 </style>
 
-<style id="offer-timer-style">
-.offerTimerBanner{
-  position:relative !important;
-  display:grid !important;
-  grid-template-columns:64px minmax(0,1fr) auto auto !important;
-  align-items:center !important;
-  gap:12px !important;
-  min-height:128px !important;
+<style id="stable-mobile-final">
+html,body{
+  width:100% !important;
+  max-width:100% !important;
+  overflow-x:hidden !important;
+}
+*,*:before,*:after{box-sizing:border-box !important}
+img,video,iframe{max-width:100% !important}
+.wrap{width:100% !important;max-width:1120px !important}
+.grid,.categories,.trust,.stats{min-width:0 !important}
+.grid>*,.categories>*{min-width:0 !important}
+.card,.catCard,.trust,.stat,.heroBox,.pinkPromo{max-width:100% !important}
+
+/* Bottom controls never overlap each other */
+.offer{
+  left:9px !important;
+  right:9px !important;
+  bottom:8px !important;
+  transform:none !important;
+  width:auto !important;
+  max-width:none !important;
+  z-index:7000 !important;
+}
+.floatWa{
+  right:14px !important;
+  bottom:78px !important;
+  z-index:9000 !important;
+}
+.cartBtn{
+  right:14px !important;
+  bottom:140px !important;
+  z-index:9001 !important;
+}
+.cartPanel{
+  right:12px !important;
+  bottom:198px !important;
+  width:min(360px,calc(100% - 24px)) !important;
+  max-width:calc(100% - 24px) !important;
+  z-index:9002 !important;
+}
+
+/* Buy Now is a true mobile bottom sheet, never wider than viewport */
+.modalBack{
+  position:fixed !important;
+  inset:0 !important;
+  width:100% !important;
+  max-width:100% !important;
+  padding:0 !important;
   overflow:hidden !important;
-  padding:16px 18px !important;
-  background:linear-gradient(135deg,#8b0045 0%,#d40068 52%,#ff9b18 100%) !important;
-  border:2px solid #ffd34f !important;
-  box-shadow:0 12px 30px rgba(112,0,52,.22) !important;
+  z-index:10000 !important;
 }
-.offerTimerBanner:before{
-  content:"" !important; position:absolute !important; inset:0 !important;
-  background:radial-gradient(circle at 18% 50%,rgba(255,210,70,.22),transparent 30%),
-             radial-gradient(circle at 78% 10%,rgba(255,255,255,.13),transparent 28%) !important;
-  pointer-events:none !important;
+.modal{
+  width:100% !important;
+  max-width:680px !important;
+  margin:0 auto !important;
+  max-height:88dvh !important;
+  overflow-y:auto !important;
+  overflow-x:hidden !important;
+  border-radius:20px 20px 0 0 !important;
+  padding:14px !important;
 }
-.offerTimerBanner>*{position:relative !important;z-index:1 !important}
-.offerTimerBanner .promoGift{
-  width:58px !important;height:58px !important;border-radius:18px !important;
-  display:grid !important;place-items:center !important;background:#ffca3a !important;
-  font-size:35px !important;box-shadow:0 5px 15px rgba(0,0,0,.2) !important;
+.modalGrid{
+  grid-template-columns:1fr !important;
+  width:100% !important;
 }
-.offerTimerBanner .promoCopy{display:flex !important;flex-direction:column !important;gap:3px !important;color:#fff !important;min-width:0 !important}
-.offerTimerBanner .promoCopy b{
-  font-size:25px !important;line-height:1.05 !important;color:#fff4bd !important;
-  letter-spacing:.3px !important
+.payBtns{
+  grid-template-columns:1fr !important;
+  width:100% !important;
 }
-.offerTimerBanner .promoCopy span{font-size:17px !important;font-weight:800 !important;color:#fff !important}
-.offerTimerBanner .promoCopy small{font-size:12px !important;color:#ffe7f2 !important}
-.offerCountdown{display:flex !important;gap:7px !important}
-.offerCountdown>div{
-  width:64px !important;min-width:64px !important;padding:7px 5px !important;
-  border-radius:12px !important;background:#fff6e8 !important;text-align:center !important;
-  border:2px solid #ffd34f !important;box-shadow:0 4px 12px rgba(0,0,0,.16) !important;
-}
-.offerCountdown strong{display:block !important;font-size:24px !important;line-height:1.05 !important;color:#171017 !important}
-.offerCountdown small{display:block !important;margin-top:4px !important;font-size:10px !important;font-weight:800 !important;color:#7d1648 !important}
-.offerTimerBanner>button{
-  border:2px solid #ffd34f !important;border-radius:999px !important;
-  background:linear-gradient(135deg,#ffd34f,#fff1a7) !important;color:#3b1730 !important;
-  font-weight:900 !important;padding:12px 18px !important;white-space:nowrap !important;
-}
-@media(max-width:720px){
-  .offerTimerBanner{
-    grid-template-columns:46px minmax(0,1fr) !important;
-    min-height:0 !important;gap:9px !important;padding:13px 12px !important;
+.field,.field input,.orderBox,.payBtn{max-width:100% !important;min-width:0 !important}
+.orderLine{min-width:0 !important}
+.orderLine span{min-width:0 !important;overflow-wrap:anywhere !important}
+
+@media(max-width:650px){
+  .wrap{padding-left:9px !important;padding-right:9px !important}
+  .offer{
+    left:8px !important;right:8px !important;bottom:7px !important;
+    width:auto !important;padding:7px 8px !important;
   }
-  .offerTimerBanner .promoGift{width:44px !important;height:44px !important;font-size:27px !important;border-radius:14px !important}
-  .offerTimerBanner .promoCopy b{font-size:18px !important}
-  .offerTimerBanner .promoCopy span{font-size:13px !important}
-  .offerTimerBanner .promoCopy small{font-size:9px !important}
-  .offerCountdown{grid-column:1/-1 !important;justify-content:center !important;gap:6px !important}
-  .offerCountdown>div{flex:1 !important;width:auto !important;min-width:0 !important;padding:6px 3px !important}
-  .offerCountdown strong{font-size:20px !important}
-  .offerCountdown small{font-size:9px !important}
-  .offerTimerBanner>button{grid-column:1/-1 !important;width:100% !important;padding:10px 14px !important}
+  .floatWa{right:12px !important;bottom:76px !important;width:52px !important;height:52px !important}
+  .cartBtn{right:12px !important;bottom:138px !important}
+  .cartPanel{
+    right:10px !important;bottom:196px !important;
+    width:calc(100% - 20px) !important;
+  }
+  .modal{
+    width:100% !important;
+    max-width:100% !important;
+    max-height:90dvh !important;
+    padding:12px !important;
+  }
+  .modal h3{font-size:17px !important}
+  .field input{font-size:14px !important;padding:11px !important}
+  .payBtn{font-size:13px !important;padding:12px !important}
+}
+
+@media(max-width:390px){
+  .floatWa{right:10px !important;bottom:74px !important}
+  .cartBtn{right:10px !important;bottom:136px !important}
+  .cartPanel{right:8px !important;width:calc(100% - 16px) !important}
+  .modal{padding:10px !important}
 }
 </style>
 
+
+<style id="stable-offer-banner">
+.offerCountdown{display:flex;gap:6px;align-items:center}
+.offerCountdown>div{width:58px;min-width:58px;padding:5px 3px;border:2px solid #ffd34f;border-radius:11px;background:#fff7e9;text-align:center}
+.offerCountdown strong{display:block;font-size:20px;line-height:1;color:#20151b}
+.offerCountdown small{display:block;font-size:9px;font-weight:800;color:#7b1746;margin-top:3px}
+@media(max-width:650px){
+ .pinkPromo{overflow:hidden !important}
+ .offerCountdown{grid-column:1/-1;justify-content:center;width:100%}
+ .offerCountdown>div{flex:1;width:auto;min-width:0;max-width:90px}
+ .promoCopy b{font-size:18px !important}
+ .promoCopy span{font-size:12px !important}
+ .promoCopy small{font-size:9px !important}
+}
+</style>
 </head>
 <body>
 <div class="top">🔥 Distributor Special Pricing • Fast Digital Delivery • WhatsApp Support</div>
@@ -328,18 +384,10 @@ body{background:linear-gradient(180deg,#fff0f7 0%,#ffd8e8 48%,#fff5f9 100%)!impo
     <div class="categories" id="categoriesGrid"></div>
   </section>
 
-  <section class="pinkPromo wrapPromo offerTimerBanner" aria-label="Limited time offer">
+  <section class="pinkPromo wrapPromo" aria-label="Limited time offer">
     <div class="promoGift">🎁</div>
-    <div class="promoCopy">
-      <b>LIMITED TIME OFFER</b>
-      <span>Hurry Up! Deals Ending Soon</span>
-      <small>Grab the Best Deals on Premium Subscriptions!</small>
-    </div>
-    <div class="offerCountdown" aria-label="Offer countdown">
-      <div><strong id="offerH">12</strong><small>Hours</small></div>
-      <div><strong id="offerM">36</strong><small>Minutes</small></div>
-      <div><strong id="offerS">24</strong><small>Seconds</small></div>
-    </div>
+    <div class="promoCopy"><b>LIMITED TIME OFFER</b><span>Hurry Up! Deals Ending Soon</span><small>Grab the Best Deals on Premium Subscriptions!</small></div>
+    <div class="offerCountdown"><div><strong id="offerH">12</strong><small>Hours</small></div><div><strong id="offerM">36</strong><small>Minutes</small></div><div><strong id="offerS">24</strong><small>Seconds</small></div></div>
     <button onclick="scrollToId('products')">⚡ Shop Now</button>
   </section>
 
@@ -701,32 +749,17 @@ function showSidePurchase(name,phone,p){
 function hideSidePurchase(){document.getElementById("sidePurchase").classList.remove("show")}
 </script>
 
-<script id="offer-timer-script">
+<script>
 (function(){
-  const key="pe_offer_end_v1";
-  let end=Number(localStorage.getItem(key));
-  if(!end || end < Date.now()){
-    end=Date.now()+12*60*60*1000+36*60*1000+24*1000;
-    localStorage.setItem(key,String(end));
-  }
-  function tick(){
-    let left=Math.max(0,end-Date.now());
-    const h=Math.floor(left/3600000);
-    const m=Math.floor((left%3600000)/60000);
-    const s=Math.floor((left%60000)/1000);
-    const H=document.getElementById("offerH"), M=document.getElementById("offerM"), S=document.getElementById("offerS");
-    if(H) H.textContent=String(h).padStart(2,"0");
-    if(M) M.textContent=String(m).padStart(2,"0");
-    if(S) S.textContent=String(s).padStart(2,"0");
-    if(left<=0){
-      end=Date.now()+12*60*60*1000;
-      localStorage.setItem(key,String(end));
-    }
-  }
-  tick(); setInterval(tick,1000);
+ const k="pe_offer_end_final"; let e=+localStorage.getItem(k);
+ if(!e || e<Date.now()) e=Date.now()+12*3600000+36*60000+24000,localStorage.setItem(k,e);
+ function t(){let x=Math.max(0,e-Date.now());let h=Math.floor(x/3600000),m=Math.floor(x%3600000/60000),s=Math.floor(x%60000/1000);
+  const a=document.getElementById("offerH"),b=document.getElementById("offerM"),c=document.getElementById("offerS");
+  if(a)a.textContent=String(h).padStart(2,"0");if(b)b.textContent=String(m).padStart(2,"0");if(c)c.textContent=String(s).padStart(2,"0");
+  if(x<=0){e=Date.now()+12*3600000;localStorage.setItem(k,e)}
+ } t();setInterval(t,1000);
 })();
 </script>
-
 </body>
 </html>
 
