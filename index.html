@@ -114,7 +114,10 @@ button,input{font:inherit}button{cursor:pointer}a{text-decoration:none;color:inh
 .details{display:flex;flex-direction:column;gap:3px;margin:7px 0 8px}.detail{font-size:9px;line-height:1.25;color:#66586a}.detail b{color:#3d303f}
 .waIcon{width:1em;height:1em;display:inline-block;vertical-align:-.16em}
 </style>
-</head>
+<style>
+.productLogo{width:100%;height:100%;object-fit:contain;display:block;border-radius:12px}
+.pic{position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden}
+</style></head>
 <body>
 <div class="top">🔥 Distributor Special Pricing • Fast Digital Delivery • WhatsApp Support</div>
 
@@ -305,7 +308,7 @@ function card(p,i){
   const tag=p.tag?`<span class="tag">${p.tag}</span>`:"";
   const d=supportFor(p);
   return `<article class="card">
-    <div class="pic">${off}${tag}${logoFor(p)}</div>
+    <div class="pic">${off}${tag}<img class="productLogo" src="${asset(p.img)}" alt="${p.name}" loading="lazy"></div>
     <div class="body">
       <div class="cat">${p.cat}</div>
       <div class="name">${p.name}</div>
