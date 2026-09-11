@@ -107,6 +107,12 @@ button,input{font:inherit}button{cursor:pointer}a{text-decoration:none;color:inh
 @media(max-width:900px){.grid{grid-template-columns:repeat(3,1fr)}.categories{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:650px){.wrap{padding:0 9px}.brandText b{font-size:13px}.brandText span{font-size:8px}.brandMark{width:43px;height:43px}.nav{min-height:62px}.hero h1{font-size:25px}.trust{grid-template-columns:repeat(2,1fr)}.grid{grid-template-columns:repeat(2,1fr);gap:8px}.pic{height:138px}.categories{grid-template-columns:repeat(2,1fr)}.catCard{min-height:72px}}
 @media(max-width:390px){.grid{grid-template-columns:repeat(2,1fr)}.pic{height:125px}.name{font-size:11px}.price{font-size:15px}.hero h1{font-size:23px}}
+
+.brandLogo{width:92px;height:92px;border-radius:18px;display:grid;place-items:center;margin:auto;background:linear-gradient(145deg,#fff,#f5edf7);border:1px solid #eadce9;box-shadow:inset 0 0 0 1px #fff;position:relative;overflow:hidden}
+.brandLogo .brandLetters{font-size:25px;font-weight:1000;letter-spacing:-1px;color:var(--maroon)}
+.brandLogo .brandName{position:absolute;bottom:7px;left:6px;right:6px;text-align:center;font-size:8px;font-weight:950;color:#5b4a5b;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.details{display:flex;flex-direction:column;gap:3px;margin:7px 0 8px}.detail{font-size:9px;line-height:1.25;color:#66586a}.detail b{color:#3d303f}
+.waIcon{width:1em;height:1em;display:inline-block;vertical-align:-.16em}
 </style>
 </head>
 <body>
@@ -120,7 +126,7 @@ button,input{font:inherit}button{cursor:pointer}a{text-decoration:none;color:inh
     </a>
     <div class="actions">
       <button class="iconBtn" onclick="focusSearch()" aria-label="Search">⌕</button>
-      <button class="iconBtn" onclick="openWhatsApp('Hello, I want to know about Premium Entertainment plans.')" aria-label="WhatsApp">◉</button>
+      <button class="iconBtn" onclick="openWhatsApp('Hello, I want to know about Premium Entertainment plans.')" aria-label="WhatsApp"><svg class="waIcon" viewBox="0 0 32 32" aria-hidden="true"><path fill="currentColor" d="M19.11 17.22c-.27-.14-1.59-.78-1.83-.87-.25-.09-.43-.14-.61.14-.18.27-.7.87-.86 1.05-.16.18-.32.2-.59.07-.27-.14-1.14-.42-2.17-1.34-.8-.71-1.34-1.59-1.5-1.86-.16-.27-.02-.42.12-.56.12-.12.27-.32.41-.48.14-.16.18-.27.27-.45.09-.18.05-.34-.02-.48-.07-.14-.61-1.47-.84-2.01-.22-.53-.45-.46-.61-.47h-.52c-.18 0-.48.07-.73.34-.25.27-.95.93-.95 2.26s.98 2.62 1.11 2.8c.14.18 1.93 2.95 4.68 4.14.65.28 1.16.45 1.56.58.66.21 1.26.18 1.74.11.53-.08 1.59-.65 1.81-1.28.23-.63.23-1.17.16-1.28-.07-.11-.25-.18-.52-.32z"/><path fill="currentColor" d="M16.02 3.2A12.78 12.78 0 0 0 5.1 22.66L3.2 28.8l6.31-1.85A12.78 12.78 0 1 0 16.02 3.2zm0 23.27c-2.04 0-4.02-.55-5.75-1.59l-.41-.24-3.74 1.1 1.12-3.64-.27-.42a10.46 10.46 0 1 1 9.05 4.79z"/></svg></button>
       <button class="iconBtn" onclick="scrollToId('categories')" aria-label="Menu">☰</button>
     </div>
   </div>
@@ -134,7 +140,7 @@ button,input{font:inherit}button{cursor:pointer}a{text-decoration:none;color:inh
       <p>OTT subscriptions, software, AI tools, music, education and combo offers — browse plans, select a plan and order directly.</p>
       <div class="heroBtns">
         <button class="goldBtn" onclick="scrollToId('products')">▶ Browse All Plans</button>
-        <button class="waBtn" onclick="openWhatsApp('Hello, I want to purchase a plan from Premium Entertainment.')">◉ Chat on WhatsApp</button>
+        <button class="waBtn" onclick="openWhatsApp('Hello, I want to purchase a plan from Premium Entertainment.')"><svg class="waIcon" viewBox="0 0 32 32" aria-hidden="true"><path fill="currentColor" d="M19.11 17.22c-.27-.14-1.59-.78-1.83-.87-.25-.09-.43-.14-.61.14-.18.27-.7.87-.86 1.05-.16.18-.32.2-.59.07-.27-.14-1.14-.42-2.17-1.34-.8-.71-1.34-1.59-1.5-1.86-.16-.27-.02-.42.12-.56.12-.12.27-.32.41-.48.14-.16.18-.27.27-.45.09-.18.05-.34-.02-.48-.07-.14-.61-1.47-.84-2.01-.22-.53-.45-.46-.61-.47h-.52c-.18 0-.48.07-.73.34-.25.27-.95.93-.95 2.26s.98 2.62 1.11 2.8c.14.18 1.93 2.95 4.68 4.14.65.28 1.16.45 1.56.58.66.21 1.26.18 1.74.11.53-.08 1.59-.65 1.81-1.28.23-.63.23-1.17.16-1.28-.07-.11-.25-.18-.52-.32z"/><path fill="currentColor" d="M16.02 3.2A12.78 12.78 0 0 0 5.1 22.66L3.2 28.8l6.31-1.85A12.78 12.78 0 1 0 16.02 3.2zm0 23.27c-2.04 0-4.02-.55-5.75-1.59l-.41-.24-3.74 1.1 1.12-3.64-.27-.42a10.46 10.46 0 1 1 9.05 4.79z"/></svg> Chat on WhatsApp</button>
       </div>
     </div>
     <div class="stats">
@@ -181,7 +187,7 @@ button,input{font:inherit}button{cursor:pointer}a{text-decoration:none;color:inh
   <button class="join" onclick="openWhatsApp('Hello, I want to join the Premium Entertainment community and get the 10% extra offer.')">Join Free</button>
   <button class="close" onclick="document.getElementById('offer').remove()">×</button>
 </div>
-<a class="floatWa" href="#" onclick="openWhatsApp('Hello, I need help with a Premium Entertainment order.');return false" aria-label="WhatsApp">◉</a>
+<a class="floatWa" href="#" onclick="openWhatsApp('Hello, I need help with a Premium Entertainment order.');return false" aria-label="WhatsApp"><svg class="waIcon" viewBox="0 0 32 32" aria-hidden="true"><path fill="currentColor" d="M19.11 17.22c-.27-.14-1.59-.78-1.83-.87-.25-.09-.43-.14-.61.14-.18.27-.7.87-.86 1.05-.16.18-.32.2-.59.07-.27-.14-1.14-.42-2.17-1.34-.8-.71-1.34-1.59-1.5-1.86-.16-.27-.02-.42.12-.56.12-.12.27-.32.41-.48.14-.16.18-.27.27-.45.09-.18.05-.34-.02-.48-.07-.14-.61-1.47-.84-2.01-.22-.53-.45-.46-.61-.47h-.52c-.18 0-.48.07-.73.34-.25.27-.95.93-.95 2.26s.98 2.62 1.11 2.8c.14.18 1.93 2.95 4.68 4.14.65.28 1.16.45 1.56.58.66.21 1.26.18 1.74.11.53-.08 1.59-.65 1.81-1.28.23-.63.23-1.17.16-1.28-.07-.11-.25-.18-.52-.32z"/><path fill="currentColor" d="M16.02 3.2A12.78 12.78 0 0 0 5.1 22.66L3.2 28.8l6.31-1.85A12.78 12.78 0 1 0 16.02 3.2zm0 23.27c-2.04 0-4.02-.55-5.75-1.59l-.41-.24-3.74 1.1 1.12-3.64-.27-.42a10.46 10.46 0 1 1 9.05 4.79z"/></svg></a>
 
 <div class="modalBack" id="modalBack" onclick="if(event.target===this)closeOrder()">
   <div class="modal">
@@ -255,26 +261,64 @@ function recentItems(){
 
 function renderRecent(){
   document.getElementById("recent").innerHTML=recentItems().map(p=>
-    `<div class="recentCard"><img src="${asset(p.img)}" alt=""><b>${p.name}</b><span>${money(p.price)}</span></div>`
+    `<div class="recentCard">${logoFor(p)}<b>${p.name}</b><span>${money(p.price)}</span></div>`
   ).join("");
 }
 
+function initials(name){
+  const clean=name.replace(/[^A-Za-z0-9+ ]/g,' ').trim().split(/\s+/).filter(Boolean);
+  return clean.length===1?clean[0].slice(0,3).toUpperCase():(clean[0][0]+clean[1][0]).toUpperCase();
+}
+function shortBrand(name){
+  return name.replace(/\s+(Premium|Pro|Plus|Yearly|Private|Shared|Membership|Career|Gold)$/i,'').slice(0,18);
+}
+function logoFor(p){
+  return `<div class="brandLogo" aria-label="${p.name}"><span class="brandLetters">${initials(p.name)}</span><span class="brandName">${shortBrand(p.name)}</span></div>`;
+}
+function supportFor(p){
+  const n=p.name.toLowerCase(), m=p.meta.toLowerCase();
+  let activation=m.includes('shared')?'Shared • 1 Device':
+    m.includes('on your number')?'On Your Number':
+    m.includes('own gmail')?'Own Gmail':
+    m.includes('own apple id')?'Own Apple ID':
+    m.includes('own email')?'Own Email':
+    m.includes('private')?'Private • Personal':
+    m.includes('combo')?'Combo':
+    m.includes('full membership')?'Full Membership':'Digital Plan';
+
+  let supported='Mobile • Web';
+  if(/adobe|coreldraw|autocad|windows 10|kaspersky/.test(n))
+    supported=/coreldraw/.test(n)?'Windows / Mac (selected plan)':
+      /windows 10/.test(n)?'Windows PC':
+      /kaspersky/.test(n)?'Windows • Mac • Mobile':'Windows • Mac';
+  else if(/capcut/.test(n)) supported='Mobile • PC';
+  else if(/lenskart|cartoon reel/.test(n)) supported='Mobile • Web';
+  else if(/jiosaavn|apple music/.test(n)) supported='Mobile • Web';
+  else if(/linkedin|coursera|datacamp|quillbot|perplexity|gemini|lovable|bolt|chatgpt|grok|ai premium/.test(n)) supported='Mobile • Web';
+  else if(/fancode|sony|hotstar|jiohotstar|prime|aha|sunnxt|discovery|zee5|hoichoi|lionsgate|netflix/.test(n))
+    supported='Mobile • Web • Smart TV';
+  return {activation,supported};
+}
 function card(p,i){
   const mrp=p.mrp?`<span class="mrp">${money(p.mrp)}</span>`:"";
   const off=p.off?`<span class="badge">${p.off}</span>`:"";
   const tag=p.tag?`<span class="tag">${p.tag}</span>`:"";
+  const d=supportFor(p);
   return `<article class="card">
-    <div class="pic">${off}${tag}<img src="${asset(p.img)}" alt="${p.name}" loading="lazy"></div>
+    <div class="pic">${off}${tag}${logoFor(p)}</div>
     <div class="body">
       <div class="cat">${p.cat}</div>
       <div class="name">${p.name}</div>
       <div class="meta">${p.meta}</div>
+      <div class="details">
+        <div class="detail"><b>Activation:</b> ${d.activation}</div>
+        <div class="detail"><b>Supported:</b> ${d.supported}</div>
+      </div>
       <div class="priceRow"><span class="price">${money(p.price)}</span>${mrp}</div>
       <button class="buy" onclick="openOrder(${i})">⚡ Buy Now</button>
     </div>
   </article>`;
 }
-
 function render(){
   renderTabs();
   const q=(document.getElementById("search")?.value||"").trim().toLowerCase();
