@@ -255,7 +255,7 @@ function recentItems(){
 
 function renderRecent(){
   document.getElementById("recent").innerHTML=recentItems().map(p=>
-    `<div class="recentCard"><img src=asset(p.img) alt=""><b>${p.name}</b><span>${money(p.price)}</span></div>`
+    `<div class="recentCard"><img src="${asset(p.img)}" alt=""><b>${p.name}</b><span>${money(p.price)}</span></div>`
   ).join("");
 }
 
@@ -264,7 +264,7 @@ function card(p,i){
   const off=p.off?`<span class="badge">${p.off}</span>`:"";
   const tag=p.tag?`<span class="tag">${p.tag}</span>`:"";
   return `<article class="card">
-    <div class="pic">${off}${tag}<img src=asset(p.img) alt="${p.name}" loading="lazy"></div>
+    <div class="pic">${off}${tag}<img src="${asset(p.img)}" alt="${p.name}" loading="lazy"></div>
     <div class="body">
       <div class="cat">${p.cat}</div>
       <div class="name">${p.name}</div>
