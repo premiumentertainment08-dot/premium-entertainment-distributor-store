@@ -931,20 +931,41 @@ function hideSidePurchase(){document.getElementById("sidePurchase").classList.re
 })();
 </script>
 
-<!-- Background Music -->
-<audio id="siteMusic" preload="auto" autoplay loop playsinline>
-  <source src="music.mp3" type="audio/mpeg">
+<!-- Background Music: autoplay when allowed; otherwise unlock on the first user gesture -->
+<audio id="siteMusic" preload="auto" autoplay loop playsinline muted>
+  <source src="./music.mp3" type="audio/mpeg">
 </audio>
+<div id="musicHint" style="position:fixed;left:50%;bottom:82px;transform:translateX(-50%);z-index:99999;background:#7d163f;color:#fff;border:1px solid #d6a62e;border-radius:999px;padding:9px 14px;font:800 12px system-ui;box-shadow:0 8px 24px rgba(0,0,0,.2);display:none;white-space:nowrap">🎵 Tap anywhere to start music</div>
 <script>
 (function(){
   const a=document.getElementById('siteMusic');
+  const hint=document.getElementById('musicHint');
   if(!a)return;
-  a.volume=1;
-  function start(){ a.play().catch(function(){}); }
-  start();
-  window.addEventListener('load',start,{once:true});
-  document.addEventListener('pointerdown',start,{once:true,passive:true});
-  document.addEventListener('keydown',start,{once:true,passive:true});
+  a.loop=true; a.preload='auto'; a.volume=1;
+  let unlocked=false;
+  function hide(){if(hint)hint.style.display='none';}
+  function unlock(){
+    if(unlocked)return;
+    unlocked=true;
+    a.muted=false;
+    a.volume=1;
+    try{a.load();}catch(e){}
+    const p=a.play();
+    if(p && p.catch)p.catch(function(){ unlocked=false; if(hint)hint.style.display='block'; });
+    else hide();
+    hide();
+  }
+  function tryAuto(){
+    a.muted=true;
+    const p=a.play();
+    if(p && p.catch)p.catch(function(){ if(hint)hint.style.display='block'; });
+  }
+  tryAuto();
+  window.addEventListener('load',tryAuto,{once:true});
+  ['pointerdown','touchstart','click','keydown'].forEach(function(ev){
+    document.addEventListener(ev,unlock,{passive:true});
+  });
+  a.addEventListener('error',function(){if(hint)hint.textContent='🎵 Music file could not be loaded';});
 })();
 </script>
 </body>
