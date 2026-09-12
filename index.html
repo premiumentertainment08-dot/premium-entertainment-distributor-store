@@ -616,14 +616,16 @@ img,video,iframe{max-width:100% !important}
 
 <script>
 const __EMBEDDED_ASSETS__ = {"1000174359.jpg":"./img-4f731af6aa22.jpg","1000174495.webp":"./img-68b189fd700b.webp","1000174477.webp":"./img-95abe124415e.webp","1000174386.webp":"./img-eb859fbc5ccb.webp","1000174370.webp":"./img-931f334edf2c.webp","1000174500.webp":"./img-e7a0873bce23.webp","1000174429.jpg":"./img-b6b7193e23a8.jpg","1000174401.webp":"./img-20192f32b6e8.webp","1000174406.webp":"./img-7b8bd276c087.webp","1000174454.webp":"./img-5735dd77218b.webp","1000174462.jpg":"./img-a3264072332b.jpg","1000174409.webp":"./img-c97a4ad0df17.webp","1000174398.jpg":"./img-85d01268ab83.jpg","1000174411.webp":"./img-f2ffcbf0ff1a.webp","1000174489.png":"./img-f03e733afb3a.jpg","1000174501.webp":"./img-f2ffcbf0ff1a.webp","1000174354.jpg":"./img-e15c4dc8712b.jpg","1000174426.webp":"./img-932f72975970.webp","1000174427.webp":"./img-054b5c7eb053.webp","1000174480.webp":"./img-d9355a44f0ac.webp","1000174396.webp":"./img-ef3f44c141ae.webp","1000174486.webp":"./img-ef3f44c141ae.webp","1000174487.webp":"./img-f906dab4102c.webp","1000174457.webp":"./img-e5bea41a343e.webp","1000174337.webp":"./img-054b5c7eb053.webp","1000174456.jpg":"./img-eceaf717efc1.jpg","1000174410.webp":"./img-e7a0873bce23.webp","1000174422.webp":"./img-b7f4054c220e.webp","1000174512.webp":"./img-b7f4054c220e.webp","1000174416.webp":"./img-01cb447e4da4.webp","1000174484.jpg":"./img-0ab0b8589e73.jpg","1000174464.webp":"./img-2945a1fb6a1b.webp","1000174493.jpg":"./img-ef2b72039367.jpg","1000174403.jpg":"./img-ef2b72039367.jpg","1000174468.png":"./img-c59417102823.png","1000174469.png":"./img-78510e6876c4.png","1000174459.png":"./img-f1b0fa57d659.png","1000174431.jpg":"./img-af1bfbc6ca4a.jpg","1000174438.png":"./img-0dfdd01128e7.png"};
+function telecomLogo(kind){
+  const logos={
+    jio:`<svg xmlns="http://www.w3.org/2000/svg" width="600" height="360" viewBox="0 0 600 360"><rect width="600" height="360" rx="36" fill="#f7f9ff"/><circle cx="300" cy="165" r="105" fill="#0b62d6"/><text x="300" y="194" text-anchor="middle" font-family="Arial,sans-serif" font-size="92" font-weight="900" fill="#fff">Jio</text></svg>`,
+    airtel:`<svg xmlns="http://www.w3.org/2000/svg" width="600" height="360" viewBox="0 0 600 360"><rect width="600" height="360" rx="36" fill="#fff"/><path d="M190 245c-8-42 9-83 49-107 26-15 55-19 86-11-19 5-34 14-46 27-20 21-28 46-25 74 2 18-5 31-20 39-18 9-39 1-44-22z" fill="#e60012"/><path d="M250 238c-9-20-6-42 10-60 13-15 31-24 53-27-13 9-20 21-21 36-1 15 5 29 18 40 10 9 12 22 4 33-10 15-29 17-45 7-9-6-16-16-19-29z" fill="#e60012"/><text x="365" y="220" text-anchor="middle" font-family="Arial,sans-serif" font-size="62" font-weight="800" fill="#e60012">airtel</text></svg>`,
+    vi:`<svg xmlns="http://www.w3.org/2000/svg" width="600" height="360" viewBox="0 0 600 360"><rect width="600" height="360" rx="36" fill="#fff"/><text x="300" y="220" text-anchor="middle" font-family="Arial,sans-serif" font-size="132" font-weight="900" fill="#e60012">Vi</text><circle cx="350" cy="105" r="13" fill="#f5c400"/><text x="300" y="278" text-anchor="middle" font-family="Arial,sans-serif" font-size="22" font-weight="700" fill="#777">vodafone idea</text></svg>`
+  };
+  return "data:image/svg+xml;charset=UTF-8,"+encodeURIComponent(logos[kind]);
+}
 function brandSvg(name){
   const key=name.toLowerCase();
-  const officialLogos={
-    "jio recharge":"https://rilstaticasset.akamaized.net/sites/default/files/2023-02/jio.png",
-    "airtel recharge":"https://s3-ap-southeast-1.amazonaws.com/bsy/iportal/images/airtel-logo-red-text-horizontal.jpg",
-    "vi recharge":"https://upload.wikimedia.org/wikipedia/commons/7/72/Vodafone_Idea_logo.svg"
-  };
-  if(officialLogos[key]) return officialLogos[key];
   const map={
     "fancode":["⚡","FanCode"],"jiosaavn premium":["♫","JioSaavn"],"apple tv+":["","Apple TV+"],
     "adobe creative cloud":["A","Adobe"],"coreldraw premium":["C","CorelDRAW"],"lovable ai":["♥","Lovable AI"],
@@ -639,12 +641,7 @@ function brandSvg(name){
   return "data:image/svg+xml;charset=UTF-8,"+encodeURIComponent(svg);
 }
 function inlineLogo(bg, fg, mark, label, accent){
-  const svg=`<svg xmlns="http://www.w3.org/2000/svg" width="600" height="360" viewBox="0 0 600 360">
-  <rect width="600" height="360" rx="36" fill="${bg}"/>
-  <circle cx="300" cy="135" r="78" fill="${accent||fg}" opacity=".98"/>
-  <text x="300" y="157" text-anchor="middle" font-family="Arial,sans-serif" font-size="${mark.length>2?44:64}" font-weight="900" fill="${bg}">${mark}</text>
-  <text x="300" y="270" text-anchor="middle" font-family="Arial,sans-serif" font-size="42" font-weight="800" fill="${fg}">${label}</text>
-  </svg>`;
+  const svg=`<svg xmlns="http://www.w3.org/2000/svg" width="600" height="360" viewBox="0 0 600 360"><rect width="600" height="360" rx="36" fill="${bg}"/><circle cx="300" cy="135" r="78" fill="${accent||fg}" opacity=".98"/><text x="300" y="157" text-anchor="middle" font-family="Arial,sans-serif" font-size="${mark.length>2?44:64}" font-weight="900" fill="${bg}">${mark}</text><text x="300" y="270" text-anchor="middle" font-family="Arial,sans-serif" font-size="42" font-weight="800" fill="${fg}">${label}</text></svg>`;
   return "data:image/svg+xml;charset=UTF-8,"+encodeURIComponent(svg);
 }
 const REAL_LOGOS={
@@ -659,9 +656,9 @@ const REAL_LOGOS={
   "windows 10 pro key":inlineLogo("#0b5a9c","#ffffff","⊞","Windows 10","#00a4ef"),
   "kaspersky":inlineLogo("#0a5a72","#ffffff","K","Kaspersky","#00a6d6"),
   "lenskart gold":inlineLogo("#111111","#ffffff","L","Lenskart","#f4c542"),
-  "jio recharge":inlineLogo("#07101d","#ffffff","Jio","Jio","#0b1b2b"),
-  "airtel recharge":inlineLogo("#e60012","#ffffff","a","airtel","#e60012"),
-  "vi recharge":inlineLogo("#ff1744","#ffffff","vi","Vi","#ff1744")
+  "jio recharge":telecomLogo("jio"),
+  "airtel recharge":telecomLogo("airtel"),
+  "vi recharge":telecomLogo("vi")
 };
 function asset(n){
   if(n&&n.startsWith("brand:")){const k=n.slice(6).toLowerCase(); return REAL_LOGOS[k]||brandSvg(n.slice(6));}
