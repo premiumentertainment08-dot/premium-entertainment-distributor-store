@@ -638,21 +638,30 @@ function brandSvg(name){
   const svg=`<svg xmlns="http://www.w3.org/2000/svg" width="600" height="360" viewBox="0 0 600 360"><rect width="600" height="360" rx="36" fill="#101522"/><circle cx="300" cy="125" r="68" fill="${c}"/><text x="300" y="145" text-anchor="middle" font-family="Arial,sans-serif" font-size="58" font-weight="900" fill="white">${esc(v[0])}</text><text x="300" y="255" text-anchor="middle" font-family="Arial,sans-serif" font-size="30" font-weight="900" fill="white">${esc(v[1])}</text></svg>`;
   return "data:image/svg+xml;charset=UTF-8,"+encodeURIComponent(svg);
 }
+function inlineLogo(bg, fg, mark, label, accent){
+  const svg=`<svg xmlns="http://www.w3.org/2000/svg" width="600" height="360" viewBox="0 0 600 360">
+  <rect width="600" height="360" rx="36" fill="${bg}"/>
+  <circle cx="300" cy="135" r="78" fill="${accent||fg}" opacity=".98"/>
+  <text x="300" y="157" text-anchor="middle" font-family="Arial,sans-serif" font-size="${mark.length>2?44:64}" font-weight="900" fill="${bg}">${mark}</text>
+  <text x="300" y="270" text-anchor="middle" font-family="Arial,sans-serif" font-size="42" font-weight="800" fill="${fg}">${label}</text>
+  </svg>`;
+  return "data:image/svg+xml;charset=UTF-8,"+encodeURIComponent(svg);
+}
 const REAL_LOGOS={
-  "fancode":"https://cdn.jsdelivr.net/npm/simple-icons@v15/icons/fancode.svg",
-  "jiosaavn premium":"https://cdn.jsdelivr.net/npm/simple-icons@v15/icons/jiosaavn.svg",
-  "apple tv+":"https://cdn.jsdelivr.net/npm/simple-icons@v15/icons/appletv.svg",
-  "adobe creative cloud":"https://cdn.jsdelivr.net/npm/simple-icons@v15/icons/adobe.svg",
-  "coreldraw premium":"https://cdn.jsdelivr.net/npm/simple-icons@v15/icons/coreldraw.svg",
-  "lovable ai":"https://cdn.jsdelivr.net/npm/simple-icons@v15/icons/lovable.svg",
-  "bolt.new pro":"https://cdn.jsdelivr.net/npm/simple-icons@v15/icons/bolt.svg",
-  "coursera plus":"https://cdn.jsdelivr.net/npm/simple-icons@v15/icons/coursera.svg",
-  "windows 10 pro key":"https://cdn.jsdelivr.net/npm/simple-icons@v15/icons/windows.svg",
-  "kaspersky":"https://cdn.jsdelivr.net/npm/simple-icons@v15/icons/kaspersky.svg",
-  "lenskart gold":"https://cdn.jsdelivr.net/npm/simple-icons@v15/icons/lenskart.svg",
-  "jio recharge":"https://cdn.jsdelivr.net/npm/simple-icons@v15/icons/jio.svg",
-  "airtel recharge":"https://cdn.jsdelivr.net/npm/simple-icons@v15/icons/airtel.svg",
-  "vi recharge":"https://cdn.jsdelivr.net/npm/simple-icons@v15/icons/vi.svg"
+  "fancode":inlineLogo("#101522","#ffffff","⚡","FanCode","#f59e0b"),
+  "jiosaavn premium":inlineLogo("#071b1c","#ffffff","Saavn","JioSaavn","#10b981"),
+  "apple tv+":inlineLogo("#101010","#ffffff","","Apple TV+","#222222"),
+  "adobe creative cloud":inlineLogo("#111111","#ffffff","A","Adobe","#ff0000"),
+  "coreldraw premium":inlineLogo("#0c3b31","#ffffff","C","CorelDRAW","#36a269"),
+  "lovable ai":inlineLogo("#24111f","#ffffff","♥","Lovable AI","#ff6b9d"),
+  "bolt.new pro":inlineLogo("#111111","#ffffff","⚡","Bolt.new","#f5c542"),
+  "coursera plus":inlineLogo("#0b1d35","#ffffff","C","Coursera","#2f80ed"),
+  "windows 10 pro key":inlineLogo("#0b5a9c","#ffffff","⊞","Windows 10","#00a4ef"),
+  "kaspersky":inlineLogo("#0a5a72","#ffffff","K","Kaspersky","#00a6d6"),
+  "lenskart gold":inlineLogo("#111111","#ffffff","L","Lenskart","#f4c542"),
+  "jio recharge":inlineLogo("#07101d","#ffffff","Jio","Jio","#0b1b2b"),
+  "airtel recharge":inlineLogo("#e60012","#ffffff","a","airtel","#e60012"),
+  "vi recharge":inlineLogo("#ff1744","#ffffff","vi","Vi","#ff1744")
 };
 function asset(n){
   if(n&&n.startsWith("brand:")){const k=n.slice(6).toLowerCase(); return REAL_LOGOS[k]||brandSvg(n.slice(6));}
