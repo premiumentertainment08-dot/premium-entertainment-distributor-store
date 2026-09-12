@@ -932,24 +932,19 @@ function hideSidePurchase(){document.getElementById("sidePurchase").classList.re
 </script>
 
 <!-- Background Music -->
-<audio id="siteMusic" preload="auto" loop>
+<audio id="siteMusic" preload="auto" autoplay loop playsinline>
   <source src="Aaj Ki Raat Stree 2 320 Kbps.mp3" type="audio/mpeg">
 </audio>
-<button id="musicToggle" aria-label="Toggle background music" title="Music ON/OFF">🎵 Music</button>
-<style>
-#musicToggle{position:fixed;left:14px;bottom:78px;z-index:9005;border:1px solid #d6a62e;border-radius:999px;padding:10px 13px;background:linear-gradient(135deg,#7d163f,#c79a2b);color:#fff;font-weight:900;font-size:11px;box-shadow:0 8px 22px rgba(72,0,38,.22)}
-@media(max-width:650px){#musicToggle{left:10px;bottom:76px;font-size:10px;padding:9px 11px}}
-</style>
 <script>
 (function(){
- const a=document.getElementById('siteMusic'), b=document.getElementById('musicToggle');
- if(!a||!b)return;
- let on=false;
- function update(){b.textContent=on?'🔊 Music ON':'🎵 Music OFF';}
- async function start(){try{await a.play();on=true;update();}catch(e){}}
- b.addEventListener('click',()=>{if(a.paused)start();else{a.pause();on=false;update();}});
- document.addEventListener('pointerdown',function once(){if(!on)start();},{once:true,passive:true});
- update();
+  const a=document.getElementById('siteMusic');
+  if(!a)return;
+  a.volume=1;
+  function start(){ a.play().catch(function(){}); }
+  start();
+  window.addEventListener('load',start,{once:true});
+  document.addEventListener('pointerdown',start,{once:true,passive:true});
+  document.addEventListener('keydown',start,{once:true,passive:true});
 })();
 </script>
 </body>
