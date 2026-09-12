@@ -432,7 +432,12 @@ img,video,iframe{max-width:100% !important}
 }
 </style>
 
-<style id="coming-soon-mobile-recharge">.comingSoonCard .pic{background:linear-gradient(145deg,#ffedf5,#fff7e4)}.comingSoonCard .productLogo{background:transparent;padding:10px}.comingSoonText{margin:8px 0 10px;padding:9px;border:1px dashed #c79a2b;border-radius:10px;text-align:center;font-size:11px;font-weight:1000;color:#8b1748;background:#fff8eb}.comingSoonBtn{background:linear-gradient(135deg,#8b1748,#c79a2b)!important;opacity:.85;cursor:not-allowed!important}</style></head>
+<style id="coming-soon-mobile-recharge">.comingSoonCard .pic{background:linear-gradient(145deg,#ffedf5,#fff7e4)}.comingSoonCard .productLogo{background:transparent;padding:10px}.comingSoonText{margin:8px 0 10px;padding:9px;border:1px dashed #c79a2b;border-radius:10px;text-align:center;font-size:11px;font-weight:1000;color:#8b1748;background:#fff8eb}.comingSoonBtn{background:linear-gradient(135deg,#8b1748,#c79a2b)!important;opacity:.85;cursor:not-allowed!important}</style>
+<style id="announcement-style">
+.announcementSection{margin-top:17px}.announcementShell{background:#182024;border:1px solid #d6a62e66;border-radius:18px;padding:12px;box-shadow:0 10px 28px rgba(34,10,25,.14)}.announcementHead{display:flex;align-items:center;justify-content:space-between;color:#fff;padding:4px 5px 10px}.announcementHead h2{margin:0;color:#fff;font-size:17px}.announcementHead small{color:#d9c8d2;font-size:10px}.announcementFeed{display:grid;gap:10px}.announcementCard{background:#222d31;color:#fff;border-radius:15px;overflow:hidden;border:1px solid rgba(255,255,255,.08);box-shadow:0 8px 20px rgba(0,0,0,.18)}.announcementTop{display:flex;align-items:center;gap:9px;padding:10px 11px}.announcementAvatar{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:#fff1f7;color:#7d163f;font-size:17px}.announcementTop b{display:block;font-size:11px}.announcementTop span{display:block;font-size:8px;color:#b8c1c3;margin-top:2px}.announcementTop i{margin-left:auto;font-style:normal;color:#51d38a;font-size:13px}.announcementImage{display:block;width:100%;max-height:280px;object-fit:cover}.announcementBody{padding:4px 12px 11px}.announcementBody h3{margin:5px 0 7px;color:#fff;font-size:15px}.announcementBody p{margin:0;color:#e9eef0;font-size:12px;line-height:1.55;white-space:pre-line}.announcementLink{display:inline-block;margin-top:10px;color:#6dc7ff;font-size:11px;font-weight:900;text-decoration:underline}.announcementFooter{display:flex;justify-content:space-between;padding:8px 12px;border-top:1px solid rgba(255,255,255,.07);font-size:8px;color:#9da8ab}.announcementAdminLink{display:inline-block;margin-top:9px;background:#fff;color:#7d163f;border-radius:999px;padding:7px 11px;font-size:9px;font-weight:900}
+@media(max-width:650px){.announcementShell{padding:9px}.announcementBody p{font-size:11px}.announcementImage{max-height:230px}}
+</style>
+</head>
 <body>
 <div class="top">🔥 Distributor Special Pricing • Fast Digital Delivery • WhatsApp Support</div>
 
@@ -472,6 +477,15 @@ img,video,iframe{max-width:100% !important}
   <section class="section">
     <div class="secHead"><h2>↻ Recently Viewed</h2><small>Clear</small></div>
     <div class="recent" id="recent"></div>
+  </section>
+
+
+  <section class="section announcementSection" id="announcements">
+    <div class="announcementShell">
+      <div class="announcementHead"><h2>📢 Announcements</h2><small>Latest store updates</small></div>
+      <div class="announcementFeed" id="announcementFeed"></div>
+      <a class="announcementAdminLink" href="admin.html">⚙️ Admin • Add Message</a>
+    </div>
   </section>
 
   <section class="section">
@@ -949,7 +963,6 @@ function hideSidePurchase(){document.getElementById("sidePurchase").classList.re
     unlocked=true;
     a.muted=false;
     a.volume=1;
-    try{a.load();}catch(e){}
     const p=a.play();
     if(p && p.catch)p.catch(function(){ unlocked=false; if(hint)hint.style.display='block'; });
     else hide();
@@ -968,5 +981,6 @@ function hideSidePurchase(){document.getElementById("sidePurchase").classList.re
   a.addEventListener('error',function(){if(hint)hint.textContent='🎵 Music file could not be loaded';});
 })();
 </script>
+<script src="firebase-config.js"></script><script src="announcements.js"></script>
 </body>
 </html>

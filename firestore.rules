@@ -1,0 +1,10 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /announcements/{docId} {
+      allow read: if true;
+      // Replace the email below with your Firebase admin email.
+      allow create, update, delete: if request.auth != null && request.auth.token.email == "YOUR_ADMIN_EMAIL@example.com";
+    }
+  }
+}
