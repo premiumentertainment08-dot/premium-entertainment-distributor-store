@@ -530,7 +530,7 @@ body:before{background:radial-gradient(circle at 10% 0%,rgba(20,136,255,.12),tra
     <div class="actions">
       <button class="headAction" onclick="return openWhatsApp('Hello, I want to know about Premium Entertainment plans.')" aria-label="WhatsApp">◉<span>WhatsApp</span></button>
       <button class="headAction" onclick="scrollToId('categories')" aria-label="Categories">☷<span>Menu</span></button>
-      <button class="headTheme" type="button" onclick="toggleQuickSettings()" aria-label="Theme settings">☀️ <span>Theme</span></button>
+      <button class="headTheme" type="button" onclick="finalToggleThemePanel()" aria-label="Theme, layout and colour settings">🎨 <span>Theme</span></button>
     </div>
   </div>
 </header>
@@ -821,7 +821,7 @@ let active="All", selected=null;
 function money(n){return "₹"+Number(n).toLocaleString("en-IN")}
 function scrollToId(id){document.getElementById(id)?.scrollIntoView({behavior:"smooth",block:"start"})}
 function focusSearch(){scrollToId("products");setTimeout(()=>document.getElementById("search")?.focus(),350)}
-function openWhatsApp(text){const url="https://wa.me/"+WHATSAPP+"?text="+encodeURIComponent(text||"");try{window.location.assign(url)}catch(e){window.location.href=url}return false}
+function openWhatsApp(text){const msg=encodeURIComponent(text||"");const urls=["https://wa.me/"+WHATSAPP+"?text="+msg,"https://api.whatsapp.com/send?phone="+WHATSAPP+"&text="+msg];try{const w=window.open(urls[0],"_blank","noopener,noreferrer");if(!w){window.location.href=urls[1]}}catch(e){window.location.href=urls[1]}return false}
 
 function renderCategories(){
   document.getElementById("categoriesGrid").innerHTML=cats.map(([name,icon,desc])=>
@@ -1159,7 +1159,7 @@ function hideSidePurchase(){document.getElementById("sidePurchase").classList.re
 
 <!-- FINAL THEME / LAYOUT / WEEKLY OFFER SYSTEM -->
 <style id="quick-settings-style">
-.quickSettings{display:flex;align-items:center;gap:10px;margin:10px auto 0;padding:10px 12px;border:1px solid var(--line);border-radius:15px;background:linear-gradient(135deg,var(--panel),var(--panel2));box-shadow:0 8px 28px rgba(0,0,0,.14);overflow-x:auto;scrollbar-width:none;position:relative;z-index:30}.quickSettings::-webkit-scrollbar{display:none}.qsGroup{display:flex;align-items:center;gap:6px;flex:none}.qsGroup>b{font-size:10px;text-transform:uppercase;letter-spacing:.08em;opacity:.72;margin-right:2px}.qsGroup button{border:1px solid var(--line);background:transparent;color:var(--text);border-radius:9px;padding:7px 9px;font-size:10px;font-weight:900;white-space:nowrap;cursor:pointer}.qsGroup button:hover,.qsGroup button:focus-visible{border-color:var(--accent);outline:none}.qsGroup button.active{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;border-color:transparent;box-shadow:0 5px 15px color-mix(in srgb,var(--accent) 28%,transparent)}.qsDivider{width:1px;height:28px;background:var(--line);flex:none}.qsColors{gap:7px}.qsDot{width:23px!important;height:23px!important;padding:0!important;border-radius:50%!important;border:2px solid rgba(255,255,255,.75)!important}.qsDot.active{outline:3px solid color-mix(in srgb,var(--accent) 45%,transparent);outline-offset:2px}.qsAutoNote{font-size:9px;font-weight:800;color:var(--muted);white-space:nowrap;margin-left:auto;flex:none}@media(max-width:760px){.quickSettings{margin-top:8px;padding:8px 9px;gap:8px;border-radius:13px}.qsAutoNote{display:none}.qsGroup>b{font-size:9px}.qsGroup button{padding:7px 8px;font-size:9px}}
+.quickSettings{display:flex;align-items:center;gap:10px;margin:10px auto 0;padding:10px 12px;border:1px solid var(--line);border-radius:15px;background:linear-gradient(135deg,var(--panel),var(--panel2));box-shadow:0 8px 28px rgba(0,0,0,.14);overflow-x:auto;scrollbar-width:none;position:relative;z-index:30}.quickSettings::-webkit-scrollbar{display:none}.qsGroup{display:flex;align-items:center;gap:6px;flex:none}.qsGroup>b{font-size:10px;text-transform:uppercase;letter-spacing:.08em;opacity:.72;margin-right:2px}.qsGroup button{border:1px solid var(--line);background:transparent;color:var(--text);border-radius:9px;padding:7px 9px;font-size:10px;font-weight:900;white-space:nowrap;cursor:pointer}.qsGroup button:hover,.qsGroup button:focus-visible{border-color:var(--accent);outline:none}.qsGroup button.active{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;border-color:transparent;box-shadow:0 5px 15px color-mix(in srgb,var(--accent) 28%,transparent)}.qsDivider{width:1px;height:28px;background:var(--line);flex:none}.qsColors{gap:7px}.qsDot{width:23px!important;height:23px!important;padding:0!important;border-radius:50%!important;border:2px solid rgba(255,255,255,.75)!important}.qsDot.active{outline:3px solid color-mix(in srgb,var(--accent) 45%,transparent);outline-offset:2px}.qsAutoNote{font-size:9px;font-weight:800;color:var(--muted);white-space:nowrap;margin-left:auto;flex:none}@media(max-width:760px){.quickSettings{margin-top:8px;padding:8px 9px;gap:8px;border-radius:13px;overflow-x:auto;-webkit-overflow-scrolling:touch}.qsAutoNote{display:none}.qsGroup>b{font-size:9px}.qsGroup button{padding:7px 8px;font-size:9px}.qsColors{padding-right:4px}.qsDot{flex:0 0 23px!important}}
 .theme-day .quickSettings{background:linear-gradient(135deg,#fff,#eef5ff)}
 </style>
 <style id="final-theme-system">
@@ -1238,7 +1238,7 @@ body.layout-grid .grid{grid-template-columns:repeat(4,minmax(0,1fr))!important}.
   btnText.textContent=saved==='auto'?'Auto Theme':(mode==='day'?'Day Theme':'Night Theme');
   btn.querySelector('span').textContent=mode==='day'?'☀️':'🌙';
   const headTheme=document.querySelector('.headTheme');
-  if(headTheme){ headTheme.firstChild.textContent=(mode==='day'?'☀️': '🌙')+' '; }
+  if(headTheme){ headTheme.querySelector('span').previousSibling.textContent=(mode==='day'?'☀️':'🌙')+' '; }
   document.querySelectorAll('#themeChoices button').forEach(x=>x.classList.toggle('active',x.dataset.theme===(ls('pe_theme_mode')||'auto')));
  }
  function applyLayout(mode){body.classList.remove('layout-grid','layout-compact','layout-list');body.classList.add('layout-'+mode);document.querySelectorAll('#layoutChoices button').forEach(x=>x.classList.toggle('active',x.dataset.layout===mode));ls('pe_layout',mode)}
