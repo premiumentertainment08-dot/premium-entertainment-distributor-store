@@ -497,6 +497,24 @@ body:before{background:radial-gradient(circle at 10% 0%,rgba(20,136,255,.12),tra
 @media(max-width:650px){.heroBox{padding:22px 17px!important;min-height:250px}.hero h1{font-size:29px!important}.pic{height:140px!important}.grid{gap:8px!important}.card{border-radius:13px!important}.body{padding:8px!important}}
 </style>
 
+
+<style id="final-mobile-clarity-festive">
+/* Clean responsive header + festive Ganesh Chaturthi banner */
+.headSearch{flex:1;max-width:430px;display:flex;align-items:center;gap:7px;border:1px solid var(--line);background:var(--panel,#fff);border-radius:13px;padding:0 11px;margin-left:10px;box-shadow:0 4px 18px rgba(0,0,0,.06)}
+.headSearch input{width:100%;border:0;outline:0;background:transparent;color:var(--text,#17202b);padding:10px 4px;font-size:11px}
+.headSearch input::placeholder{color:var(--muted,#7b8795)}
+.headAction{min-width:62px;height:44px;border:1px solid var(--line);border-radius:12px;background:var(--panel,#fff);color:var(--text,#17202b);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;font-size:16px}
+.headAction span{font-size:8px;font-weight:900}.headTheme{height:44px;border:1px solid var(--line);border-radius:12px;background:linear-gradient(135deg,var(--panel,#fff),var(--panel2,#eef5ff));color:var(--text,#17202b);padding:0 11px;font-weight:950;display:flex;align-items:center;gap:5px}.headTheme span{font-size:9px}
+#finalThemeBtn{display:none!important}
+#finalThemePanel{top:82px!important;right:12px!important}
+.ganeshFest{position:relative;margin-top:14px;border-radius:18px;overflow:hidden;border:1px solid rgba(226,169,0,.35);box-shadow:0 12px 35px rgba(105,55,0,.12);background:#fff4cf}
+.ganeshFest img{display:block;width:100%;height:auto;min-height:175px;object-fit:cover}
+.ganeshOverlay{position:absolute;left:18px;bottom:14px;display:flex;align-items:center;gap:9px;flex-wrap:wrap;background:rgba(255,255,255,.90);padding:8px 10px;border-radius:13px;box-shadow:0 8px 22px rgba(0,0,0,.12)}
+.ganeshOverlay span{font-size:10px;font-weight:950;color:#8d3a13}.ganeshOverlay b{font-size:14px;color:#d51d2e}.ganeshOverlay button{border:0;border-radius:9px;padding:8px 11px;background:linear-gradient(135deg,#ffb300,#ff6b00);color:#fff;font-weight:950;font-size:10px}
+.theme-day .ganeshFest{background:#fff8df}.theme-day .ganeshOverlay{background:rgba(255,255,255,.92)}
+@media(max-width:760px){.nav{gap:7px;min-height:64px}.brandMark{width:38px;height:38px}.brandText b{font-size:11px}.brandText span{font-size:7px}.headSearch{order:3;flex-basis:100%;max-width:none;margin:0}.header .nav{flex-wrap:wrap;padding:7px 0}.actions{gap:5px}.headAction{min-width:40px;width:40px;height:38px;font-size:14px}.headAction span{font-size:6px}.headTheme{height:38px;padding:0 8px;font-size:12px}.headTheme span{display:none}.ganeshFest{margin-top:10px}.ganeshFest img{min-height:150px}.ganeshOverlay{left:8px;right:8px;bottom:8px;padding:7px;gap:5px}.ganeshOverlay span{font-size:8px}.ganeshOverlay b{font-size:12px}.ganeshOverlay button{font-size:8px;padding:7px 9px}#finalThemePanel{top:125px!important;right:8px!important;max-width:calc(100vw - 16px)!important;width:320px!important}}
+@media(max-width:420px){.brandText{max-width:140px}.brandText b{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.headAction{width:34px;min-width:34px}.headSearch input{font-size:10px}.ganeshFest img{min-height:132px}.ganeshOverlay span{max-width:125px}.ganeshOverlay b{font-size:11px}}
+</style>
 </head>
 <body>
 <div class="top">🔥 Distributor Special Pricing • Fast Digital Delivery • WhatsApp Support</div>
@@ -507,10 +525,11 @@ body:before{background:radial-gradient(circle at 10% 0%,rgba(20,136,255,.12),tra
       <div class="brandMark"><img loading="lazy" decoding="async" src="site-logo.jpg" alt="Premium Entertainment logo"></div>
       <div class="brandText"><b>PREMIUM ENTERTAINMENT</b><span>EXPERIENCE EXCELLENCE</span></div>
     </a>
+    <div class="headSearch"><span>⌕</span><input aria-label="Search products" placeholder="Search IPTV, OTT, AI Tools, Education..." oninput="document.getElementById('search').value=this.value;render()"></div>
     <div class="actions">
-      <button class="iconBtn" onclick="focusSearch()" aria-label="Search">⌕</button>
-      <button class="iconBtn" onclick="openWhatsApp('Hello, I want to know about Premium Entertainment plans.')" aria-label="WhatsApp"><svg class="waIcon" viewBox="0 0 32 32" aria-hidden="true"><path fill="currentColor" d="M19.11 17.22c-.27-.14-1.59-.78-1.83-.87-.25-.09-.43-.14-.61.14-.18.27-.7.87-.86 1.05-.16.18-.32.2-.59.07-.27-.14-1.14-.42-2.17-1.34-.8-.71-1.34-1.59-1.5-1.86-.16-.27-.02-.42.12-.56.12-.12.27-.32.41-.48.14-.16.18-.27.27-.45.09-.18.05-.34-.02-.48-.07-.14-.61-1.47-.84-2.01-.22-.53-.45-.46-.61-.47h-.52c-.18 0-.48.07-.73.34-.25.27-.95.93-.95 2.26s.98 2.62 1.11 2.8c.14.18 1.93 2.95 4.68 4.14.65.28 1.16.45 1.56.58.66.21 1.26.18 1.74.11.53-.08 1.59-.65 1.81-1.28.23-.63.23-1.17.16-1.28-.07-.11-.25-.18-.52-.32z"/><path fill="currentColor" d="M16.02 3.2A12.78 12.78 0 0 0 5.1 22.66L3.2 28.8l6.31-1.85A12.78 12.78 0 1 0 16.02 3.2zm0 23.27c-2.04 0-4.02-.55-5.75-1.59l-.41-.24-3.74 1.1 1.12-3.64-.27-.42a10.46 10.46 0 1 1 9.05 4.79z"/></svg></button>
-      <button class="iconBtn" onclick="scrollToId('categories')" aria-label="Menu">☰</button>
+      <button class="headAction" onclick="openWhatsApp('Hello, I want to know about Premium Entertainment plans.')" aria-label="WhatsApp">◉<span>WhatsApp</span></button>
+      <button class="headAction" onclick="scrollToId('categories')" aria-label="Categories">☷<span>Menu</span></button>
+      <button class="headTheme" type="button" onclick="finalToggleThemePanel()" aria-label="Theme">☀️ <span>Theme</span></button>
     </div>
   </div>
 </header>
@@ -532,6 +551,11 @@ body:before{background:radial-gradient(circle at 10% 0%,rgba(20,136,255,.12),tra
       <div class="stat"><b>90%</b><span>Max<br>Savings</span></div>
       <div class="stat"><b>3+</b><span>Years<br>Experience</span></div>
     </div>
+  </section>
+
+  <section class="ganeshFest wrapPromo" aria-label="Ganesh Chaturthi special offer">
+    <img src="ganesh-chaturthi-poster.png" alt="Ganesh Chaturthi Special Offer - Up to 50% OFF on all plans" loading="eager">
+    <div class="ganeshOverlay"><span>🪔 Ganesh Chaturthi Special Offer</span><b>UP TO 50% OFF</b><button onclick="scrollToId('products')">View Offers →</button></div>
   </section>
 
   <section class="section">
