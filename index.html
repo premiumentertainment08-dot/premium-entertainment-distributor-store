@@ -99,6 +99,9 @@ button,input{font:inherit}button{cursor:pointer}a{text-decoration:none;color:inh
 .orderBox{margin-top:10px;background:#fbf8fc;border:1px solid var(--line);border-radius:12px;padding:10px}
 .orderLine{display:flex;justify-content:space-between;gap:8px;font-size:10px;padding:4px 0}
 .total{font-size:15px;font-weight:1000;color:var(--maroon)}
+.couponBox{margin-top:11px;padding:11px;border:1px solid rgba(199,154,43,.38);border-radius:12px;background:linear-gradient(180deg,#fffaf0,#fff)}
+.couponTitle{font-size:12px;font-weight:950;color:var(--maroon);margin-bottom:8px}.couponRow{display:flex;gap:7px}.couponRow input{flex:1;min-width:0;border:1px solid #dfd2df;border-radius:9px;padding:10px 11px;font-size:11px;font-weight:800;text-transform:uppercase;outline:0;background:#fff}.couponApply{border:0;border-radius:9px;padding:10px 15px;background:linear-gradient(135deg,#c79a2b,#8b1748);color:#fff;font-weight:950;font-size:11px;cursor:pointer}.couponApply:active{transform:scale(.98)}.couponMsg{min-height:16px;margin-top:6px;font-size:10px;font-weight:850}.couponMsg.ok{color:#128447}.couponMsg.err{color:#b4233d}.discountLine{display:flex;justify-content:space-between;gap:8px;font-size:10px;padding:4px 0;color:#128447;font-weight:850}.oldTotal{text-decoration:line-through;opacity:.6;margin-right:5px;font-size:10px}
+@media(max-width:520px){.couponRow{align-items:stretch}.couponApply{padding:10px 12px;min-width:76px}}
 .payBtns{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:9px}
 .payBtn{border:0;border-radius:10px;padding:11px;font-weight:950;font-size:10px}
 .upi{background:linear-gradient(180deg,#f3cd64,#dba92f);color:#3c2600}
@@ -706,6 +709,7 @@ body:before{background:radial-gradient(circle at 10% 0%,rgba(20,136,255,.12),tra
     <div class="orderBox">
       <div class="orderLine"><span>Plan</span><b id="mPlan"></b></div>
       <div class="orderLine"><span>Duration</span><span id="mMeta"></span></div>
+      <div class="discountLine" id="couponDiscountLine" style="display:none"><span>Coupon Discount (10%)</span><span id="couponDiscountAmount"></span></div>
       <div class="orderLine"><span>Total Payable</span><span class="total" id="mPrice"></span></div>
     </div>
     <h3 style="font-size:13px;margin-top:13px">1️⃣ Customer Information</h3>
@@ -713,6 +717,11 @@ body:before{background:radial-gradient(circle at 10% 0%,rgba(20,136,255,.12),tra
       <div class="field"><label>FULL NAME *</label><input id="name" placeholder="Enter your full name"></div>
       <div class="field"><label>WHATSAPP NUMBER *</label><input id="phone" placeholder="9876543210" inputmode="numeric"></div>
       <div class="field" style="grid-column:1/-1"><label>EMAIL ADDRESS (OPTIONAL)</label><input id="email" placeholder="your@email.com"></div>
+    </div>
+    <div class="couponBox">
+      <div class="couponTitle">🎟️ Coupon Code <span style="font-weight:700;opacity:.65">(Optional)</span></div>
+      <div class="couponRow"><input id="couponCode" maxlength="30" placeholder="ENTER COUPON CODE" autocomplete="off" inputmode="text"><button class="couponApply" type="button" onclick="applyCoupon()">Apply</button></div>
+      <div id="couponMsg" class="couponMsg" aria-live="polite"></div>
     </div>
     <div class="note">Your order details will be sent to WhatsApp support. Please verify the plan, amount and terms before payment.</div>
     <div class="payBtns">
@@ -816,7 +825,7 @@ const cats=[
   ["Business Website","🌐","Professional business websites • 50% festival offer"]
 ];
 
-let active="All", selected=null;
+let active="All", selected=null, couponApplied=false, couponDiscount=0;
 
 function money(n){return "₹"+Number(n).toLocaleString("en-IN")}
 function scrollToId(id){document.getElementById(id)?.scrollIntoView({behavior:"smooth",block:"start"})}
@@ -935,12 +944,48 @@ function openLinkedProduct(){
   }
 }
 
+function getFinalAmount(){
+  if(!selected)return 0;
+  return Math.max(0, Number(selected.price||0)-Number(couponDiscount||0));
+}
+function updateOrderTotal(){
+  const base=Number(selected?.price||0);
+  const final=getFinalAmount();
+  const priceEl=document.getElementById("mPrice");
+  if(priceEl) priceEl.innerHTML=couponApplied ? `<span class="oldTotal">${money(base)}</span>${money(final)}` : money(base);
+  const line=document.getElementById("couponDiscountLine");
+  if(line){line.style.display=couponApplied?"flex":"none";document.getElementById("couponDiscountAmount").textContent="−"+money(couponDiscount);}
+}
+function applyCoupon(){
+  if(!selected)return;
+  const input=document.getElementById("couponCode");
+  const msg=document.getElementById("couponMsg");
+  const code=(input?.value||"").trim().toUpperCase();
+  couponApplied=false; couponDiscount=0;
+  if(code==="PREMIUMPLAN"){
+    couponDiscount=Math.round(Number(selected.price||0)*0.10);
+    couponApplied=true;
+    msg.textContent=`✓ PREMIUMPLAN applied — 10% OFF (${money(couponDiscount)} saved)`;
+    msg.className="couponMsg ok";
+  }else if(!code){
+    msg.textContent="Enter coupon code to apply the discount.";
+    msg.className="couponMsg err";
+  }else{
+    msg.textContent="Invalid coupon code.";
+    msg.className="couponMsg err";
+  }
+  updateOrderTotal();
+}
+
 function openOrder(i){
   selected=products[i];
+  couponApplied=false; couponDiscount=0;
   document.getElementById("modalTitle").textContent="Order • "+selected.name;
   document.getElementById("mPlan").textContent=selected.name;
   document.getElementById("mMeta").textContent=selected.meta;
-  document.getElementById("mPrice").textContent=money(selected.price);
+  const ci=document.getElementById("couponCode"); if(ci) ci.value="";
+  const cm=document.getElementById("couponMsg"); if(cm){cm.textContent="";cm.className="couponMsg";}
+  updateOrderTotal();
   document.getElementById("modalBack").classList.add("show");
   document.body.style.overflow="hidden";
 }
@@ -953,7 +998,7 @@ function orderMessage(){
   return `Hello Premium Entertainment, I want to order:
 Plan: ${selected.name}
 Duration: ${selected.meta}
-Amount: ${money(selected.price)}
+Amount: ${money(getFinalAmount())}${couponApplied?` (Original ${money(selected.price)}, 10% OFF via PREMIUMPLAN)`:""}
 Name: ${name||"Not provided"}
 WhatsApp: ${phone||"Not provided"}
 Email: ${email||"Not provided"}`;
@@ -974,8 +1019,8 @@ function payUPI(){
   const phone=document.getElementById("phone").value.trim();
   if(!name||!phone){alert("Please enter Full Name and WhatsApp Number first.");return;}
   const params=new URLSearchParams({
-    pa:UPI,pn:"Premium Entertainment",am:String(selected.price),cu:"INR",
-    tn:selected.name+" - "+selected.meta
+    pa:UPI,pn:"Premium Entertainment",am:String(getFinalAmount()),cu:"INR",
+    tn:selected.name+" - "+selected.meta+(couponApplied?" - PREMIUMPLAN 10% OFF":"")
   });
   window.location.href="upi://pay?"+params.toString();
 }
