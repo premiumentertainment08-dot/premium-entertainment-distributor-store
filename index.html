@@ -518,6 +518,23 @@ body:before{background:radial-gradient(circle at 10% 0%,rgba(20,136,255,.12),tra
 @media(max-width:760px){.nav{gap:7px;min-height:64px}.brandMark{width:38px;height:38px}.brandText b{font-size:11px}.brandText span{font-size:7px}.headSearch{order:3;flex-basis:100%;max-width:none;margin:0}.header .nav{flex-wrap:wrap;padding:7px 0}.actions{gap:5px}.headAction{min-width:40px;width:40px;height:38px;font-size:14px}.headAction span{font-size:6px}.headTheme{height:38px;padding:0 8px;font-size:12px}.headTheme span{display:none}.ganeshFest{margin-top:10px}.ganeshFest img{min-height:150px}.ganeshOverlay{left:8px;right:8px;bottom:8px;padding:7px;gap:5px}.ganeshOverlay span{font-size:8px}.ganeshOverlay b{font-size:12px}.ganeshOverlay button{font-size:8px;padding:7px 9px}#finalThemePanel{top:125px!important;right:8px!important;max-width:calc(100vw - 16px)!important;width:320px!important}}
 @media(max-width:420px){.brandText{max-width:140px}.brandText b{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.headAction{width:34px;min-width:34px}.headSearch input{font-size:10px}.ganeshFest img{min-height:132px}.ganeshOverlay span{max-width:125px}.ganeshOverlay b{font-size:11px}}
 </style>
+
+<style id="all-plans-format">
+.groupedPlanCard .planTop{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.groupedPlanCard .stockPill{font-size:11px;font-weight:900;color:#1d9d55;background:#e9f8ef;border:1px solid #bfe9cf;border-radius:999px;padding:5px 9px;white-space:nowrap}
+.groupedPlanCard .selectLabel{margin-top:18px;font-size:13px;font-weight:900;letter-spacing:1.3px;color:var(--muted)}
+.planChoices{display:flex;flex-wrap:wrap;gap:10px;margin-top:10px}
+.planChoice{min-width:112px;flex:1 1 112px;padding:12px 10px;border:1px solid #e5d9ea;border-radius:14px;background:#f8f3fb;color:#5e5964;font-weight:800;cursor:pointer}
+.planChoice b{display:block;font-size:14px}.planChoice span{display:block;margin-top:5px;color:#219b55;font-size:12px;font-weight:900}
+.planChoice.selected{border-color:var(--gold);box-shadow:0 0 0 2px rgba(227,180,63,.16);background:#fffaf0;color:#8b6b1f}
+.groupedPlanCard .selectedMeta{margin-top:10px;font-size:12px;color:var(--muted);line-height:1.5;min-height:18px}
+.groupedPlanCard .betterValue{position:relative;margin-top:16px;padding:12px 92px 12px 13px;border:1px solid #eadfcf;background:#fffaf0;border-radius:14px}
+.groupedPlanCard .betterValue span,.groupedPlanCard .betterValue small{display:block;color:#7a7470;font-size:12px}.groupedPlanCard .betterValue b{display:block;margin:4px 0;color:var(--ink);font-size:13px}.groupedPlanCard .betterValue button{position:absolute;right:10px;top:50%;transform:translateY(-50%);border:0;border-radius:10px;padding:10px 12px;background:var(--gold);font-weight:900;cursor:pointer}
+.groupActions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
+.groupedPlanCard .priceRow{align-items:center}.groupedPlanCard .savePill{font-size:12px;color:#219b55;font-weight:800}
+@media(max-width:650px){.planChoices{gap:7px}.planChoice{min-width:calc(33.333% - 5px);flex:1 1 calc(33.333% - 5px);padding:10px 6px}.planChoice b{font-size:11px}.planChoice span{font-size:10px}.groupedPlanCard .betterValue{padding-right:82px}.groupActions{grid-template-columns:1fr 1fr}}
+.theme-night .groupedPlanCard .planChoice{background:#111b29;border-color:#29435a;color:#dce7f1}.theme-night .groupedPlanCard .planChoice.selected{background:#18283a;color:#fff0a8;border-color:var(--accent2)}.theme-night .groupedPlanCard .stockPill{background:#10261b;color:#72e0a0;border-color:#245b3a}.theme-night .groupedPlanCard .betterValue{background:#172031;border-color:#4d4430}.theme-night .groupedPlanCard .betterValue b{color:#fff}.theme-night .groupedPlanCard .betterValue span,.theme-night .groupedPlanCard .betterValue small,.theme-night .groupedPlanCard .selectedMeta{color:#aebdcc}
+</style>
 </head>
 <body>
 <div class="top">🔥 Distributor Special Pricing • Fast Digital Delivery • WhatsApp Support</div>
@@ -931,6 +948,58 @@ function groupedIPTVCard(group){
   }).join("");
   return `<article class="card iptvGroupedCard"><div class="pic"><span class="tag">3 PLANS</span><img class="productLogo" src="${asset(first.img)}" alt="${first.name}" loading="lazy"></div><div class="body"><div class="cat">${first.cat}</div><div class="name">${first.name}</div><div class="meta">Choose your duration • 3 Months / 6 Months / 12 Months</div><div class="iptvPlanList">${rows}</div><div class="iptvShareRow">${share}</div></div></article>`;
 }
+function planKey(p){return p.name+"||"+p.cat+"||"+(p.tag||"")}
+function durationLabel(p){
+  const m=p.meta.match(/^(\d+)\s*Months?/i);
+  if(m)return m[1]+" MONTH"+(Number(m[1])===1?"":"S");
+  const y=p.meta.match(/^(\d+)\s*Year/i);
+  if(y)return y[1]+" YEAR"+(Number(y[1])===1?"":"S");
+  return (p.meta.split(" • ")[0]||"PLAN").toUpperCase();
+}
+function planOff(p){
+  if(p.off)return p.off;
+  if(p.mrp&&p.price&&p.mrp>p.price)return Math.round((1-p.price/p.mrp)*100)+"% off";
+  return "BEST VALUE";
+}
+function groupedProductCard(group,gid){
+  const first=group[0].p;
+  const rows=group.map((x,k)=>{
+    const p=x.p;
+    return `<button class="planChoice ${k===0?'selected':''}" onclick="selectGroupedPlan('${gid}',${k})"><b>${durationLabel(p)}</b><span>${planOff(p)}</span></button>`;
+  }).join("");
+  const mrp=first.mrp?`<span class="mrp" id="gpMrp-${gid}">${money(first.mrp)}</span>`:"";
+  const off=first.off?`<span class="badge">${first.off}</span>`:"";
+  const tag=first.tag?`<span class="tag">${first.tag}</span>`:"";
+  const next=group.length>1?`<div class="betterValue" id="gpBetter-${gid}"><span>↗ Better Value Available</span><b>Upgrade to ${durationLabel(group[1].p)} — only ${money(group[1].p.price)}</b><small>Save more with a longer plan</small><button onclick="selectGroupedPlan('${gid}',1)">Switch</button></div>`:"";
+  return `<article class="card groupedPlanCard" id="gpc-${gid}">
+    <div class="pic">${off}${tag}<img class="productLogo" src="${asset(first.img)}" alt="${first.name}" loading="lazy"></div>
+    <div class="body">
+      <div class="planTop"><span class="cat">${first.cat}</span><span class="stockPill">● IN STOCK</span></div>
+      <div class="name">${first.name}</div>
+      <div class="priceRow"><span class="price" id="gpPrice-${gid}">${money(first.price)}</span>${mrp}<span class="savePill" id="gpSave-${gid}">${first.mrp&&first.mrp>first.price?`🏷 You save ${money(first.mrp-first.price)}!`:''}</span></div>
+      <div class="selectLabel">SELECT PLAN</div>
+      <div class="planChoices">${rows}</div>
+      <div class="selectedMeta" id="gpMeta-${gid}">${first.meta}</div>
+      ${next}
+      <div class="groupActions"><button class="buy goldBuy" id="gpCart-${gid}" onclick="addToCart(${group[0].i})">🛒 Add to Cart</button><button class="buy" id="gpBuy-${gid}" onclick="openOrder(${group[0].i})">⚡ Buy Now</button></div>
+      <button class="sharePlan" id="gpShare-${gid}" onclick="sharePlan(${group[0].i})">🔗 Share Selected Plan</button>
+    </div>
+  </article>`;
+}
+function selectGroupedPlan(gid,k){
+  const g=window.__groupedPlans?.[gid]; if(!g||!g[k])return;
+  const x=g[k],p=x.p;
+  document.querySelectorAll(`#gpc-${gid} .planChoice`).forEach((b,i)=>b.classList.toggle('selected',i===k));
+  const set=(id,v)=>{const e=document.getElementById(id);if(e)e.textContent=v};
+  set(`gpPrice-${gid}`,money(p.price));
+  const mrp=document.getElementById(`gpMrp-${gid}`); if(mrp){mrp.textContent=p.mrp?money(p.mrp):'';mrp.style.display=p.mrp?'inline':''}
+  set(`gpSave-${gid}`,p.mrp&&p.mrp>p.price?`🏷 You save ${money(p.mrp-p.price)}!`:'');
+  set(`gpMeta-${gid}`,p.meta);
+  const buy=document.getElementById(`gpBuy-${gid}`),cart=document.getElementById(`gpCart-${gid}`),share=document.getElementById(`gpShare-${gid}`);
+  if(buy)buy.setAttribute('onclick',`openOrder(${x.i})`);
+  if(cart)cart.setAttribute('onclick',`addToCart(${x.i})`);
+  if(share)share.setAttribute('onclick',`sharePlan(${x.i})`);
+}
 function render(){
   renderTabs();
   const q=(document.getElementById("search")?.value||"").trim().toLowerCase();
@@ -938,18 +1007,14 @@ function render(){
     (active==="All"||x.p.cat===active) &&
     (x.p.name+" "+x.p.cat+" "+x.p.meta).toLowerCase().includes(q)
   );
-  document.getElementById("result").textContent=list.length+" plans";
   document.getElementById("empty").style.display=list.length?"none":"block";
-  if(active==="IPTV Services" && !q){
-    const groups=[];
-    const byName=new Map();
-    list.forEach(x=>{if(!byName.has(x.p.name))byName.set(x.p.name,[]);byName.get(x.p.name).push(x)});
-    byName.forEach(g=>groups.push(g));
-    document.getElementById("result").textContent=groups.length+" IPTV services • "+list.length+" plans";
-    document.getElementById("grid").innerHTML=groups.map(groupedIPTVCard).join("");
-    return;
-  }
-  document.getElementById("grid").innerHTML=list.map(x=>card(x.p,x.i)).join("");
+  const groups=[]; const byKey=new Map();
+  list.forEach(x=>{const key=planKey(x.p); if(!byKey.has(key))byKey.set(key,[]);byKey.get(key).push(x)});
+  byKey.forEach(g=>groups.push(g));
+  document.getElementById("result").textContent=(active==="IPTV Services"&&!q?groups.length+" IPTV services • ":groups.length+" products • ")+list.length+" plans";
+  window.__groupedPlans={};
+  const html=groups.map((g,n)=>{window.__groupedPlans[String(n)]=g;return groupedProductCard(g,String(n));}).join("");
+  document.getElementById("grid").innerHTML=html;
 }
 
 function productUrl(i){return window.location.origin+window.location.pathname+"?product="+encodeURIComponent(i);}
