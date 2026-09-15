@@ -3,8 +3,17 @@ service cloud.firestore {
   match /databases/{database}/documents {
     match /announcements/{docId} {
       allow read: if true;
-      // Replace the email below with your Firebase admin email.
       allow create, update, delete: if request.auth != null && request.auth.token.email == "YOUR_ADMIN_EMAIL@example.com";
+    }
+
+    match /paymentOrders/{orderId} {
+      // Customers may submit a pending order; admin alone can read or change it.
+      allow create: if request.resource.data.status == "PENDING"
+        && request.resource.data.amount is number
+        && request.resource.data.amount >= 0
+        && request.resource.data.orderId == orderId
+        && request.resource.data.screenshotPath is string;
+      allow read, update, delete: if request.auth != null && request.auth.token.email == "YOUR_ADMIN_EMAIL@example.com";
     }
   }
 }

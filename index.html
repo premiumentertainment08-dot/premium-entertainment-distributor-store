@@ -212,6 +212,10 @@ body{background:linear-gradient(180deg,#fff0f7 0%,#ffd8e8 48%,#fff5f9 100%)!impo
 @media(max-width:600px){.sidePurchase{right:10px;top:auto;bottom:145px;transform:translateX(120%)}.sidePurchase.show{transform:translateX(0)}}
 </style>
 
+<style id="payment-upload-style">
+.paymentUploadBox{margin-top:9px;padding:11px;border:1px dashed rgba(199,154,43,.65);border-radius:12px;background:linear-gradient(180deg,#fffaf0,#fff)}
+.paymentUploadTitle{font-size:12px;font-weight:950;color:#7d163f}.paymentUploadNote{font-size:9px;color:#756672;margin-top:4px;line-height:1.45}.paymentUploadMsg{min-height:16px;margin-top:5px;font-size:10px;font-weight:850}.paymentUploadMsg.ok{color:#128447}.paymentUploadMsg.err{color:#b4233d}.paymentUploadBox input[type=file]{display:block}
+</style>
 <style id="stable-mobile-final">
 html,body{
   width:100% !important;
@@ -752,7 +756,14 @@ body:before{background:radial-gradient(circle at 10% 0%,rgba(20,136,255,.12),tra
     </div>
     <div class="note">Your order details will be sent to WhatsApp support. Please verify the plan, amount and terms before payment.</div>
     <div class="payBtns">
-      <button class="payBtn upi" onclick="payUPI()">▦ Pay via UPI</button><button class="payBtn" style="width:100%;margin-top:7px;background:linear-gradient(135deg,#c79a2b,#8b1748);color:#fff" onclick="confirmPaid()">✅ I Have Paid / Confirm Order</button>
+      <button class="payBtn upi" onclick="payUPI()">▦ Pay via UPI</button>
+      <div class="paymentUploadBox">
+        <div class="paymentUploadTitle">📸 Payment Screenshot</div>
+        <div class="paymentUploadNote">UPI payment ke baad screenshot upload karein. Max 5 MB • JPG, PNG, WEBP</div>
+        <input id="paymentScreenshot" type="file" accept="image/jpeg,image/png,image/webp" style="width:100%;font-size:11px;margin-top:7px">
+        <div id="paymentUploadMsg" class="paymentUploadMsg" aria-live="polite"></div>
+      </div>
+      <button class="payBtn" style="width:100%;margin-top:7px;background:linear-gradient(135deg,#c79a2b,#8b1748);color:#fff" onclick="confirmPaid()">📸 Upload Screenshot & Confirm Order</button>
       <button class="payBtn whats" onclick="sendOrder()">◉ Order on WhatsApp</button>
     </div>
     <button class="payBtn" style="width:100%;margin-top:7px;background:#f0eaf3;color:#5b4d5d" onclick="closeOrder()">Close</button>
@@ -1224,14 +1235,29 @@ function closePurchaseSuccess(){
   document.getElementById("purchaseSuccess").style.display="none";
   closeOrder();
 }
-function confirmPaid(){
+async function confirmPaid(){
   if(!selected)return;
   const name=document.getElementById("name").value.trim();
   const phone=document.getElementById("phone").value.trim();
+  const email=document.getElementById("email").value.trim();
+  const file=document.getElementById("paymentScreenshot")?.files?.[0];
+  const msg=document.getElementById("paymentUploadMsg");
   if(!name||!phone){alert("Please enter Full Name and WhatsApp Number first.");return;}
-  showPurchaseSuccess(name,phone,selected);
-  showSidePurchase(name,phone,selected);
-  addActivity(name,phone,selected);
+  if(!file){if(msg){msg.textContent="Please select your payment screenshot first.";msg.className="paymentUploadMsg err";}return;}
+  if(!file.type.startsWith("image/")){if(msg){msg.textContent="Only image screenshots are allowed.";msg.className="paymentUploadMsg err";}return;}
+  if(file.size>5*1024*1024){if(msg){msg.textContent="Screenshot must be 5 MB or smaller.";msg.className="paymentUploadMsg err";}return;}
+  if(msg){msg.textContent="Uploading screenshot…";msg.className="paymentUploadMsg";}
+  if(!window.submitPaymentOrder){if(msg){msg.textContent="Payment upload is not configured yet. Admin Firebase setup is required.";msg.className="paymentUploadMsg err";}return;}
+  try{
+    const result=await window.submitPaymentOrder({name,phone,email,product:selected.name,plan:selected.meta,amount:getFinalAmount(),originalAmount:Number(selected.price||0),coupon:couponApplied?"PREMIUMPLAN":"",file});
+    if(msg){msg.textContent="✓ Screenshot uploaded. Order ID: "+result.orderId;msg.className="paymentUploadMsg ok";}
+    showPurchaseSuccess(name,phone,{...selected,price:getFinalAmount()});
+    showSidePurchase(name,phone,{...selected,price:getFinalAmount()});
+    addActivity(name,phone,{...selected,price:getFinalAmount()});
+    setTimeout(()=>openWhatsApp(`Payment screenshot uploaded. Order ID: ${result.orderId}\nPlan: ${selected.name}\nDuration: ${selected.meta}\nAmount: ${money(getFinalAmount())}`),350);
+  }catch(e){
+    if(msg){msg.textContent="Upload failed: "+(e.message||e);msg.className="paymentUploadMsg err";}
+  }
 }
 function showPurchasePopup(text){
   const t=document.getElementById('purchaseToast'); t.textContent='🛍️ '+text; t.classList.remove('show'); void t.offsetWidth; t.classList.add('show');
@@ -1316,6 +1342,27 @@ function hideSidePurchase(){document.getElementById("sidePurchase").classList.re
 })();
 </script>
 <script src="firebase-config.js"></script><script src="announcements.js"></script>
+<script type="module">
+import {initializeApp} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+import {getFirestore,doc,setDoc,serverTimestamp} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+import {getStorage,ref,uploadBytes} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-storage.js";
+(function(){
+  const cfg=window.FIREBASE_CONFIG;
+  if(!cfg||!cfg.apiKey||!cfg.projectId||!cfg.storageBucket){return;}
+  try{
+    const app=initializeApp(cfg); const db=getFirestore(app); const storage=getStorage(app);
+    window.submitPaymentOrder=async function(o){
+      const orderId="PE-"+Date.now()+"-"+Math.random().toString(36).slice(2,7).toUpperCase();
+      const safeName=(o.file.name||"screenshot").replace(/[^a-zA-Z0-9._-]/g,"_");
+      const path=`paymentScreenshots/${orderId}-${safeName}`;
+      await setDoc(doc(db,"paymentOrders",orderId),{orderId,name:o.name,phone:o.phone,email:o.email||"",product:o.product,plan:o.plan,amount:Number(o.amount||0),originalAmount:Number(o.originalAmount||0),coupon:o.coupon||"",screenshotPath:path,fileName:safeName,status:"PENDING",createdAt:serverTimestamp()});
+      await uploadBytes(ref(storage,path),o.file,{contentType:o.file.type,customMetadata:{orderId,name:o.name,phone:o.phone}});
+      return {orderId,path};
+    };
+    window.paymentUploadReady=true;
+  }catch(e){console.warn("Payment upload setup failed",e);}
+})();
+</script>
 
 <!-- FINAL THEME / LAYOUT / WEEKLY OFFER SYSTEM -->
 <style id="quick-settings-style">

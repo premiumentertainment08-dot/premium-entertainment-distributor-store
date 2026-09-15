@@ -23,9 +23,9 @@
     // Optional Firebase live mode. firebase-config.js must define window.FIREBASE_CONFIG.
     if(!window.FIREBASE_CONFIG || !window.FIREBASE_CONFIG.apiKey)return;
     const s=document.createElement('script');s.type='module';s.textContent=`
-      import { initializeApp } from 'https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js';
+      import { getApps, getApp } from 'https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js';
       import { getFirestore, collection, query, orderBy, limit, onSnapshot } from 'https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js';
-      const app=initializeApp(window.FIREBASE_CONFIG); const db=getFirestore(app);
+      const app=getApps().length ? getApp() : null; if(!app) return; const db=getFirestore(app);
       const q=query(collection(db,'announcements'),orderBy('time','desc'),limit(10));
       onSnapshot(q,snap=>{const items=snap.docs.map(d=>({id:d.id,...d.data()})); if(items.length){ localStorage.setItem('${demoKey}',JSON.stringify(items)); window.__renderAnnouncements(items); }});
     `;document.body.appendChild(s);
