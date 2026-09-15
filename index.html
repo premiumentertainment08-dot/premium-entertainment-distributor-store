@@ -948,7 +948,7 @@ function groupedIPTVCard(group){
   }).join("");
   return `<article class="card iptvGroupedCard"><div class="pic"><span class="tag">3 PLANS</span><img class="productLogo" src="${asset(first.img)}" alt="${first.name}" loading="lazy"></div><div class="body"><div class="cat">${first.cat}</div><div class="name">${first.name}</div><div class="meta">Choose your duration • 3 Months / 6 Months / 12 Months</div><div class="iptvPlanList">${rows}</div><div class="iptvShareRow">${share}</div></div></article>`;
 }
-function planKey(p){return p.name+"||"+p.cat+"||"+(p.tag||"")}
+function planKey(p){return p.name+"||"+p.cat}
 function durationLabel(p){
   const m=p.meta.match(/^(\d+)\s*Months?/i);
   if(m)return m[1]+" MONTH"+(Number(m[1])===1?"":"S");
@@ -960,6 +960,12 @@ function planOff(p){
   if(p.off)return p.off;
   if(p.mrp&&p.price&&p.mrp>p.price)return Math.round((1-p.price/p.mrp)*100)+"% off";
   return "BEST VALUE";
+}
+function planSortValue(p){
+  const m=p.meta.match(/^(\d+)\s*Months?/i); if(m)return Number(m[1]);
+  const y=p.meta.match(/^(\d+)\s*Year/i); if(y)return Number(y[1])*12;
+  const d=p.meta.match(/^(\d+)\s*Days?/i); if(d)return Number(d[1])/30;
+  return 9999;
 }
 function groupedProductCard(group,gid){
   const first=group[0].p;
@@ -1010,10 +1016,16 @@ function render(){
   document.getElementById("empty").style.display=list.length?"none":"block";
   const groups=[]; const byKey=new Map();
   list.forEach(x=>{const key=planKey(x.p); if(!byKey.has(key))byKey.set(key,[]);byKey.get(key).push(x)});
-  byKey.forEach(g=>groups.push(g));
+  byKey.forEach(g=>{
+    g.sort((a,b)=>planSortValue(a.p)-planSortValue(b.p));
+    groups.push(g);
+  });
   document.getElementById("result").textContent=(active==="IPTV Services"&&!q?groups.length+" IPTV services • ":groups.length+" products • ")+list.length+" plans";
   window.__groupedPlans={};
-  const html=groups.map((g,n)=>{window.__groupedPlans[String(n)]=g;return groupedProductCard(g,String(n));}).join("");
+  const html=groups.map((g,n)=>{
+    window.__groupedPlans[String(n)]=g;
+    return g.length>1 ? groupedProductCard(g,String(n)) : card(g[0].p,g[0].i);
+  }).join("");
   document.getElementById("grid").innerHTML=html;
 }
 
