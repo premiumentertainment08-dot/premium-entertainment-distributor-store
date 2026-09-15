@@ -520,6 +520,15 @@ body:before{background:radial-gradient(circle at 10% 0%,rgba(20,136,255,.12),tra
 </style>
 
 <style id="all-plans-format">
+/* Clean one-card product layout: variants are selected only after Buy/Cart is tapped */
+.variantPicker{margin:12px 0 4px;padding:12px;border:1px solid #e6d8bf;border-radius:14px;background:#fffaf0}
+.variantPickerTitle{font-size:12px;font-weight:950;letter-spacing:1px;color:var(--maroon);margin-bottom:9px}
+.variantPickerGrid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+.variantBtn{border:1px solid #dfd5e2;border-radius:11px;background:#f8f3fb;color:#5b5260;padding:10px 8px;text-align:left;cursor:pointer;font-weight:850}
+.variantBtn b{display:block;font-size:12px}.variantBtn span{display:block;margin-top:4px;color:#16894b;font-size:10px}
+.variantBtn.active{border-color:var(--gold);background:#fff5d8;box-shadow:0 0 0 2px rgba(227,180,63,.15);color:#7d5e14}
+.theme-night .variantPicker{background:#111b29;border-color:#29435a}.theme-night .variantPickerTitle{color:#ffe08a}.theme-night .variantBtn{background:#172334;border-color:#29435a;color:#dce7f1}.theme-night .variantBtn.active{background:#27384b;color:#fff0a8;border-color:var(--accent2)}
+@media(max-width:650px){.variantPickerGrid{grid-template-columns:repeat(2,1fr)}.variantBtn{padding:9px 7px}}
 .groupedPlanCard .planTop{display:flex;justify-content:space-between;align-items:center;gap:8px}
 .groupedPlanCard .stockPill{font-size:11px;font-weight:900;color:#1d9d55;background:#e9f8ef;border:1px solid #bfe9cf;border-radius:999px;padding:5px 9px;white-space:nowrap}
 .groupedPlanCard .selectLabel{margin-top:18px;font-size:13px;font-weight:900;letter-spacing:1.3px;color:var(--muted)}
@@ -729,6 +738,7 @@ body:before{background:radial-gradient(circle at 10% 0%,rgba(20,136,255,.12),tra
       <div class="discountLine" id="couponDiscountLine" style="display:none"><span>Coupon Discount (10%)</span><span id="couponDiscountAmount"></span></div>
       <div class="orderLine"><span>Total Payable</span><span class="total" id="mPrice"></span></div>
     </div>
+    <div id="modalVariantPicker" class="variantPicker" style="display:none"></div>
     <h3 style="font-size:13px;margin-top:13px">1️⃣ Customer Information</h3>
     <div class="modalGrid">
       <div class="field"><label>FULL NAME *</label><input id="name" placeholder="Enter your full name"></div>
@@ -969,43 +979,27 @@ function planSortValue(p){
 }
 function groupedProductCard(group,gid){
   const first=group[0].p;
-  const rows=group.map((x,k)=>{
-    const p=x.p;
-    return `<button class="planChoice ${k===0?'selected':''}" onclick="selectGroupedPlan('${gid}',${k})"><b>${durationLabel(p)}</b><span>${planOff(p)}</span></button>`;
-  }).join("");
-  const mrp=first.mrp?`<span class="mrp" id="gpMrp-${gid}">${money(first.mrp)}</span>`:"";
+  const mrp=first.mrp?`<span class="mrp">${money(first.mrp)}</span>`:"";
   const off=first.off?`<span class="badge">${first.off}</span>`:"";
   const tag=first.tag?`<span class="tag">${first.tag}</span>`:"";
-  const next=group.length>1?`<div class="betterValue" id="gpBetter-${gid}"><span>↗ Better Value Available</span><b>Upgrade to ${durationLabel(group[1].p)} — only ${money(group[1].p.price)}</b><small>Save more with a longer plan</small><button onclick="selectGroupedPlan('${gid}',1)">Switch</button></div>`:"";
+  const d=supportFor(first);
   return `<article class="card groupedPlanCard" id="gpc-${gid}">
     <div class="pic">${off}${tag}<img class="productLogo" src="${asset(first.img)}" alt="${first.name}" loading="lazy"></div>
     <div class="body">
-      <div class="planTop"><span class="cat">${first.cat}</span><span class="stockPill">● IN STOCK</span></div>
+      <div class="cat">${first.cat}</div>
       <div class="name">${first.name}</div>
-      <div class="priceRow"><span class="price" id="gpPrice-${gid}">${money(first.price)}</span>${mrp}<span class="savePill" id="gpSave-${gid}">${first.mrp&&first.mrp>first.price?`🏷 You save ${money(first.mrp-first.price)}!`:''}</span></div>
-      <div class="selectLabel">SELECT PLAN</div>
-      <div class="planChoices">${rows}</div>
-      <div class="selectedMeta" id="gpMeta-${gid}">${first.meta}</div>
-      ${next}
-      <div class="groupActions"><button class="buy goldBuy" id="gpCart-${gid}" onclick="addToCart(${group[0].i})">🛒 Add to Cart</button><button class="buy" id="gpBuy-${gid}" onclick="openOrder(${group[0].i})">⚡ Buy Now</button></div>
-      <button class="sharePlan" id="gpShare-${gid}" onclick="sharePlan(${group[0].i})">🔗 Share Selected Plan</button>
+      <div class="meta">Multiple plans available • Select plan after Buy</div>
+      <div class="details">
+        <div class="detail"><b>Activation:</b> ${d.activation}</div>
+        <div class="detail"><b>Supported:</b> ${d.supported}</div>
+      </div>
+      <div class="priceRow"><span class="price">${money(first.price)}</span>${mrp}</div>
+      <div class="groupActions"><button class="buy goldBuy" onclick="openOrder(${group[0].i})">🛒 Add to Cart</button><button class="buy" onclick="openOrder(${group[0].i})">⚡ Buy Now</button></div>
+      <button class="sharePlan" onclick="openOrder(${group[0].i})">🔗 Share Plan Link</button>
     </div>
   </article>`;
 }
-function selectGroupedPlan(gid,k){
-  const g=window.__groupedPlans?.[gid]; if(!g||!g[k])return;
-  const x=g[k],p=x.p;
-  document.querySelectorAll(`#gpc-${gid} .planChoice`).forEach((b,i)=>b.classList.toggle('selected',i===k));
-  const set=(id,v)=>{const e=document.getElementById(id);if(e)e.textContent=v};
-  set(`gpPrice-${gid}`,money(p.price));
-  const mrp=document.getElementById(`gpMrp-${gid}`); if(mrp){mrp.textContent=p.mrp?money(p.mrp):'';mrp.style.display=p.mrp?'inline':''}
-  set(`gpSave-${gid}`,p.mrp&&p.mrp>p.price?`🏷 You save ${money(p.mrp-p.price)}!`:'');
-  set(`gpMeta-${gid}`,p.meta);
-  const buy=document.getElementById(`gpBuy-${gid}`),cart=document.getElementById(`gpCart-${gid}`),share=document.getElementById(`gpShare-${gid}`);
-  if(buy)buy.setAttribute('onclick',`openOrder(${x.i})`);
-  if(cart)cart.setAttribute('onclick',`addToCart(${x.i})`);
-  if(share)share.setAttribute('onclick',`sharePlan(${x.i})`);
-}
+function selectGroupedPlan(gid,k){ return; }
 function render(){
   renderTabs();
   const q=(document.getElementById("search")?.value||"").trim().toLowerCase();
@@ -1078,16 +1072,37 @@ function applyCoupon(){
 }
 
 function openOrder(i){
-  selected=products[i];
+  const base=products[i]; if(!base)return;
+  const variants=products.map((p,idx)=>({p,i:idx}))
+    .filter(x=>x.p.name===base.name && x.p.cat===base.cat && !x.p.comingSoon)
+    .sort((a,b)=>planSortValue(a.p)-planSortValue(b.p));
+  const currentIndex=variants.findIndex(x=>x.i===i);
+  selected=(currentIndex>=0?variants[currentIndex]:variants[0]).p;
   couponApplied=false; couponDiscount=0;
   document.getElementById("modalTitle").textContent="Order • "+selected.name;
   document.getElementById("mPlan").textContent=selected.name;
   document.getElementById("mMeta").textContent=selected.meta;
-  const ci=document.getElementById("couponCode"); if(ci) ci.value="";
+  const picker=document.getElementById("modalVariantPicker");
+  if(picker && variants.length>1){
+    picker.style.display="block";
+    picker.innerHTML=`<div class="variantPickerTitle">SELECT PLAN</div><div class="variantPickerGrid">${variants.map(x=>`<button type="button" class="variantBtn ${x.i===i?'active':''}" data-index="${x.i}" onclick="chooseModalVariant(${x.i})"><b>${durationLabel(x.p)}</b><span>${money(x.p.price)} • ${planOff(x.p)}</span></button>`).join('')}</div>`;
+  }else if(picker){picker.style.display="none";picker.innerHTML="";}
+  const ci=document.getElementById("couponCode"); if(ci)ci.value="";
   const cm=document.getElementById("couponMsg"); if(cm){cm.textContent="";cm.className="couponMsg";}
   updateOrderTotal();
   document.getElementById("modalBack").classList.add("show");
   document.body.style.overflow="hidden";
+}
+function chooseModalVariant(i){
+  const p=products[i]; if(!p)return;
+  selected=p; couponApplied=false; couponDiscount=0;
+  document.getElementById("modalTitle").textContent="Order • "+selected.name;
+  document.getElementById("mPlan").textContent=selected.name;
+  document.getElementById("mMeta").textContent=selected.meta;
+  document.querySelectorAll("#modalVariantPicker .variantBtn").forEach(btn=>btn.classList.toggle("active",Number(btn.dataset.index)===i));
+  const ci=document.getElementById("couponCode"); if(ci)ci.value="";
+  const cm=document.getElementById("couponMsg"); if(cm){cm.textContent="";cm.className="couponMsg";}
+  updateOrderTotal();
 }
 function closeOrder(){document.getElementById("modalBack").classList.remove("show");document.body.style.overflow=""}
 
