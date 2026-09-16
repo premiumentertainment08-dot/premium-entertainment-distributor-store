@@ -1,6 +1,10 @@
 <!doctype html>
 <html lang="en">
 <head>
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#111827">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#6b0731">
@@ -1499,5 +1503,26 @@ body.layout-grid .grid{grid-template-columns:repeat(4,minmax(0,1fr))!important}.
 })();
 </script>
 
-</body>
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));
+}
+</script><style>
+#pwaInstallBtn{display:none;position:fixed;right:14px;bottom:18px;z-index:99999;border:0;border-radius:999px;padding:12px 18px;font-weight:700;background:#111827;color:#fff;box-shadow:0 6px 22px rgba(0,0,0,.25)}
+</style>
+<button id="pwaInstallBtn" type="button">📲 Install App</button>
+<script>
+let deferredPrompt;
+const installBtn=document.getElementById('pwaInstallBtn');
+window.addEventListener('beforeinstallprompt',e=>{
+ e.preventDefault(); deferredPrompt=e; installBtn.style.display='block';
+});
+installBtn.addEventListener('click',async()=>{
+ if(!deferredPrompt)return;
+ deferredPrompt.prompt();
+ try{await deferredPrompt.userChoice;}catch(e){}
+ deferredPrompt=null; installBtn.style.display='none';
+});
+window.addEventListener('appinstalled',()=>installBtn.style.display='none');
+</script></body>
 </html>
