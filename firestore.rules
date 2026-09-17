@@ -1,19 +1,13 @@
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
-    match /announcements/{docId} {
-      allow read: if true;
-      allow create, update, delete: if request.auth != null && request.auth.token.email == "YOUR_ADMIN_EMAIL@example.com";
-    }
-
+    function isAdmin() { return request.auth != null && request.auth.token.email == "YOUR_ADMIN_EMAIL@example.com"; }
+    match /products/{docId} { allow read: if true; allow create, update, delete: if isAdmin(); }
+    match /siteSettings/{docId} { allow read: if true; allow create, update, delete: if isAdmin(); }
+    match /announcements/{docId} { allow read: if true; allow create, update, delete: if isAdmin(); }
     match /paymentOrders/{orderId} {
-      // Customers may submit a pending order; admin alone can read or change it.
-      allow create: if request.resource.data.status == "PENDING"
-        && request.resource.data.amount is number
-        && request.resource.data.amount >= 0
-        && request.resource.data.orderId == orderId
-        && request.resource.data.screenshotPath is string;
-      allow read, update, delete: if request.auth != null && request.auth.token.email == "YOUR_ADMIN_EMAIL@example.com";
+      allow create: if request.resource.data.status == "PENDING" && request.resource.data.amount is number && request.resource.data.amount >= 0 && request.resource.data.orderId == orderId && request.resource.data.screenshotPath is string;
+      allow read, update, delete: if isAdmin();
     }
   }
 }
