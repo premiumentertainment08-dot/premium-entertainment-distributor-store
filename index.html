@@ -1041,17 +1041,21 @@ function render(){
   document.getElementById("grid").innerHTML=html;
 }
 
-function productUrl(i){return window.location.origin+window.location.pathname+"?product="+encodeURIComponent(i);}
+function productKey(p){return [p.name,p.cat,p.price,p.meta].map(v=>String(v??"").trim().toLowerCase()).join("|");}
+function encodeKey(v){return btoa(unescape(encodeURIComponent(v))).replace(/\+/g,"-").replace(/\//g,"_").replace(/=+$/g,"");}
+function decodeKey(v){try{return decodeURIComponent(escape(atob(v.replace(/-/g,"+").replace(/_/g,"/")+"=".repeat((4-v.length%4)%4))))}catch(e){return ""}}
+function productUrl(i){const p=products[i];return window.location.origin+window.location.pathname+"?plan="+encodeURIComponent(encodeKey(productKey(p)));}
 async function sharePlan(i){
   const p=products[i], url=productUrl(i);
   const text=`${p.name} • ${p.meta} • ${money(p.price)}\n\nOpen / Buy: ${url}`;
-  try{if(navigator.share){await navigator.share({title:p.name,text,url});}else{await navigator.clipboard.writeText(url);alert("Plan link copied\n\n"+url);}}catch(e){}
+  try{if(navigator.share){await navigator.share({title:p.name,text,url});}else if(navigator.clipboard){await navigator.clipboard.writeText(url);alert("Plan link copied\n\n"+url);}else{prompt("Copy plan link:",url);}}catch(e){try{prompt("Copy plan link:",url)}catch(_){}}
 }
 function openLinkedProduct(){
-  const raw=new URLSearchParams(location.search).get("product");
-  if(raw===null)return;
-  const i=Number(raw);
-  if(Number.isInteger(i)&&products[i]&&!products[i].comingSoon){
+  const qs=new URLSearchParams(location.search), encoded=qs.get("plan"), raw=qs.get("product");
+  let i=-1;
+  if(encoded){const k=decodeKey(encoded);i=products.findIndex(p=>productKey(p)===k);}
+  else if(raw!==null)i=Number(raw);
+  if(Number.isInteger(i)&&i>=0&&products[i]&&!products[i].comingSoon){
     active="All"; render(); setTimeout(()=>{scrollToId("products"); openOrder(i);},180);
   }
 }
