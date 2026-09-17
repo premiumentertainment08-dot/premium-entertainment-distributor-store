@@ -842,6 +842,7 @@ const REAL_LOGOS={
   "super iptv":"./super-iptv-user.png",
   "crystal tv":"./crystal-tv-user.png"
 };
+REAL_LOGOS["netflix 4k"]="./netflix-logo.svg";
 REAL_LOGOS["fancode"]="./fancode.jpg";
 REAL_LOGOS["jiosaavn premium"]="./jiosaavn.png";
 REAL_LOGOS["jio recharge"]="./jio.png";
@@ -1515,7 +1516,17 @@ body.layout-grid .grid{grid-template-columns:repeat(4,minmax(0,1fr))!important}.
     const snap=await getDocs(collection(db,'products'));
     if(!snap.empty){
       const remote=snap.docs.map(d=>({id:d.id,...d.data()})).filter(p=>p.active!==false);
-      if(remote.length) products=remote;
+      if(remote.length){
+        // Keep the original catalogue visible and add/update owner-managed Firebase plans.
+        // This prevents the catalogue from disappearing when Firebase contains only a test/new plan.
+        const key=p=>[p.name,p.price,p.meta,p.cat].map(v=>String(v||'').trim().toLowerCase()).join('|');
+        const merged=[...products];
+        for(const rp of remote){
+          const k=key(rp), i=merged.findIndex(lp=>key(lp)===k);
+          if(i>=0) merged[i]={...merged[i],...rp}; else merged.push(rp);
+        }
+        products=merged;
+      }
     }
     const settings=await getDoc(doc(db,'siteSettings','main'));
     if(settings.exists()){
