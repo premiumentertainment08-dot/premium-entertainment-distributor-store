@@ -871,22 +871,35 @@ const cats=[
 ];
 
 let active="All", selected=null, couponApplied=false, couponDiscount=0, couponCodeApplied="", couponPercent=0;
+window.__ownerDataReady = new Promise(resolve => { window.__resolveOwnerDataReady = resolve; });
 
 function money(n){return "₹"+Number(n).toLocaleString("en-IN")}
 function scrollToId(id){document.getElementById(id)?.scrollIntoView({behavior:"smooth",block:"start"})}
 function focusSearch(){scrollToId("products");setTimeout(()=>document.getElementById("search")?.focus(),350)}
 function openWhatsApp(text){const msg=encodeURIComponent(text||"");const urls=["https://wa.me/"+WHATSAPP+"?text="+msg,"https://api.whatsapp.com/send?phone="+WHATSAPP+"&text="+msg];try{const w=window.open(urls[0],"_blank","noopener,noreferrer");if(!w){window.location.href=urls[1]}}catch(e){window.location.href=urls[1]}return false}
 
+function allCategories(){
+  const out=[...cats];
+  const seen=new Set(out.map(x=>String(x[0]).trim().toLowerCase()));
+  for(const p of products){
+    const name=String(p.cat||"").trim();
+    if(!name || seen.has(name.toLowerCase())) continue;
+    seen.add(name.toLowerCase());
+    out.push([name,"📦","Owner-added category"]);
+  }
+  return out;
+}
+
 function renderCategories(){
-  document.getElementById("categoriesGrid").innerHTML=cats.map(([name,icon,desc])=>
-    `<button class="catCard" onclick="chooseCat('${name}')"><div class="catIcon">${icon}</div><div><b>${name}</b><span>${desc}</span></div></button>`
+  document.getElementById("categoriesGrid").innerHTML=allCategories().map(([name,icon,desc])=>
+    `<button class="catCard" onclick="chooseCat('${String(name).replace(/'/g,"\\'")}')"><div class="catIcon">${icon}</div><div><b>${name}</b><span>${desc}</span></div></button>`
   ).join("");
 }
 
 function renderTabs(){
-  const names=["All",...cats.map(x=>x[0])];
+  const names=["All",...allCategories().map(x=>x[0])];
   document.getElementById("tabs").innerHTML=names.map(c=>
-    `<button class="tab ${c===active?"active":""}" onclick="chooseCat('${c}')">${c}</button>`
+    `<button class="tab ${c===active?"active":""}" onclick="chooseCat('${String(c).replace(/'/g,"\\'")}')">${c}</button>`
   ).join("");
 }
 
@@ -1013,7 +1026,7 @@ function groupedProductCard(group,gid){
       </div>
       <div class="priceRow"><span class="price">${money(first.price)}</span>${mrp}</div>
       <div class="groupActions"><button class="buy goldBuy" onclick="openOrder(${group[0].i})">🛒 Add to Cart</button><button class="buy" onclick="openOrder(${group[0].i})">⚡ Buy Now</button></div>
-      <button class="sharePlan" onclick="openOrder(${group[0].i})">🔗 Share Plan Link</button>
+      <button class="sharePlan" onclick="sharePlan(${group[0].i})">🔗 Share Plan Link</button>
     </div>
   </article>`;
 }
@@ -1044,19 +1057,33 @@ function render(){
 function productKey(p){return [p.name,p.cat,p.price,p.meta].map(v=>String(v??"").trim().toLowerCase()).join("|");}
 function encodeKey(v){return btoa(unescape(encodeURIComponent(v))).replace(/\+/g,"-").replace(/\//g,"_").replace(/=+$/g,"");}
 function decodeKey(v){try{return decodeURIComponent(escape(atob(v.replace(/-/g,"+").replace(/_/g,"/")+"=".repeat((4-v.length%4)%4))))}catch(e){return ""}}
-function productUrl(i){const p=products[i];return window.location.origin+window.location.pathname+"?plan="+encodeURIComponent(encodeKey(productKey(p)));}
+function productUrl(i){
+  const p=products[i];
+  const base=window.location.origin+window.location.pathname;
+  const key=encodeURIComponent(encodeKey(productKey(p)));
+  // Always include the portable product key; Firebase ID is an additional fast lookup.
+  return p&&p.id ? base+"?plan="+key+"&pid="+encodeURIComponent(String(p.id)) : base+"?plan="+key;
+}
 async function sharePlan(i){
   const p=products[i], url=productUrl(i);
   const text=`${p.name} • ${p.meta} • ${money(p.price)}\n\nOpen / Buy: ${url}`;
   try{if(navigator.share){await navigator.share({title:p.name,text,url});}else if(navigator.clipboard){await navigator.clipboard.writeText(url);alert("Plan link copied\n\n"+url);}else{prompt("Copy plan link:",url);}}catch(e){try{prompt("Copy plan link:",url)}catch(_){}}
 }
-function openLinkedProduct(){
-  const qs=new URLSearchParams(location.search), encoded=qs.get("plan"), raw=qs.get("product");
+async function openLinkedProduct(){
+  const qs=new URLSearchParams(location.search), pid=qs.get("pid"), encoded=qs.get("plan"), raw=qs.get("product");
+  if(!pid && encoded===null && raw===null) return;
+  // Wait until Firebase products have been merged into the static catalogue.
+  try{await window.__ownerDataReady;}catch(e){}
   let i=-1;
-  if(encoded){const k=decodeKey(encoded);i=products.findIndex(p=>productKey(p)===k);}
-  else if(raw!==null)i=Number(raw);
+  if(pid)i=products.findIndex(p=>String(p.id||"")===String(pid));
+  if(i<0 && encoded){const k=decodeKey(encoded);i=products.findIndex(p=>productKey(p)===k);}
+  if(i<0 && raw!==null && /^\d+$/.test(raw))i=Number(raw);
   if(Number.isInteger(i)&&i>=0&&products[i]&&!products[i].comingSoon){
-    active="All"; render(); setTimeout(()=>{scrollToId("products"); openOrder(i);},180);
+    active="All"; render();
+    setTimeout(()=>{scrollToId("products"); openOrder(i);},180);
+  }else if(encoded){
+    // One final retry for slow mobile Firebase/network loads.
+    setTimeout(()=>openLinkedProduct(),900);
   }
 }
 
@@ -1544,9 +1571,12 @@ body.layout-grid .grid{grid-template-columns:repeat(4,minmax(0,1fr))!important}.
         if(sp&&x.offerText)sp.textContent=x.offerText;
       }
     }
+    if(typeof renderCategories==='function') renderCategories();
     if(typeof render==='function') render();
     if(typeof renderRecent==='function') renderRecent();
-  }catch(e){console.warn('Owner data sync skipped',e)}})();
+  }catch(e){console.warn('Owner data sync skipped',e)}finally{
+    if(window.__resolveOwnerDataReady) window.__resolveOwnerDataReady();
+  }})();
 })();
 </script>
 <script>
