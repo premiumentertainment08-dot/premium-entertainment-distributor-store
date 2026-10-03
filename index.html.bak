@@ -125,7 +125,7 @@ button,input{font:inherit}button{cursor:pointer}a{text-decoration:none;color:inh
 
 .brandFallback{width:100%;height:100%;border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:10px;box-sizing:border-box;text-align:center;font-weight:900;letter-spacing:.2px}
 .brandFallback .bfIcon{font-size:28px;line-height:1;margin-bottom:6px}.brandFallback .bfName{font-size:13px;line-height:1.08}
-.sharePlan{width:100%;margin-top:7px;border:1px solid rgba(199,154,43,.45);background:#fff8eb;color:#7b1745;border-radius:10px;padding:9px 10px;font-weight:900;cursor:pointer}.sharePlan:active{transform:scale(.98)}.stockBadge{display:inline-flex;align-items:center;justify-content:center;gap:5px;margin-top:7px;padding:7px 10px;border-radius:9px;background:#ffe8e8;color:#b4233d;font-weight:950;font-size:11px}.stockDisabled{opacity:.58!important;filter:saturate(.55);cursor:not-allowed!important}</style>
+.sharePlan{width:100%;margin-top:7px;border:1px solid rgba(199,154,43,.45);background:#fff8eb;color:#7b1745;border-radius:10px;padding:9px 10px;font-weight:900;cursor:pointer}.sharePlan:active{transform:scale(.98)}</style>
 <style>
 .productLogo{background:#f3eef6;width:100%;height:100%;object-fit:contain;display:block;border-radius:12px}
 .pic{position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden}
@@ -958,20 +958,37 @@ function card(p,i){
   const mrp=p.mrp?`<span class="mrp">${money(p.mrp)}</span>`:"";
   const off=p.off?`<span class="badge">${p.off}</span>`:"";
   const tag=p.tag?`<span class="tag">${p.tag}</span>`:"";
-  const d=supportFor(p), out=p.active===false;
+  const d=supportFor(p);
   if(p.comingSoon){
     return `<article class="card comingSoonCard"><div class="pic">${tag}<img class="productLogo" src="${asset(p.img)}" alt="${p.name}" loading="lazy"></div><div class="body"><div class="cat">${p.cat}</div><div class="name">${p.name}</div><div class="meta">${p.meta}</div><div class="comingSoonText">🚀 COMING SOON</div><button class="buy comingSoonBtn" disabled>⏳ Coming Soon</button></div></article>`;
   }
-  const actions=out
-    ? `<button class="buy goldBuy stockDisabled" disabled>🛒 Add to Cart</button><button class="buy stockDisabled" disabled>⚡ Buy Now</button>`
-    : `<button class="buy goldBuy" onclick="addToCart(${i})">🛒 Add to Cart</button><button class="buy" onclick="openOrder(${i})">⚡ Buy Now</button>`;
-  return `<article class="card${out?' outOfStockCard':''}"><div class="pic">${off}${tag}<img class="productLogo" src="${asset(p.img)}" alt="${p.name}" loading="lazy"></div><div class="body"><div class="cat">${p.cat}</div><div class="name">${p.name}</div><div class="meta">${p.meta}</div><div class="details"><div class="detail"><b>Activation:</b> ${d.activation}</div><div class="detail"><b>Supported:</b> ${d.supported}</div></div><div class="priceRow"><span class="price">${money(p.price)}</span>${mrp}</div>${out?'<div class="stockBadge">🔴 OUT OF STOCK</div>':''}<div class="cardActions">${actions}</div><button class="sharePlan" onclick="sharePlan(${i})">🔗 Share Plan Link</button></div></article>`;
+  return `<article class="card">
+    <div class="pic">${off}${tag}<img class="productLogo" src="${asset(p.img)}" alt="${p.name}" loading="lazy"></div>
+    <div class="body">
+      <div class="cat">${p.cat}</div>
+      <div class="name">${p.name}</div>
+      <div class="meta">${p.meta}</div>
+      <div class="details">
+        <div class="detail"><b>Activation:</b> ${d.activation}</div>
+        <div class="detail"><b>Supported:</b> ${d.supported}</div>
+      </div>
+      <div class="priceRow"><span class="price">${money(p.price)}</span>${mrp}</div>
+      <div class="cardActions"><button class="buy goldBuy" onclick="addToCart(${i})">🛒 Add to Cart</button><button class="buy" onclick="openOrder(${i})">⚡ Buy Now</button></div><button class="sharePlan" onclick="sharePlan(${i})">🔗 Share Plan Link</button>
+    </div>
+  </article>`;
 }
 function groupedIPTVCard(group){
-  const available=group.filter(x=>x.p.active!==false), first=(available[0]||group[0]).p;
-  if(!available.length)return `<article class="card iptvGroupedCard outOfStockCard"><div class="pic"><span class="tag">3 PLANS</span><img class="productLogo" src="${asset(first.img)}" alt="${first.name}" loading="lazy"></div><div class="body"><div class="cat">${first.cat}</div><div class="name">${first.name}</div><div class="meta">All plans currently unavailable</div><div class="stockBadge">🔴 OUT OF STOCK</div></div></article>`;
-  const rows=available.map(x=>{const months=(x.p.meta.match(/^(\d+) Months?/i)||[])[1]||"",duration=months?months+" Months":x.p.meta.split(" • ")[0];return `<div class="iptvPlanRow"><div class="iptvPlanDuration"><b>${duration}</b><span>${x.p.meta.replace(/^\d+ Months? • /i,"")}</span></div><strong class="iptvPlanPrice">${money(x.p.price)}</strong><button class="buy iptvMiniBuy" onclick="openOrder(${x.i})">⚡ Buy</button><button class="iptvMiniCart" onclick="addToCart(${x.i})">🛒</button></div>`;}).join("");
-  const share=available.map(x=>{const months=(x.p.meta.match(/^(\d+) Months?/i)||[])[1]||"",duration=months?months+" Months":x.p.meta.split(" • ")[0];return `<button class="sharePlan iptvShare" onclick="sharePlan(${x.i})">🔗 ${duration}</button>`;}).join("");
+  const first=group[0].p;
+  const rows=group.map(x=>{
+    const months=(x.p.meta.match(/^(\d+) Months?/i)||[])[1]||"";
+    const duration=months?months+" Months":x.p.meta.split(" • ")[0];
+    return `<div class="iptvPlanRow"><div class="iptvPlanDuration"><b>${duration}</b><span>${x.p.meta.replace(/^\d+ Months? • /i,"")}</span></div><strong class="iptvPlanPrice">${money(x.p.price)}</strong><button class="buy iptvMiniBuy" onclick="openOrder(${x.i})">⚡ Buy</button><button class="iptvMiniCart" onclick="addToCart(${x.i})">🛒</button></div>`;
+  }).join("");
+  const share=group.map(x=>{
+    const months=(x.p.meta.match(/^(\d+) Months?/i)||[])[1]||"";
+    const duration=months?months+" Months":x.p.meta.split(" • ")[0];
+    return `<button class="sharePlan iptvShare" onclick="sharePlan(${x.i})">🔗 ${duration}</button>`;
+  }).join("");
   return `<article class="card iptvGroupedCard"><div class="pic"><span class="tag">3 PLANS</span><img class="productLogo" src="${asset(first.img)}" alt="${first.name}" loading="lazy"></div><div class="body"><div class="cat">${first.cat}</div><div class="name">${first.name}</div><div class="meta">Choose your duration • 3 Months / 6 Months / 12 Months</div><div class="iptvPlanList">${rows}</div><div class="iptvShareRow">${share}</div></div></article>`;
 }
 function planKey(p){return p.name+"||"+p.cat}
@@ -994,12 +1011,26 @@ function planSortValue(p){
   return 9999;
 }
 function groupedProductCard(group,gid){
-  const available=group.filter(x=>x.p.active!==false), first=(available[0]||group[0]).p;
-  const mrp=first.mrp?`<span class="mrp">${money(first.mrp)}</span>`:"", off=first.off?`<span class="badge">${first.off}</span>`:"", tag=first.tag?`<span class="tag">${first.tag}</span>`:"", d=supportFor(first);
-  if(!available.length){return `<article class="card groupedPlanCard outOfStockCard" id="gpc-${gid}"><div class="pic">${off}${tag}<img class="productLogo" src="${asset(first.img)}" alt="${first.name}" loading="lazy"></div><div class="body"><div class="cat">${first.cat}</div><div class="name">${first.name}</div><div class="meta">All plans currently unavailable</div><div class="details"><div class="detail"><b>Activation:</b> ${d.activation}</div><div class="detail"><b>Supported:</b> ${d.supported}</div></div><div class="priceRow"><span class="price">${money(first.price)}</span>${mrp}</div><div class="stockBadge">🔴 OUT OF STOCK</div><div class="groupActions"><button class="buy stockDisabled" disabled>⚡ Buy Now</button></div><button class="sharePlan" onclick="sharePlan(${group[0].i})">🔗 Share Plan Link</button></div></article>`;}
-  const rows=available.map(x=>{const months=(x.p.meta.match(/^(\d+) Months?/i)||[])[1]||"", duration=months?months+" Months":x.p.meta.split(" • ")[0];return `<div class="iptvPlanRow"><div class="iptvPlanDuration"><b>${duration}</b><span>${x.p.meta.replace(/^\d+ Months? • /i,"")}</span></div><strong class="iptvPlanPrice">${money(x.p.price)}</strong><button class="buy iptvMiniBuy" onclick="openOrder(${x.i})">⚡ Buy</button><button class="iptvMiniCart" onclick="addToCart(${x.i})">🛒</button></div>`;}).join("");
-  const share=available.map(x=>{const months=(x.p.meta.match(/^(\d+) Months?/i)||[])[1]||"", duration=months?months+" Months":x.p.meta.split(" • ")[0];return `<button class="sharePlan iptvShare" onclick="sharePlan(${x.i})">🔗 ${duration}</button>`;}).join("");
-  return `<article class="card groupedPlanCard" id="gpc-${gid}"><div class="pic">${off}${tag}<img class="productLogo" src="${asset(first.img)}" alt="${first.name}" loading="lazy"></div><div class="body"><div class="cat">${first.cat}</div><div class="name">${first.name}</div><div class="meta">Multiple plans available • Select plan after Buy</div><div class="details"><div class="detail"><b>Activation:</b> ${d.activation}</div><div class="detail"><b>Supported:</b> ${d.supported}</div></div><div class="priceRow"><span class="price">${money(first.price)}</span>${mrp}</div><div class="iptvPlanList">${rows}</div><div class="iptvShareRow">${share}</div></div></article>`;
+  const first=group[0].p;
+  const mrp=first.mrp?`<span class="mrp">${money(first.mrp)}</span>`:"";
+  const off=first.off?`<span class="badge">${first.off}</span>`:"";
+  const tag=first.tag?`<span class="tag">${first.tag}</span>`:"";
+  const d=supportFor(first);
+  return `<article class="card groupedPlanCard" id="gpc-${gid}">
+    <div class="pic">${off}${tag}<img class="productLogo" src="${asset(first.img)}" alt="${first.name}" loading="lazy"></div>
+    <div class="body">
+      <div class="cat">${first.cat}</div>
+      <div class="name">${first.name}</div>
+      <div class="meta">Multiple plans available • Select plan after Buy</div>
+      <div class="details">
+        <div class="detail"><b>Activation:</b> ${d.activation}</div>
+        <div class="detail"><b>Supported:</b> ${d.supported}</div>
+      </div>
+      <div class="priceRow"><span class="price">${money(first.price)}</span>${mrp}</div>
+      <div class="groupActions"><button class="buy goldBuy" onclick="openOrder(${group[0].i})">🛒 Add to Cart</button><button class="buy" onclick="openOrder(${group[0].i})">⚡ Buy Now</button></div>
+      <button class="sharePlan" onclick="sharePlan(${group[0].i})">🔗 Share Plan Link</button>
+    </div>
+  </article>`;
 }
 function selectGroupedPlan(gid,k){ return; }
 function render(){
@@ -1025,24 +1056,39 @@ function render(){
   document.getElementById("grid").innerHTML=html;
 }
 
-function productKey(p){return [p.name,p.cat,p.price,p.meta].map(v=>String(v??' ').trim().toLowerCase()).join("|");}
-function shortCode(p){const str=productKey(p);let h=2166136261;for(let i=0;i<str.length;i++){h^=str.charCodeAt(i);h=Math.imul(h,16777619)}h^=h>>>13;h=Math.imul(h,1274126177);h^=h>>>16;return (h>>>0).toString(36).padStart(7,"0").slice(0,8)}
+function productKey(p){return [p.name,p.cat,p.price,p.meta].map(v=>String(v??"").trim().toLowerCase()).join("|");}
 function encodeKey(v){return btoa(unescape(encodeURIComponent(v))).replace(/\+/g,"-").replace(/\//g,"_").replace(/=+$/g,"");}
 function decodeKey(v){try{return decodeURIComponent(escape(atob(v.replace(/-/g,"+").replace(/_/g,"/")+"=".repeat((4-v.length%4)%4))))}catch(e){return ""}}
-function productUrl(i){const p=products[i],base=window.location.origin+window.location.pathname;return base+"?p="+encodeURIComponent(shortCode(p));}
-async function sharePlan(i){const p=products[i],url=productUrl(i),text=`${p.name} • ${p.meta} • ${money(p.price)}\n\nOpen / Buy: ${url}`;try{if(navigator.share){await navigator.share({title:p.name,text,url});}else if(navigator.clipboard){await navigator.clipboard.writeText(url);alert("Plan link copied\n\n"+url);}else{prompt("Copy plan link:",url);}}catch(e){try{prompt("Copy plan link:",url)}catch(_){} }}
-async function openLinkedProduct(){
-  const qs=new URLSearchParams(location.search),code=qs.get("p"),pid=qs.get("pid"),encoded=qs.get("plan"),raw=qs.get("product");
-  if(code===null&&!pid&&encoded===null&&raw===null)return;
-  try{await window.__ownerDataReady}catch(e){}
-  let i=-1;
-  if(code)i=products.findIndex(p=>shortCode(p)===code);
-  if(i<0&&pid)i=products.findIndex(p=>String(p.id||"")===String(pid));
-  if(i<0&&encoded){const k=decodeKey(encoded);i=products.findIndex(p=>productKey(p)===k);}
-  if(i<0&&raw!==null&&/^\d+$/.test(raw))i=Number(raw);
-  if(Number.isInteger(i)&&i>=0&&products[i]&&!products[i].comingSoon){active="All";render();setTimeout(()=>{scrollToId("products");openOrder(i);},180);}
-  else if(code||encoded||pid)setTimeout(()=>openLinkedProduct(),900);
+function productUrl(i){
+  const p=products[i];
+  const base=window.location.origin+window.location.pathname;
+  const key=encodeURIComponent(encodeKey(productKey(p)));
+  // Always include the portable product key; Firebase ID is an additional fast lookup.
+  return p&&p.id ? base+"?plan="+key+"&pid="+encodeURIComponent(String(p.id)) : base+"?plan="+key;
 }
+async function sharePlan(i){
+  const p=products[i], url=productUrl(i);
+  const text=`${p.name} • ${p.meta} • ${money(p.price)}\n\nOpen / Buy: ${url}`;
+  try{if(navigator.share){await navigator.share({title:p.name,text,url});}else if(navigator.clipboard){await navigator.clipboard.writeText(url);alert("Plan link copied\n\n"+url);}else{prompt("Copy plan link:",url);}}catch(e){try{prompt("Copy plan link:",url)}catch(_){}}
+}
+async function openLinkedProduct(){
+  const qs=new URLSearchParams(location.search), pid=qs.get("pid"), encoded=qs.get("plan"), raw=qs.get("product");
+  if(!pid && encoded===null && raw===null) return;
+  // Wait until Firebase products have been merged into the static catalogue.
+  try{await window.__ownerDataReady;}catch(e){}
+  let i=-1;
+  if(pid)i=products.findIndex(p=>String(p.id||"")===String(pid));
+  if(i<0 && encoded){const k=decodeKey(encoded);i=products.findIndex(p=>productKey(p)===k);}
+  if(i<0 && raw!==null && /^\d+$/.test(raw))i=Number(raw);
+  if(Number.isInteger(i)&&i>=0&&products[i]&&!products[i].comingSoon){
+    active="All"; render();
+    setTimeout(()=>{scrollToId("products"); openOrder(i);},180);
+  }else if(encoded){
+    // One final retry for slow mobile Firebase/network loads.
+    setTimeout(()=>openLinkedProduct(),900);
+  }
+}
+
 function getFinalAmount(){
   if(!selected)return 0;
   return Math.max(0, Number(selected.price||0)-Number(couponDiscount||0));
@@ -1079,9 +1125,8 @@ function applyCoupon(){
 
 function openOrder(i){
   const base=products[i]; if(!base)return;
-  if(base.active===false){showPurchasePopup("This plan is currently Out of Stock");return;}
   const variants=products.map((p,idx)=>({p,i:idx}))
-    .filter(x=>x.p.name===base.name && x.p.cat===base.cat && !x.p.comingSoon && x.p.active!==false)
+    .filter(x=>x.p.name===base.name && x.p.cat===base.cat && !x.p.comingSoon)
     .sort((a,b)=>planSortValue(a.p)-planSortValue(b.p));
   const currentIndex=variants.findIndex(x=>x.i===i);
   selected=(currentIndex>=0?variants[currentIndex]:variants[0]).p;
@@ -1191,8 +1236,7 @@ function renderActivity(){
 function escapeHtml(v){return String(v).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
 function money2(n){return '₹'+Number(n||0).toLocaleString('en-IN')}
 function addToCart(i){
-  const p=products[i]; if(!p)return;
-  if(p.active===false){showPurchasePopup("This plan is currently Out of Stock");return;}
+  const p=products[i];
   const found=cart.find(x=>x.i===i);
   if(found) found.qty++;
   else cart.push({i,qty:1});
@@ -1500,7 +1544,7 @@ body.layout-grid .grid{grid-template-columns:repeat(4,minmax(0,1fr))!important}.
     async function mediaValue(refPath){try{const snap=await get(ref(rtdb,refPath));const v=snap.val();return v&&v.data?v.data:''}catch(e){console.warn('Owner media read failed',e);return ''}}
     const snap=await getDocs(collection(db,'products'));
     if(!snap.empty){
-      const remote=snap.docs.map(d=>({id:d.id,...d.data()}));
+      const remote=snap.docs.map(d=>({id:d.id,...d.data()})).filter(p=>p.active!==false);
       if(remote.length){
         // Keep the original catalogue visible and add/update owner-managed Firebase plans.
         // This prevents the catalogue from disappearing when Firebase contains only a test/new plan.
