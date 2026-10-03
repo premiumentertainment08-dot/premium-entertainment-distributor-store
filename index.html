@@ -995,11 +995,44 @@ function planSortValue(p){
 }
 function groupedProductCard(group,gid){
   const available=group.filter(x=>x.p.active!==false), first=(available[0]||group[0]).p;
-  const mrp=first.mrp?`<span class="mrp">${money(first.mrp)}</span>`:"", off=first.off?`<span class="badge">${first.off}</span>`:"", tag=first.tag?`<span class="tag">${first.tag}</span>`:"", d=supportFor(first);
-  if(!available.length){return `<article class="card groupedPlanCard outOfStockCard" id="gpc-${gid}"><div class="pic">${off}${tag}<img class="productLogo" src="${asset(first.img)}" alt="${first.name}" loading="lazy"></div><div class="body"><div class="cat">${first.cat}</div><div class="name">${first.name}</div><div class="meta">All plans currently unavailable</div><div class="details"><div class="detail"><b>Activation:</b> ${d.activation}</div><div class="detail"><b>Supported:</b> ${d.supported}</div></div><div class="priceRow"><span class="price">${money(first.price)}</span>${mrp}</div><div class="stockBadge">🔴 OUT OF STOCK</div><div class="groupActions"><button class="buy stockDisabled" disabled>⚡ Buy Now</button></div><button class="sharePlan" onclick="sharePlan(${group[0].i})">🔗 Share Plan Link</button></div></article>`;}
-  const rows=available.map(x=>{const months=(x.p.meta.match(/^(\d+) Months?/i)||[])[1]||"", duration=months?months+" Months":x.p.meta.split(" • ")[0];return `<div class="iptvPlanRow"><div class="iptvPlanDuration"><b>${duration}</b><span>${x.p.meta.replace(/^\d+ Months? • /i,"")}</span></div><strong class="iptvPlanPrice">${money(x.p.price)}</strong><button class="buy iptvMiniBuy" onclick="openOrder(${x.i})">⚡ Buy</button><button class="iptvMiniCart" onclick="addToCart(${x.i})">🛒</button></div>`;}).join("");
-  const share=available.map(x=>{const months=(x.p.meta.match(/^(\d+) Months?/i)||[])[1]||"", duration=months?months+" Months":x.p.meta.split(" • ")[0];return `<button class="sharePlan iptvShare" onclick="sharePlan(${x.i})">🔗 ${duration}</button>`;}).join("");
-  return `<article class="card groupedPlanCard" id="gpc-${gid}"><div class="pic">${off}${tag}<img class="productLogo" src="${asset(first.img)}" alt="${first.name}" loading="lazy"></div><div class="body"><div class="cat">${first.cat}</div><div class="name">${first.name}</div><div class="meta">Multiple plans available • Select plan after Buy</div><div class="details"><div class="detail"><b>Activation:</b> ${d.activation}</div><div class="detail"><b>Supported:</b> ${d.supported}</div></div><div class="priceRow"><span class="price">${money(first.price)}</span>${mrp}</div><div class="iptvPlanList">${rows}</div><div class="iptvShareRow">${share}</div></div></article>`;
+  const mrp=first.mrp?`<span class="mrp">${money(first.mrp)}</span>`:"";
+  const off=first.off?`<span class="badge">${first.off}</span>`:"";
+  const tag=first.tag?`<span class="tag">${first.tag}</span>`:"";
+  const d=supportFor(first);
+  const target=(available[0]||group[0]).i;
+  if(!available.length){
+    return `<article class="card groupedPlanCard outOfStockCard" id="gpc-${gid}">
+      <div class="pic">${off}${tag}<img class="productLogo" src="${asset(first.img)}" alt="${first.name}" loading="lazy"></div>
+      <div class="body">
+        <div class="cat">${first.cat}</div>
+        <div class="name">${first.name}</div>
+        <div class="meta">All plans currently unavailable</div>
+        <div class="details">
+          <div class="detail"><b>Activation:</b> ${d.activation}</div>
+          <div class="detail"><b>Supported:</b> ${d.supported}</div>
+        </div>
+        <div class="priceRow"><span class="price">${money(first.price)}</span>${mrp}</div>
+        <div class="stockBadge">🔴 OUT OF STOCK</div>
+        <div class="groupActions"><button class="buy stockDisabled" disabled>⚡ Buy Now</button></div>
+        <button class="sharePlan" onclick="sharePlan(${group[0].i})">🔗 Share Plan Link</button>
+      </div>
+    </article>`;
+  }
+  return `<article class="card groupedPlanCard" id="gpc-${gid}">
+    <div class="pic">${off}${tag}<img class="productLogo" src="${asset(first.img)}" alt="${first.name}" loading="lazy"></div>
+    <div class="body">
+      <div class="cat">${first.cat}</div>
+      <div class="name">${first.name}</div>
+      <div class="meta">Multiple plans available • Select plan after Buy</div>
+      <div class="details">
+        <div class="detail"><b>Activation:</b> ${d.activation}</div>
+        <div class="detail"><b>Supported:</b> ${d.supported}</div>
+      </div>
+      <div class="priceRow"><span class="price">${money(first.price)}</span>${mrp}</div>
+      <div class="groupActions"><button class="buy goldBuy" onclick="openOrder(${target})">🛒 Add to Cart</button><button class="buy" onclick="openOrder(${target})">⚡ Buy Now</button></div>
+      <button class="sharePlan" onclick="sharePlan(${target})">🔗 Share Plan Link</button>
+    </div>
+  </article>`;
 }
 function selectGroupedPlan(gid,k){ return; }
 function render(){
