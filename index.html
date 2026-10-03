@@ -1059,7 +1059,7 @@ function render(){
 }
 
 function productKey(p){return [p.name,p.cat,p.price,p.meta].map(v=>String(v??' ').trim().toLowerCase()).join("|");}
-function shortCode(p){const str=productKey(p);let h=2166136261;for(let i=0;i<str.length;i++){h^=str.charCodeAt(i);h=Math.imul(h,16777619)}h^=h>>>13;h=Math.imul(h,1274126177);h^=h>>>16;return (h>>>0).toString(36).padStart(7,"0").slice(0,8)}
+function shortCode(p){const str=productKey(p);let h=2166136261;for(let i=0;i<str.length;i++){h^=str.charCodeAt(i);h=Math.imul(h,16777619)}h^=h>>>13;h=Math.imul(h,1274126177);h^=h>>>16;return (h>>>0).toString(36).padStart(4,"0").slice(0,4)}
 function encodeKey(v){return btoa(unescape(encodeURIComponent(v))).replace(/\+/g,"-").replace(/\//g,"_").replace(/=+$/g,"");}
 function decodeKey(v){try{return decodeURIComponent(escape(atob(v.replace(/-/g,"+").replace(/_/g,"/")+"=".repeat((4-v.length%4)%4))))}catch(e){return ""}}
 function productUrl(i){const p=products[i],base=window.location.origin+window.location.pathname;return base+"?p="+encodeURIComponent(shortCode(p));}
