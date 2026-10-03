@@ -6,9 +6,9 @@
 <section id="products" class="box"><h3 style="margin:0">📦 Manage Plans</h3><div class="grid"><div><label>PLAN NAME</label><input id="pname"></div><div><label>CATEGORY</label><input id="pcat" placeholder="OTT Apps / IPTV Services"></div><div><label>PRICE (₹)</label><input id="pprice" type="number"></div><div><label>MRP (₹)</label><input id="pmrp" type="number"></div><div><label>VALIDITY / DETAILS</label><input id="pmeta"></div><div><label>PLAN LOGO / IMAGE</label><input id="pimg" placeholder="Image URL or filename"><input id="pfile" type="file" accept="image/*" style="margin-top:7px"><div id="imgpreview" style="margin-top:8px"></div><div class="muted">Phone gallery se logo select karein. Image automatically compress hokar save hogi.</div></div><div><label>OFFER TEXT</label><input id="poff" placeholder="25% OFF"></div><div><label>TAG</label><input id="ptag" placeholder="LIMITED OFFER"></div></div><div class="btns"><button class="primary" id="save">➕ Add Plan</button><button class="secondary" id="seed">📥 Import Existing Website Plans</button><button class="secondary" id="clear">Clear</button></div><div id="pstatus" class="status"></div><div id="plist"></div></section>
 <section id="site" class="box hidden"><h3 style="margin:0">⚙️ Website Settings</h3>
 <div class="grid">
-<div><label>LOGO</label><input id="logo" placeholder="Image URL or filename"><input id="logoFile" type="file" accept="image/*" style="margin-top:7px"><div id="logoPreview" style="margin-top:8px"></div></div>
-<div><label>OFFER POSTER</label><input id="poster" placeholder="Image URL or filename"><input id="posterFile" type="file" accept="image/*" style="margin-top:7px"><div id="posterPreview" style="margin-top:8px"></div></div>
-<div><label>WEBSITE SONG URL / FILENAME</label><input id="song" placeholder="aaj-ki-raat-stree-2.mp3 or full URL"></div>
+<div><label>LOGO</label><input id="logo" placeholder="Uploaded URL or filename"><input id="logoFile" type="file" accept="image/*" style="margin-top:7px"><div id="logoPreview" style="margin-top:8px"></div><div id="logoUploadStatus" class="muted"></div></div>
+<div><label>OFFER POSTER</label><input id="poster" placeholder="Uploaded URL or filename"><input id="posterFile" type="file" accept="image/*" style="margin-top:7px"><div id="posterPreview" style="margin-top:8px"></div><div id="posterUploadStatus" class="muted"></div></div>
+<div><label>WEBSITE SONG</label><input id="song" placeholder="Uploaded song URL"><input id="songFile" type="file" accept="audio/mpeg,audio/mp3,audio/*" style="margin-top:7px"><div id="songUploadStatus" class="muted"></div></div>
 <div><label>WHATSAPP NUMBER</label><input id="wa"></div>
 <div><label>UPI ID</label><input id="upi"></div>
 <div><label>OFFER TITLE</label><input id="offerTitle"></div>
@@ -25,15 +25,40 @@
 <div class="muted" style="margin-top:7px">Code/percentage badal kar Save karein. 0% karne par coupon effectively inactive rahega.</div>
 </div>
 <div class="btns"><button class="primary" id="saveSite">💾 Save Website Settings</button></div><div id="sstatus" class="status"></div>
-<div class="muted">Logo/poster phone gallery se select karke Firebase mein compressed image ke roop mein save ho sakte hain. Song file ko permanent rakhne ke liye pehle MP3 ko website/GitHub par upload karein, phir yahan uska filename/URL badlein; large MP3 ko Firestore mein store nahi kiya jata.</div></section>
+<div class="muted">Logo, poster aur song ab phone se direct Firebase Storage par upload ho sakte hain. Upload ke baad URL automatically save hota hai; GitHub par file upload karne ki zarurat nahi. Firebase Storage ko project mein ek baar enable karke Storage Rules mein authenticated owner upload/read allow hona chahiye.</div></section>
 <section id="ann" class="box hidden"><h3 style="margin:0">📢 Announcement / Offer</h3><label>TITLE</label><input id="atitle"><label>MESSAGE</label><textarea id="atext"></textarea><label>IMAGE URL (optional)</label><input id="aimage"><label>LINK (optional)</label><input id="alink"><div class="btns"><button class="primary" id="publish">Publish Offer</button></div><div id="astatus" class="status"></div></section></div></div>
 <script src="firebase-config.js"></script><script type="module">
-let auth,db,fb,uidUser=null,editing=null,products=[];
+let auth,db,storage,fb,uidUser=null,editing=null,products=[];
 async function fileToDataUrl(file){return new Promise((resolve,reject)=>{const r=new FileReader();r.onload=()=>{const im=new Image();im.onload=()=>{const max=700,scale=Math.min(1,max/Math.max(im.width,im.height));const c=document.createElement('canvas');c.width=Math.max(1,Math.round(im.width*scale));c.height=Math.max(1,Math.round(im.height*scale));c.getContext('2d').drawImage(im,0,0,c.width,c.height);resolve(c.toDataURL('image/webp',0.76));};im.onerror=reject;im.src=r.result};r.onerror=reject;r.readAsDataURL(file)})}
 const $=id=>document.getElementById(id);$('pfile').onchange=async()=>{const f=$('pfile').files[0];if(!f)return;try{const url=await fileToDataUrl(f);$('pimg').value=url;$('imgpreview').innerHTML=`<img src="${url}" style="max-width:110px;max-height:80px;border-radius:10px;object-fit:contain;border:1px solid #eadde5">`;}catch(e){$('pstatus').textContent='Image upload failed: '+e.message;$('pstatus').className='status warn'}};
-async function bindImageUpload(fileId,inputId,previewId){const f=$(fileId);if(!f)return;f.onchange=async()=>{const file=f.files[0];if(!file)return;try{const url=await fileToDataUrl(file);$(inputId).value=url;$(previewId).innerHTML=`<img src="${url}" style="max-width:140px;max-height:90px;border-radius:10px;object-fit:contain;border:1px solid #eadde5">`;}catch(e){$('sstatus').textContent='Image upload failed: '+e.message;$('sstatus').className='status warn'}}}
-bindImageUpload('logoFile','logo','logoPreview');bindImageUpload('posterFile','poster','posterPreview');const esc=v=>String(v??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
-async function boot(){const cfg=window.FIREBASE_CONFIG;if(!cfg||!cfg.apiKey){$('mode').textContent='Firebase config missing';return}try{const app=(await import('https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js'));const a=app.getApps().length?app.getApp():app.initializeApp(cfg);const au=await import('https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js');const fs=await import('https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js');auth=au.getAuth(a);db=fs.getFirestore(a);fb={...au,...fs};$('mode').textContent='Firebase connected • Free Spark setup';au.onAuthStateChanged(auth,u=>{uidUser=u;if(u){$('loginBox').classList.add('hidden');$('app').classList.remove('hidden');load()}else{$('loginBox').classList.remove('hidden');$('app').classList.add('hidden')}})}catch(e){$('mode').textContent='Firebase error: '+e.message}}
+async function uploadToStorage(file, folder, statusId){
+  if(!storage) throw new Error('Firebase Storage not connected');
+  if(!uidUser) throw new Error('Please login first');
+  const maxBytes = file.type.startsWith('audio/') ? 30*1024*1024 : 8*1024*1024;
+  if(file.size > maxBytes) throw new Error(`File too large. Maximum ${file.type.startsWith('audio/')?'30MB':'8MB'}.`);
+  const safe = file.name.replace(/[^a-zA-Z0-9._-]/g,'_');
+  const path = `owner-assets/${uidUser.uid}/${folder}/${Date.now()}-${safe}`;
+  const r = fb.ref(storage,path);
+  $(statusId).textContent='Uploading…';
+  await fb.uploadBytes(r,file,{contentType:file.type||undefined,cacheControl:'public,max-age=31536000'});
+  const url = await fb.getDownloadURL(r);
+  $(statusId).textContent='Uploaded ✓';
+  return url;
+}
+async function bindStorageUpload(fileId,inputId,previewId,statusId,isAudio=false){
+  const el=$(fileId); if(!el)return;
+  el.onchange=async()=>{
+    const file=el.files[0]; if(!file)return;
+    try{
+      const url=await uploadToStorage(file,isAudio?'songs':inputId==='logo'?'logos':'posters',statusId);
+      $(inputId).value=url;
+      if(!isAudio) $(previewId).innerHTML=`<img src="${esc(url)}" style="max-width:180px;max-height:100px;border-radius:10px;object-fit:contain;border:1px solid #eadde5">`;
+      else $(previewId||'songUploadStatus').textContent='Uploaded ✓';
+    }catch(e){$(statusId).textContent='Upload failed: '+e.message;$(statusId).className='muted warn';}
+  };
+}
+const esc=v=>String(v??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
+async function boot(){const cfg=window.FIREBASE_CONFIG;if(!cfg||!cfg.apiKey){$('mode').textContent='Firebase config missing';return}try{const app=(await import('https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js'));const a=app.getApps().length?app.getApp():app.initializeApp(cfg);const au=await import('https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js');const fs=await import('https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js');const st=await import('https://www.gstatic.com/firebasejs/12.1.0/firebase-storage.js');auth=au.getAuth(a);db=fs.getFirestore(a);storage=st.getStorage(a);fb={...au,...fs,...st};$('mode').textContent='Firebase connected • Free Spark setup';au.onAuthStateChanged(auth,u=>{uidUser=u;if(u){$('loginBox').classList.add('hidden');$('app').classList.remove('hidden');load()}else{$('loginBox').classList.remove('hidden');$('app').classList.add('hidden')}})}catch(e){$('mode').textContent='Firebase error: '+e.message}}
 async function load(){const s=await fb.getDocs(fb.collection(db,'products'));products=s.docs.map(d=>({id:d.id,...d.data()}));renderList();const d=await fb.getDoc(fb.doc(db,'siteSettings','main'));if(d.exists()){const x=d.data();$('logo').value=x.logo||'';$('wa').value=x.whatsapp||x.wa||'';$('upi').value=x.upi||'';$('offerTitle').value=x.offerTitle||'';$('offerText').value=x.offerText||'';$('poster').value=x.poster||'';$('song').value=x.song||'';$('coupon1Code').value=x.coupon1Code||'PREMIUMPLAN';$('coupon1Percent').value=x.coupon1Percent??10;$('coupon2Code').value=x.coupon2Code||'PREMIUM25';$('coupon2Percent').value=x.coupon2Percent??25;if(x.logo)$('logoPreview').innerHTML=`<img src="${esc(x.logo)}" style="max-width:140px;max-height:90px;border-radius:10px;object-fit:contain;border:1px solid #eadde5">`;if(x.poster)$('posterPreview').innerHTML=`<img src="${esc(x.poster)}" style="max-width:180px;max-height:100px;border-radius:10px;object-fit:cover;border:1px solid #eadde5">`;}}
 function renderList(){ $('plist').innerHTML=products.map(p=>`<div class="item"><div class="row"><div><h3>${esc(p.name)} — ₹${Number(p.price||0).toLocaleString('en-IN')}</h3><small>${esc(p.cat)} • ${esc(p.meta||'')} • ${p.active===false?'OFF':'ON'}</small></div><div><button class="secondary" onclick="window.editP('${p.id}')">Edit</button> <button class="danger" onclick="window.delP('${p.id}')">Delete</button></div></div></div>`).join('')||'<div class="muted">No plans in Firebase yet.</div>'}
 function reset(){editing=null;['pname','pcat','pprice','pmrp','pmeta','pimg','poff','ptag'].forEach(x=>$(x).value='');$('pfile').value='';$('imgpreview').innerHTML='';$('save').textContent='➕ Add Plan'}
