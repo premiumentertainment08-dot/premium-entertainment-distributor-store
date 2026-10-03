@@ -1364,7 +1364,7 @@ function hideSidePurchase(){document.getElementById("sidePurchase").classList.re
 </script>
 
 <!-- Background Music: autoplay when allowed; otherwise unlock on the first user gesture -->
-<audio id="siteMusic" preload="auto" autoplay loop playsinline muted>
+<audio id="siteMusic" preload="none" autoplay loop playsinline muted>
   <source src="./aaj-ki-raat-stree-2.mp3" type="audio/mpeg">
 </audio>
 <div id="musicHint" style="position:fixed;left:50%;bottom:82px;transform:translateX(-50%);z-index:99999;background:#7d163f;color:#fff;border:1px solid #d6a62e;border-radius:999px;padding:9px 14px;font:800 12px system-ui;box-shadow:0 8px 24px rgba(0,0,0,.2);display:none;white-space:nowrap">🎵 Tap anywhere to start music</div>
@@ -1373,12 +1373,14 @@ function hideSidePurchase(){document.getElementById("sidePurchase").classList.re
   const a=document.getElementById('siteMusic');
   const hint=document.getElementById('musicHint');
   if(!a)return;
-  a.loop=true; a.preload='auto'; a.volume=1;
+  async function loadRemoteSong(){const path=a.dataset.remoteSongRef;if(!path)return false;try{const cfg=window.FIREBASE_CONFIG;if(!cfg)return false;const {initializeApp,getApps,getApp}=await import('https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js');const {getDatabase,ref,get}=await import('https://www.gstatic.com/firebasejs/12.1.0/firebase-database.js');const app=getApps().length?getApp():initializeApp(cfg);const snap=await get(ref(getDatabase(app),path));const v=snap.val();if(v&&v.data){a.querySelector('source').src=v.data;a.src=v.data;a.load();return true}}catch(e){console.warn('Remote song load failed',e)}return false;}
+  a.loop=true; a.preload='none'; a.volume=1;
   let unlocked=false;
   function hide(){if(hint)hint.style.display='none';}
-  function unlock(){
+  async function unlock(){
     if(unlocked)return;
     unlocked=true;
+    if(a.dataset.remoteSongRef) await loadRemoteSong();
     a.muted=false;
     a.volume=1;
     const p=a.play();
@@ -1537,7 +1539,9 @@ body.layout-grid .grid{grid-template-columns:repeat(4,minmax(0,1fr))!important}.
   (async()=>{try{
     const {initializeApp,getApps,getApp}=await import('https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js');
     const {getFirestore,collection,getDocs,doc,getDoc}=await import('https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js');
-    const app=getApps().length?getApp():initializeApp(cfg), db=getFirestore(app);
+    const {getDatabase,ref,get}=await import('https://www.gstatic.com/firebasejs/12.1.0/firebase-database.js');
+    const app=getApps().length?getApp():initializeApp(cfg), db=getFirestore(app), rtdb=getDatabase(app);
+    async function mediaValue(refPath){try{const snap=await get(ref(rtdb,refPath));const v=snap.val();return v&&v.data?v.data:''}catch(e){console.warn('Owner media read failed',e);return ''}}
     const snap=await getDocs(collection(db,'products'));
     if(!snap.empty){
       const remote=snap.docs.map(d=>({id:d.id,...d.data()})).filter(p=>p.active!==false);
@@ -1559,9 +1563,9 @@ body.layout-grid .grid{grid-template-columns:repeat(4,minmax(0,1fr))!important}.
       window.OWNER_SETTINGS={...window.OWNER_SETTINGS,...x};
       if(x.whatsapp) WHATSAPP=String(x.whatsapp).replace(/\D/g,'');
       if(x.upi) UPI=String(x.upi);
-      if(x.logo){document.querySelectorAll('.brandMark img').forEach(i=>i.src=x.logo)}
-      if(x.poster){const pi=document.querySelector('.navratriFest img');if(pi)pi.src=x.poster;}
-      if(x.song){const audio=document.getElementById('siteMusic');if(audio){audio.querySelector('source').src=x.song;audio.src=x.song;audio.load();}}
+      if(x.logo){const u=String(x.logo).startsWith('rtdb://')?await mediaValue('siteMedia/logo'):x.logo;if(u)document.querySelectorAll('.brandMark img').forEach(i=>i.src=u)}
+      if(x.poster){const u=String(x.poster).startsWith('rtdb://')?await mediaValue('siteMedia/poster'):x.poster;const pi=document.querySelector('.navratriFest img');if(pi&&u)pi.src=u;}
+      if(x.song){const audio=document.getElementById('siteMusic');if(audio){if(String(x.song).startsWith('rtdb://')){window.__OWNER_SONG_REF='siteMedia/song';audio.dataset.remoteSongRef='siteMedia/song';}else{audio.querySelector('source').src=x.song;audio.src=x.song;audio.load();}}}
       if(x.offerTitle||x.offerText){
         const b=document.querySelector('.pinkPromo .promoCopy b'); const sp=document.querySelector('.pinkPromo .promoCopy span');
         if(b&&x.offerTitle)b.textContent=x.offerTitle;
