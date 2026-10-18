@@ -13,7 +13,6 @@
 <link rel="preload" as="image" href="site-logo.webp" fetchpriority="high">
 <meta name="description" content="Premium Entertainment Distributor Store — OTT, software, AI tools, music, education and combo offers.">
 <style>
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Roboto:wght@400;500;700;900&display=swap");
 :root{--bg:#f8f4fb;--card:#fff;--ink:#26152d;--muted:#786f7d;--maroon:#73072f;--maroon2:#930c3e;--gold:#e3b43f;--gold2:#f4d37a;--green:#16b95b;--line:#eee5ef;--lav:#f2ecf7}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
 button,input{font:inherit}button{cursor:pointer}a{text-decoration:none;color:inherit}
@@ -99,10 +98,6 @@ button,input{font:inherit}button{cursor:pointer}a{text-decoration:none;color:inh
 .modalBack{position:fixed;inset:0;background:#180817a8;z-index:100;display:none;align-items:flex-end;justify-content:center}
 .modalBack.show{display:flex}
 .modal{width:min(620px,100%);background:#fff;border-radius:20px 20px 0 0;max-height:90vh;overflow:auto;padding:16px}
-.orderProductHero{display:flex;align-items:center;gap:12px;margin:0 0 12px;padding:10px;border:1px solid #eadce9;border-radius:14px;background:linear-gradient(135deg,#fff,#fbf6fc);box-shadow:0 4px 14px rgba(65,20,55,.06)}
-.orderProductLogo{width:76px;height:76px;flex:0 0 76px;border-radius:14px;object-fit:contain;background:#f3eef6;border:1px solid #eadce9;padding:7px;display:block}
-.orderProductFallback{width:76px;height:76px;flex:0 0 76px;border-radius:14px;background:linear-gradient(145deg,#7d163f,#c79a2b);color:#fff;display:grid;place-items:center;font-size:24px;font-weight:1000;text-align:center;padding:8px}
-.orderProductInfo{min-width:0}.orderProductInfo b{display:block;font-size:14px;color:#351827;line-height:1.25}.orderProductInfo span{display:block;margin-top:5px;font-size:10px;color:#776976;line-height:1.4}
 .modal h3{margin:0 0 10px;color:var(--maroon)}
 .modalGrid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 .field label{display:block;font-size:9px;font-weight:900;margin:0 0 4px;color:#5c4f5e}
@@ -130,7 +125,7 @@ button,input{font:inherit}button{cursor:pointer}a{text-decoration:none;color:inh
 
 .brandFallback{width:100%;height:100%;border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:10px;box-sizing:border-box;text-align:center;font-weight:900;letter-spacing:.2px}
 .brandFallback .bfIcon{font-size:28px;line-height:1;margin-bottom:6px}.brandFallback .bfName{font-size:13px;line-height:1.08}
-.sharePlan{width:100%;margin-top:7px;border:1px solid rgba(199,154,43,.45);background:#fff8eb;color:#7b1745;border-radius:10px;padding:9px 10px;font-weight:900;cursor:pointer}.sharePlan:active{transform:scale(.98)}.stockBadge{display:inline-flex;align-items:center;justify-content:center;gap:5px;margin-top:7px;padding:7px 10px;border-radius:9px;background:#ffe8e8;color:#b4233d;font-weight:950;font-size:11px}.stockDisabled{opacity:.58!important;filter:saturate(.55);cursor:not-allowed!important}</style>
+.sharePlan{width:100%;margin-top:7px;border:1px solid rgba(199,154,43,.45);background:#fff8eb;color:#7b1745;border-radius:10px;padding:9px 10px;font-weight:900;cursor:pointer}.sharePlan:active{transform:scale(.98)}</style>
 <style>
 .productLogo{background:#f3eef6;width:100%;height:100%;object-fit:contain;display:block;border-radius:12px}
 .pic{position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden}
@@ -517,7 +512,7 @@ body:before{background:radial-gradient(circle at 10% 0%,rgba(20,136,255,.12),tra
 
 
 <style id="final-mobile-clarity-festive">
-/* Clean responsive header + festive Navratri banner */
+/* Clean responsive header + festive Ganesh Chaturthi banner */
 .headSearch{flex:1;max-width:430px;display:flex;align-items:center;gap:7px;border:1px solid var(--line);background:var(--panel,#fff);border-radius:13px;padding:0 11px;margin-left:10px;box-shadow:0 4px 18px rgba(0,0,0,.06)}
 .headSearch input{width:100%;border:0;outline:0;background:transparent;color:var(--text,#17202b);padding:10px 4px;font-size:11px}
 .headSearch input::placeholder{color:var(--muted,#7b8795)}
@@ -525,13 +520,13 @@ body:before{background:radial-gradient(circle at 10% 0%,rgba(20,136,255,.12),tra
 .headAction span{font-size:8px;font-weight:900}.headTheme{height:44px;border:1px solid var(--line);border-radius:12px;background:linear-gradient(135deg,var(--panel,#fff),var(--panel2,#eef5ff));color:var(--text,#17202b);padding:0 11px;font-weight:950;display:flex;align-items:center;gap:5px}.headTheme span{font-size:9px}
 @media(max-width:760px){.headTheme{order:2;flex:none}.actions{margin-left:auto}.headSearch{order:3}.header .nav{row-gap:7px}}
 #finalThemePanel{top:82px!important;right:12px!important}
-.navratriFest{position:relative;margin-top:14px;border-radius:18px;overflow:hidden;border:1px solid rgba(226,169,0,.35);box-shadow:0 12px 35px rgba(105,55,0,.12);background:#fff4cf}
-.navratriFest img{display:block;width:100%;height:auto;min-height:175px;object-fit:cover}
-.navratriOverlay{position:absolute;left:18px;bottom:14px;display:flex;align-items:center;gap:9px;flex-wrap:wrap;background:rgba(255,255,255,.90);padding:8px 10px;border-radius:13px;box-shadow:0 8px 22px rgba(0,0,0,.12)}
-.navratriOverlay span{font-size:10px;font-weight:950;color:#8d3a13}.navratriOverlay b{font-size:14px;color:#d51d2e}.navratriOverlay button{border:0;border-radius:9px;padding:8px 11px;background:linear-gradient(135deg,#ffb300,#ff6b00);color:#fff;font-weight:950;font-size:10px}
-.theme-day .navratriFest{background:#fff8df}.theme-day .navratriOverlay{background:rgba(255,255,255,.92)}
-@media(max-width:760px){.nav{gap:7px;min-height:64px}.brandMark{width:38px;height:38px}.brandText b{font-size:11px}.brandText span{font-size:7px}.headSearch{order:3;flex-basis:100%;max-width:none;margin:0}.header .nav{flex-wrap:wrap;padding:7px 0}.actions{gap:5px}.headAction{min-width:40px;width:40px;height:38px;font-size:14px}.headAction span{font-size:6px}.headTheme{height:38px;padding:0 8px;font-size:12px}.headTheme span{display:none}.navratriFest{margin-top:10px}.navratriFest img{min-height:150px}.navratriOverlay{left:8px;right:8px;bottom:8px;padding:7px;gap:5px}.navratriOverlay span{font-size:8px}.navratriOverlay b{font-size:12px}.navratriOverlay button{font-size:8px;padding:7px 9px}#finalThemePanel{top:125px!important;right:8px!important;max-width:calc(100vw - 16px)!important;width:320px!important}}
-@media(max-width:420px){.brandText{max-width:140px}.brandText b{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.headAction{width:34px;min-width:34px}.headSearch input{font-size:10px}.navratriFest img{min-height:132px}.navratriOverlay span{max-width:125px}.navratriOverlay b{font-size:11px}}
+.ganeshFest{position:relative;margin-top:14px;border-radius:18px;overflow:hidden;border:1px solid rgba(226,169,0,.35);box-shadow:0 12px 35px rgba(105,55,0,.12);background:#fff4cf}
+.ganeshFest img{display:block;width:100%;height:auto;min-height:175px;object-fit:cover}
+.ganeshOverlay{position:absolute;left:18px;bottom:14px;display:flex;align-items:center;gap:9px;flex-wrap:wrap;background:rgba(255,255,255,.90);padding:8px 10px;border-radius:13px;box-shadow:0 8px 22px rgba(0,0,0,.12)}
+.ganeshOverlay span{font-size:10px;font-weight:950;color:#8d3a13}.ganeshOverlay b{font-size:14px;color:#d51d2e}.ganeshOverlay button{border:0;border-radius:9px;padding:8px 11px;background:linear-gradient(135deg,#ffb300,#ff6b00);color:#fff;font-weight:950;font-size:10px}
+.theme-day .ganeshFest{background:#fff8df}.theme-day .ganeshOverlay{background:rgba(255,255,255,.92)}
+@media(max-width:760px){.nav{gap:7px;min-height:64px}.brandMark{width:38px;height:38px}.brandText b{font-size:11px}.brandText span{font-size:7px}.headSearch{order:3;flex-basis:100%;max-width:none;margin:0}.header .nav{flex-wrap:wrap;padding:7px 0}.actions{gap:5px}.headAction{min-width:40px;width:40px;height:38px;font-size:14px}.headAction span{font-size:6px}.headTheme{height:38px;padding:0 8px;font-size:12px}.headTheme span{display:none}.ganeshFest{margin-top:10px}.ganeshFest img{min-height:150px}.ganeshOverlay{left:8px;right:8px;bottom:8px;padding:7px;gap:5px}.ganeshOverlay span{font-size:8px}.ganeshOverlay b{font-size:12px}.ganeshOverlay button{font-size:8px;padding:7px 9px}#finalThemePanel{top:125px!important;right:8px!important;max-width:calc(100vw - 16px)!important;width:320px!important}}
+@media(max-width:420px){.brandText{max-width:140px}.brandText b{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.headAction{width:34px;min-width:34px}.headSearch input{font-size:10px}.ganeshFest img{min-height:132px}.ganeshOverlay span{max-width:125px}.ganeshOverlay b{font-size:11px}}
 </style>
 
 <style id="all-plans-format">
@@ -559,16 +554,16 @@ body:before{background:radial-gradient(circle at 10% 0%,rgba(20,136,255,.12),tra
 @media(max-width:650px){.planChoices{gap:7px}.planChoice{min-width:calc(33.333% - 5px);flex:1 1 calc(33.333% - 5px);padding:10px 6px}.planChoice b{font-size:11px}.planChoice span{font-size:10px}.groupedPlanCard .betterValue{padding-right:82px}.groupActions{grid-template-columns:1fr 1fr}}
 .theme-night .groupedPlanCard .planChoice{background:#111b29;border-color:#29435a;color:#dce7f1}.theme-night .groupedPlanCard .planChoice.selected{background:#18283a;color:#fff0a8;border-color:var(--accent2)}.theme-night .groupedPlanCard .stockPill{background:#10261b;color:#72e0a0;border-color:#245b3a}.theme-night .groupedPlanCard .betterValue{background:#172031;border-color:#4d4430}.theme-night .groupedPlanCard .betterValue b{color:#fff}.theme-night .groupedPlanCard .betterValue span,.theme-night .groupedPlanCard .betterValue small,.theme-night .groupedPlanCard .selectedMeta{color:#aebdcc}
 </style>
-<style id="owner-appearance-settings">
-:root{--owner-bg:initial;--owner-text:initial;--owner-font:system-ui,-apple-system,Segoe UI,Roboto,Arial;--owner-weight:400}
-body.owner-light{background:var(--owner-bg)!important;color:var(--owner-text)!important}
-body.owner-light .header,body.owner-light .top,body.owner-light .heroBox,body.owner-light .trustCard,body.owner-light .catCard,body.owner-light .product,body.owner-light .toolbar,body.owner-light .section,body.owner-light .recent{color:var(--owner-text)!important}
-body.owner-dark{background:var(--owner-bg,#07101f)!important;color:var(--owner-text,#fff)!important}
-body.owner-dark .product,body.owner-dark .card,body.owner-dark .trustCard,body.owner-dark .catCard,body.owner-dark .toolbar,body.owner-dark .search{color:var(--owner-text,#fff)!important}
-body{font-family:var(--owner-font)!important;font-weight:var(--owner-weight)!important}
-body.owner-light .product,body.owner-light .card,body.owner-dark .product,body.owner-dark .card{font-weight:var(--owner-weight)!important}
-</style></head>
+
+<style id="qr-checkout-style">
+.qrCheckout{margin-top:12px;padding:13px;border:1px solid #dbe3f0;border-radius:16px;background:linear-gradient(180deg,#fff,#f7f8ff);color:#18233b}
+.qrCheckoutHead{display:flex;justify-content:space-between;align-items:center;gap:10px;font-size:11px;font-weight:900;letter-spacing:.04em}.qrCheckoutHead span{color:#18865b}.qrCheckoutHead b{font-size:20px;color:#151d35;letter-spacing:0}
+.upiAppGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:12px}.upiApp{display:grid;grid-template-columns:36px 1fr;grid-template-rows:auto auto;align-items:center;text-align:left;gap:1px 9px;padding:10px;border:1px solid #e2e6ef;border-radius:12px;background:#fff;color:#1d2639;cursor:pointer}.upiApp:hover{border-color:#8061f5;background:#f8f6ff}.upiLogo{grid-row:1/3;width:34px;height:34px;display:flex;align-items:center;justify-content:center;border-radius:10px;font-size:17px;font-weight:950}.phonepeLogo{background:#5f259f;color:white}.gpayLogo{background:#eef4ff;color:#4285f4}.paytmLogo{background:#e7f7ff;color:#00a4d6;font-size:12px}.anyupiLogo{background:#e9f8ef;color:#13864e}.upiApp b{font-size:12px}.upiApp small{font-size:10px;color:#69758b}.qrDivider{display:flex;align-items:center;gap:9px;margin:15px 0 11px;color:#7a8498;font-size:9px;font-weight:900;letter-spacing:.09em}.qrDivider:before,.qrDivider:after{content:"";height:1px;background:#e0e5ef;flex:1}.qrImageWrap{display:flex;align-items:center;gap:13px;padding:10px;background:white;border:1px solid #e6e9f1;border-radius:13px}.qrImageWrap img{width:118px;height:118px;object-fit:contain;border-radius:7px;background:white}.qrImageWrap div{display:flex;flex-direction:column;gap:6px;min-width:0}.qrImageWrap b{font-size:12px}.qrImageWrap span{font-size:10px;line-height:1.45;color:#657087;overflow-wrap:anywhere}.qrImageWrap strong{color:#18233b}.qrPayNote{font-size:10px;line-height:1.5;color:#657087;margin:10px 0}.qrCheckout .payBtn{width:100%}@media(max-width:380px){.qrImageWrap{gap:9px}.qrImageWrap img{width:94px;height:94px}.upiApp{padding:8px;grid-template-columns:30px 1fr;gap:2px 7px}.upiLogo{width:29px;height:29px}}
+</style>
+
+</head>
 <body>
+
 <div class="top">🔥 Distributor Special Pricing • Fast Digital Delivery • WhatsApp Support</div>
 
 <header class="header">
@@ -630,9 +625,9 @@ body.owner-light .product,body.owner-light .card,body.owner-dark .product,body.o
     </div>
   </section>
 
-  <section class="navratriFest wrapPromo" aria-label="Navratri special offer">
-    <img src="navratri-special-poster.png" alt="Navratri Special Offer - 50% OFF on all products" loading="eager">
-    <div class="navratriOverlay"><span>🪔 Navratri Special Offer</span><b>50% OFF</b><button onclick="scrollToId('products')">View Offers →</button></div>
+  <section class="ganeshFest wrapPromo" aria-label="Ganesh Chaturthi special offer">
+    <img src="ganesh-chaturthi-poster.png" alt="Ganesh Chaturthi Special Offer - Up to 50% OFF on all plans" loading="eager">
+    <div class="ganeshOverlay"><span>🪔 Ganesh Chaturthi Special Offer</span><b>UP TO 50% OFF</b><button onclick="scrollToId('products')">View Offers →</button></div>
   </section>
 
   <section class="section">
@@ -755,11 +750,6 @@ body.owner-light .product,body.owner-light .card,body.owner-dark .product,body.o
 <div class="modalBack" id="modalBack" onclick="if(event.target===this)closeOrder()">
   <div class="modal">
     <h3 id="modalTitle">Order Plan</h3>
-    <div class="orderProductHero">
-      <img id="mLogo" class="orderProductLogo" src="" alt="Subscription logo" loading="eager" onerror="this.style.display='none';this.nextElementSibling.style.display='grid'">
-      <div id="mLogoFallback" class="orderProductFallback" style="display:none">✦</div>
-      <div class="orderProductInfo"><b id="mLogoName">Subscription</b><span id="mLogoMeta">Selected subscription</span></div>
-    </div>
     <div class="orderBox">
       <div class="orderLine"><span>Plan</span><b id="mPlan"></b></div>
       <div class="orderLine"><span>Duration</span><span id="mMeta"></span></div>
@@ -778,18 +768,20 @@ body.owner-light .product,body.owner-light .card,body.owner-dark .product,body.o
       <div class="couponRow"><input id="couponCode" maxlength="30" placeholder="ENTER COUPON CODE" autocomplete="off" inputmode="text"><button class="couponApply" type="button" onclick="applyCoupon()">Apply</button></div>
       <div id="couponMsg" class="couponMsg" aria-live="polite"></div>
     </div>
-    <div class="note">Your order details will be sent to WhatsApp support. Please verify the plan, amount and terms before payment.</div>
-    <div class="payBtns">
-      <button class="payBtn upi" type="button" onclick="payUPI()">▦ Pay via UPI</button>
-      <input id="paymentScreenshot" type="file" accept="image/jpeg,image/png,image/webp" hidden>
-      <div class="paymentUploadBox" style="border-style:solid;background:linear-gradient(180deg,#f0fff5,#fff)">
-        <div class="paymentUploadTitle" style="color:#128447">🟢 Payment Screenshot → WhatsApp</div>
-        <div class="paymentUploadNote">UPI payment ke baad screenshot WhatsApp par bhejein. Screenshot yahan upload/store nahi hoga.</div>
-        <button class="payBtn" type="button" style="width:100%;margin-top:8px;background:#25D366;color:#fff" onclick="sendPaymentScreenshotWhatsApp()">📸 Send Payment Screenshot on WhatsApp →</button>
-        <div id="paymentUploadMsg" class="paymentUploadMsg" aria-live="polite"></div>
+    <div class="note">Verify the plan and amount, then pay using any UPI app. If an app link is blocked, scan the QR code below.</div>
+    <section class="qrCheckout" aria-label="UPI payment options">
+      <div class="qrCheckoutHead"><span>🔒 SECURE UPI PAYMENT</span><b id="qrAmount">₹0</b></div>
+      <div class="upiAppGrid">
+        <button type="button" class="upiApp" onclick="payWithUPI('PhonePe')"><span class="upiLogo phonepeLogo">पे</span><b>PhonePe</b><small>Pay with UPI</small></button>
+        <button type="button" class="upiApp" onclick="payWithUPI('Google Pay')"><span class="upiLogo gpayLogo">G</span><b>Google Pay</b><small>Pay with UPI</small></button>
+        <button type="button" class="upiApp" onclick="payWithUPI('Paytm')"><span class="upiLogo paytmLogo">paytm</span><b>Paytm</b><small>Pay with UPI</small></button>
+        <button type="button" class="upiApp" onclick="payWithUPI('Any UPI app')"><span class="upiLogo anyupiLogo">₹</span><b>Any UPI App</b><small>Open UPI app</small></button>
       </div>
+      <div class="qrDivider"><span>OR SCAN QR CODE</span></div>
+      <div class="qrImageWrap"><img src="./payment-qr.jpg" alt="Merchant UPI payment QR code"><div><b>Scan using any UPI app</b><span>Pay the exact amount shown above.</span><span>UPI ID: <strong>Q00403870@ybl</strong></span></div></div>
+      <p class="qrPayNote">After payment, confirm your order on WhatsApp and share the payment screenshot for verification. Do not pay twice if your app shows pending.</p>
       <button class="payBtn whats" type="button" onclick="sendOrder()">◉ Confirm Order on WhatsApp</button>
-    </div>
+    </section>
     <button class="payBtn" style="width:100%;margin-top:7px;background:#f0eaf3;color:#5b4d5d" onclick="closeOrder()">Close</button>
   </div>
 </div>
@@ -872,8 +864,6 @@ function asset(n){
 
 let WHATSAPP="917668677629";
 let UPI="Q00403870@ybl";
-window.OWNER_SETTINGS = window.OWNER_SETTINGS || { coupon1Code:"PREMIUMPLAN", coupon1Percent:10, coupon1Enabled:true, coupon2Code:"PREMIUM25", coupon2Percent:25, coupon2Enabled:true, poster:"", song:"", logo:"" };
-
 let products=[{"name":"Netflix 4K 1 Device Shared","cat":"OTT Apps","price":99,"mrp":0,"meta":"1 Month • Shared Plan • 1 Device","img":"brand:Netflix 4K","off":"","tag":"SHARED • 1 DEVICE"},{"name":"Netflix 4K 1 Device Shared","cat":"OTT Apps","price":249,"mrp":0,"meta":"3 Months • Shared Plan • 1 Device","img":"brand:Netflix 4K","off":"","tag":"SHARED • 1 DEVICE"},{"name":"Netflix 4K 1 Device Shared","cat":"OTT Apps","price":499,"mrp":0,"meta":"6 Months • Shared Plan • 1 Device","img":"brand:Netflix 4K","off":"","tag":"SHARED • 1 DEVICE"},{"name":"Netflix 4K 1 Device Shared","cat":"OTT Apps","price":899,"mrp":0,"meta":"12 Months • Shared Plan • 1 Device","img":"brand:Netflix 4K","off":"","tag":"SHARED • 1 DEVICE"},{"name":"Sony LIV Yearly","cat":"OTT Apps","price":599,"mrp":1499,"meta":"1 Year • On Your Number","img":"1000174386.webp","off":"60% OFF","tag":"PERSONAL"},{"name":"VZY OTT","cat":"OTT Apps","price":149,"mrp":0,"meta":"1 Month • On Your Number • 5 Devices • Mobile / TV / Laptop","img":"brand:VZY OTT","off":"","tag":"5 DEVICES"},{"name":"VZY OTT","cat":"OTT Apps","price":399,"mrp":0,"meta":"3 Months • On Your Number • 5 Devices • Mobile / TV / Laptop","img":"brand:VZY OTT","off":"","tag":"5 DEVICES"},{"name":"VZY OTT","cat":"OTT Apps","price":649,"mrp":0,"meta":"6 Months • On Your Number • 5 Devices • Mobile / TV / Laptop","img":"brand:VZY OTT","off":"","tag":"5 DEVICES"},{"name":"VZY OTT","cat":"OTT Apps","price":1149,"mrp":0,"meta":"12 Months • On Your Number • 5 Devices • Mobile / TV / Laptop","img":"brand:VZY OTT","off":"","tag":"5 DEVICES"},{"name":"VZY OTT","cat":"OTT Apps","price":99,"mrp":0,"meta":"1 Month • Shared Plan • TV Only","img":"brand:VZY OTT","off":"","tag":"SHARED • TV"},{"name":"VZY OTT","cat":"OTT Apps","price":199,"mrp":0,"meta":"3 Months • Shared Plan • TV Only","img":"brand:VZY OTT","off":"","tag":"SHARED • TV"},{"name":"VZY OTT","cat":"OTT Apps","price":349,"mrp":0,"meta":"6 Months • Shared Plan • TV Only","img":"brand:VZY OTT","off":"","tag":"SHARED • TV"},{"name":"VZY OTT","cat":"OTT Apps","price":649,"mrp":0,"meta":"12 Months • Shared Plan • TV Only","img":"brand:VZY OTT","off":"","tag":"SHARED • TV"},{"name":"Sony LIV Premium","cat":"OTT Apps","price":99,"mrp":0,"meta":"1 Month • Shared • 1 Device Login","img":"brand:Sony LIV Premium","off":"","tag":"SHARED"},{"name":"Sony LIV Premium","cat":"OTT Apps","price":149,"mrp":0,"meta":"3 Months • Shared • 1 Device Login","img":"brand:Sony LIV Premium","off":"","tag":"SHARED"},{"name":"Sony LIV Premium","cat":"OTT Apps","price":199,"mrp":0,"meta":"6 Months • Shared • 1 Device Login","img":"brand:Sony LIV Premium","off":"","tag":"SHARED"},{"name":"Sony LIV Premium","cat":"OTT Apps","price":299,"mrp":0,"meta":"1 Year • Shared • 1 Device Login","img":"brand:Sony LIV Premium","off":"","tag":"SHARED"},{"name":"Sony LIV Premium","cat":"OTT Apps","price":699,"mrp":0,"meta":"1 Year • Personal • On Your Number • 5 Devices","img":"brand:Sony LIV Premium","off":"","tag":"PERSONAL"},{"name":"Hotstar Premium 4K","cat":"OTT Apps","price":1999,"mrp":2199,"meta":"1 Year • On Your Number","img":"1000174500.webp","off":"9% OFF","tag":"4K"},{"name":"JioHotstar Super","cat":"OTT Apps","price":70,"mrp":0,"meta":"1 Month • Private","img":"1000174398.jpg","off":"","tag":"PRIVATE"},{"name":"JioHotstar Super","cat":"OTT Apps","price":185,"mrp":0,"meta":"3 Months • Private","img":"1000174398.jpg","off":"","tag":"PRIVATE"},{"name":"JioHotstar Super","cat":"OTT Apps","price":399,"mrp":0,"meta":"6 Months • Private","img":"1000174398.jpg","off":"","tag":"PRIVATE"},{"name":"FanCode","cat":"OTT Apps","price":89,"mrp":0,"meta":"1 Month • Private","img":"brand:FanCode","off":"","tag":"PRIVATE"},{"name":"FanCode","cat":"OTT Apps","price":599,"mrp":0,"meta":"1 Year • Private","img":"brand:FanCode","off":"","tag":"PRIVATE"},{"name":"Lionsgate Play","cat":"OTT Apps","price":299,"mrp":0,"meta":"3 Months","img":"1000174495.webp","off":"","tag":"POPULAR"},{"name":"Lionsgate Play","cat":"OTT Apps","price":449,"mrp":0,"meta":"6 Months","img":"1000174495.webp","off":"","tag":"VALUE"},{"name":"ZEE5 + Sony LIV Combo","cat":"Combo Offers","price":699,"mrp":2799,"meta":"1 Year • Combo","img":"1000174406.webp","off":"75% OFF","tag":"BEST VALUE"},{"name":"JioSaavn Premium","cat":"Music Streaming","price":149,"mrp":299,"meta":"2 Months • On Your Number","img":"brand:JioSaavn Premium","off":"50% OFF","tag":""},{"name":"JioSaavn Premium","cat":"Music Streaming","price":399,"mrp":999,"meta":"12 Months • On Your Number","img":"brand:JioSaavn Premium","off":"60% OFF","tag":"BEST VALUE"},{"name":"YouTube Premium","cat":"Premium Apps","price":599,"mrp":999,"meta":"6 Months • Own Gmail","img":"1000174354.jpg","off":"40% OFF","tag":""},{"name":"YouTube Premium","cat":"Premium Apps","price":1149,"mrp":1299,"meta":"12 Months • Own Gmail","img":"1000174354.jpg","off":"12% OFF","tag":"BEST VALUE"},{"name":"Apple TV+","cat":"Premium Apps","price":449,"mrp":1499,"meta":"6 Months • Own Apple ID","img":"brand:Apple TV+","off":"70% OFF","tag":""},{"name":"Apple Music","cat":"Music Streaming","price":499,"mrp":899,"meta":"6 Months • Own Apple ID","img":"1000174427.webp","off":"44% OFF","tag":""},{"name":"Apple TV+ & Music Combo","cat":"Combo Offers","price":699,"mrp":1999,"meta":"6 Months • Own Apple ID","img":"1000174416.webp","off":"65% OFF","tag":"COMBO"},{"name":"Adobe Creative Cloud","cat":"Software & Tools","price":2000,"mrp":25000,"meta":"4 Months • Own Email","img":"brand:Adobe Creative Cloud","off":"92% OFF","tag":"PREMIUM"},{"name":"CorelDRAW Premium","cat":"Software & Tools","price":3999,"mrp":72505,"meta":"Windows • 1 Year","img":"brand:CorelDRAW Premium","off":"94% OFF","tag":"WINDOWS"},{"name":"CorelDRAW Premium","cat":"Software & Tools","price":4999,"mrp":84505,"meta":"Mac • 1 Year","img":"brand:CorelDRAW Premium","off":"94% OFF","tag":"MAC"},{"name":"DataCamp Premium","cat":"Education & Learning","price":1299,"mrp":19899,"meta":"1 Year","img":"1000174426.webp","off":"93% OFF","tag":"BEST VALUE"},{"name":"Lovable AI","cat":"AI Tools","price":2000,"mrp":8000,"meta":"Premium Plan • 1 Year","img":"brand:Lovable AI","off":"75% OFF","tag":"AI"},{"name":"Amazon Prime Private 4K","cat":"OTT Apps","price":99,"mrp":299,"meta":"1 Month • Private • 4K","img":"1000174429.jpg","off":"67% OFF","tag":"4K"},{"name":"Amazon Prime Private 4K","cat":"OTT Apps","price":549,"mrp":1499,"meta":"12 Months • Private • 4K","img":"1000174429.jpg","off":"63% OFF","tag":"4K"},{"name":"Amazon Prime TV-Only","cat":"OTT Apps","price":59,"mrp":299,"meta":"1 Month • Shared • TV Only","img":"1000174429.jpg","off":"80% OFF","tag":"TV"},{"name":"Amazon Prime Full Membership","cat":"OTT Apps","price":1099,"mrp":1499,"meta":"1 Year • Full Membership","img":"1000174429.jpg","off":"27% OFF","tag":""},{"name":"Hotstar Premium 4K Shared","cat":"OTT Apps","price":899,"mrp":2299,"meta":"1 Year • Shared","img":"1000174410.webp","off":"61% OFF","tag":"SHARED"},{"name":"Aha Gold","cat":"OTT Apps","price":70,"mrp":249,"meta":"1 Month • Shared","img":"1000174411.webp","off":"72% OFF","tag":"SHARED"},{"name":"Aha Gold","cat":"OTT Apps","price":249,"mrp":999,"meta":"6 Months • Shared","img":"1000174411.webp","off":"75% OFF","tag":"VALUE"},{"name":"Aha Gold","cat":"OTT Apps","price":349,"mrp":0,"meta":"12 Months • Shared","img":"1000174411.webp","off":"","tag":"BEST VALUE"},{"name":"Sun NXT","cat":"OTT Apps","price":59,"mrp":149,"meta":"1 Month","img":"1000174480.webp","off":"60% OFF","tag":""},{"name":"Sun NXT","cat":"OTT Apps","price":249,"mrp":549,"meta":"6 Months","img":"1000174480.webp","off":"55% OFF","tag":""},{"name":"Sun NXT","cat":"OTT Apps","price":349,"mrp":0,"meta":"12 Months","img":"1000174480.webp","off":"","tag":"BEST VALUE"},{"name":"Discovery+","cat":"OTT Apps","price":79,"mrp":299,"meta":"1 Month","img":"1000174457.webp","off":"74% OFF","tag":""},{"name":"Discovery+","cat":"OTT Apps","price":249,"mrp":799,"meta":"6 Months","img":"1000174457.webp","off":"69% OFF","tag":""},{"name":"Discovery+","cat":"OTT Apps","price":399,"mrp":0,"meta":"12 Months","img":"1000174457.webp","off":"","tag":"BEST VALUE"},{"name":"ZEE5 Premium","cat":"OTT Apps","price":349,"mrp":999,"meta":"1 Year • FHD","img":"1000174484.jpg","off":"65% OFF","tag":"FHD"},{"name":"Hoichoi + Sony + Hotstar","cat":"Combo Offers","price":149,"mrp":399,"meta":"1 Month • Combo","img":"1000174454.webp","off":"63% OFF","tag":"COMBO"},{"name":"Prime + Hotstar + ZEE5 + Sony","cat":"Combo Offers","price":999,"mrp":2599,"meta":"6 Months • 4 OTT Combo","img":"1000174422.webp","off":"62% OFF","tag":"4 OTT"},{"name":"Prime + Hotstar + ZEE5 + Sony","cat":"Combo Offers","price":1499,"mrp":0,"meta":"1 Year • 4 OTT Combo","img":"1000174464.webp","off":"","tag":"BEST VALUE"},{"name":"Netflix + Prime + Sony + ZEE","cat":"Combo Offers","price":2999,"mrp":9999,"meta":"1 Year • 4 OTT Combo","img":"1000174512.webp","off":"70% OFF","tag":"MEGA COMBO"},{"name":"CapCut Pro","cat":"Software & Tools","price":399,"mrp":1999,"meta":"1 Month","img":"1000174409.webp","off":"80% OFF","tag":""},{"name":"Perplexity AI Pro","cat":"AI Tools","price":2999,"mrp":14999,"meta":"12 Months","img":"1000174396.webp","off":"80% OFF","tag":"AI"},{"name":"Gemini AI + 5TB","cat":"AI Tools","price":399,"mrp":18000,"meta":"18 Months • 5TB","img":"1000174493.jpg","off":"98% OFF","tag":"5TB"},{"name":"AutoCAD + Gemini Veo3 + 2TB","cat":"AI Tools","price":1989,"mrp":121301,"meta":"1 Year • Bundle","img":"1000174477.webp","off":"98% OFF","tag":"BUNDLE"},{"name":"Bolt.new Pro","cat":"Software & Tools","price":4599,"mrp":66500,"meta":"1 Year","img":"brand:Bolt.new Pro","off":"93% OFF","tag":"PRO"},{"name":"QuillBot Premium","cat":"Software & Tools","price":399,"mrp":800,"meta":"1 Month","img":"1000174370.webp","off":"50% OFF","tag":""},{"name":"LinkedIn Career","cat":"Social Media Growth","price":499,"mrp":8100,"meta":"3 Months","img":"1000174462.jpg","off":"94% OFF","tag":"CAREER"},{"name":"Coursera Plus","cat":"Education & Learning","price":1399,"mrp":43000,"meta":"1 Year","img":"brand:Coursera Plus","off":"97% OFF","tag":"LEARNING"},{"name":"Windows 10 Pro Key","cat":"Software & Tools","price":449,"mrp":4999,"meta":"Lifetime Key","img":"brand:Windows 10 Pro Key","off":"91% OFF","tag":"KEY"},{"name":"Kaspersky","cat":"Software & Tools","price":499,"mrp":1129,"meta":"1 Year","img":"brand:Kaspersky","off":"56% OFF","tag":"SECURITY"},{"name":"Lenskart Gold","cat":"Premium Apps","price":179,"mrp":800,"meta":"Membership","img":"brand:Lenskart Gold","off":"78% OFF","tag":"MEMBERSHIP"},{"name":"Cartoon Reel Bundle","cat":"Education & Learning","price":79,"mrp":999,"meta":"Digital Bundle","img":"brand:Cartoon Reel Bundle","off":"92% OFF","tag":"BUNDLE"},{"name":"AI Premium","cat":"AI Tools","price":999,"mrp":0,"meta":"Premium Plan","img":"brand:AI Premium","off":"","tag":"AI"},{"name":"Gemini Pro","cat":"AI Tools","price":999,"mrp":0,"meta":"Premium Plan","img":"1000174403.jpg","off":"","tag":"AI"},{"name":"Super Grok","cat":"AI Tools","price":999,"mrp":0,"meta":"Premium Plan","img":"super-grok-logo.jpg","off":"","tag":"AI"},{"name":"Gaana Premium","cat":"Music Streaming","price":149,"mrp":0,"meta":"Premium Plan","img":"1000174359.jpg","off":"","tag":"MUSIC"},{"name":"Star TV IPTV","cat":"IPTV Services","price":399,"mrp":0,"meta":"3 Months • 11,000+ Live Channels","img":"1000174431.jpg","off":"","tag":"11K+ CHANNELS"},{"name":"Star TV IPTV","cat":"IPTV Services","price":699,"mrp":0,"meta":"6 Months • 11,000+ Live Channels","img":"1000174431.jpg","off":"","tag":"11K+ CHANNELS"},{"name":"Star TV IPTV","cat":"IPTV Services","price":1199,"mrp":0,"meta":"12 Months • 11,000+ Live Channels","img":"1000174431.jpg","off":"","tag":"11K+ CHANNELS"},{"name":"StarShare IPTV","cat":"IPTV Services","price":399,"mrp":0,"meta":"3 Months • 11,000+ Live Channels","img":"1000174468.png","off":"","tag":"11K+ CHANNELS"},{"name":"StarShare IPTV","cat":"IPTV Services","price":699,"mrp":0,"meta":"6 Months • 11,000+ Live Channels","img":"1000174468.png","off":"","tag":"11K+ CHANNELS"},{"name":"StarShare IPTV","cat":"IPTV Services","price":1199,"mrp":0,"meta":"12 Months • 11,000+ Live Channels","img":"1000174468.png","off":"","tag":"11K+ CHANNELS"},{"name":"BOSTV Prime IPTV","cat":"IPTV Services","price":299,"mrp":0,"meta":"3 Months • 11,000+ Live Channels","img":"1000174469.png","off":"","tag":"11K+ CHANNELS"},{"name":"BOSTV Prime IPTV","cat":"IPTV Services","price":499,"mrp":0,"meta":"6 Months • 11,000+ Live Channels","img":"1000174469.png","off":"","tag":"11K+ CHANNELS"},{"name":"BOSTV Prime IPTV","cat":"IPTV Services","price":899,"mrp":0,"meta":"12 Months • 11,000+ Live Channels","img":"1000174469.png","off":"","tag":"11K+ CHANNELS"},{"name":"Rolex TV IPTV","cat":"IPTV Services","price":299,"mrp":0,"meta":"3 Months • 11,000+ Live Channels","img":"1000174459.png","off":"","tag":"11K+ CHANNELS"},{"name":"Rolex TV IPTV","cat":"IPTV Services","price":499,"mrp":0,"meta":"6 Months • 11,000+ Live Channels","img":"1000174459.png","off":"","tag":"11K+ CHANNELS"},{"name":"Rolex TV IPTV","cat":"IPTV Services","price":899,"mrp":0,"meta":"12 Months • 11,000+ Live Channels","img":"1000174459.png","off":"","tag":"11K+ CHANNELS"},{"name":"IBOSOL Player Activation","cat":"IPTV Services","price":600,"mrp":0,"meta":"1 Year • Premium Player Activation","img":"1000174438.png","off":"","tag":"1 YEAR"},{"name":"IBOSOL Player Activation","cat":"IPTV Services","price":1200,"mrp":0,"meta":"Lifetime • Premium Player Activation","img":"1000174438.png","off":"","tag":"LIFETIME"},{"name":"IBOSOL Reseller Panel","cat":"IPTV Services","price":6000,"mrp":0,"meta":"20 Credits • Activation on your mail","img":"1000174438.png","off":"","tag":"20 CREDITS"},{"name":"IBOSOL Reseller Panel","cat":"IPTV Services","price":14000,"mrp":0,"meta":"50 Credits • Activation on your mail","img":"1000174438.png","off":"","tag":"50 CREDITS"},{"name":"IBOSOL Reseller Panel","cat":"IPTV Services","price":28000,"mrp":0,"meta":"100 Credits • Activation on your mail","img":"1000174438.png","off":"","tag":"100 CREDITS"},{"name":"Jio Recharge • 2GB/day • 28 Days","cat":"Mobile Recharge","price":"349","mrp":0,"meta":"2GB/day • 28 Days • Unlimited Calls • 100 SMS/day • Unlimited 5G*","img":"brand:Jio Recharge","off":"","tag":"JIO"},{"name":"Jio Recharge • 2GB/day • 30 Days","cat":"Mobile Recharge","price":"399","mrp":0,"meta":"2GB/day • 30 Days • Unlimited Calls • 100 SMS/day • Unlimited 5G*","img":"brand:Jio Recharge","off":"","tag":"JIO"},{"name":"Jio Recharge • 2GB/day • 56 Days","cat":"Mobile Recharge","price":"579","mrp":0,"meta":"2GB/day • 56 Days • Unlimited Calls • 100 SMS/day • Unlimited 5G*","img":"brand:Jio Recharge","off":"","tag":"JIO"},{"name":"Jio Recharge • 2GB/day • 84 Days","cat":"Mobile Recharge","price":"719","mrp":0,"meta":"2GB/day • 84 Days • Unlimited Calls • 100 SMS/day • Unlimited 5G*","img":"brand:Jio Recharge","off":"","tag":"JIO"},{"name":"Jio Recharge • 2GB/day • 84 Days","cat":"Mobile Recharge","price":"859","mrp":0,"meta":"2GB/day • 84 Days • Unlimited Calls • 100 SMS/day • Unlimited 5G*","img":"brand:Jio Recharge","off":"","tag":"JIO"},{"name":"Jio Recharge • 2GB/day • 90 Days","cat":"Mobile Recharge","price":"899","mrp":0,"meta":"2GB/day • 90 Days • Unlimited Calls • 100 SMS/day • Unlimited 5G*","img":"brand:Jio Recharge","off":"","tag":"JIO"},{"name":"Jio Recharge • 2GB/day • 84 Days","cat":"Mobile Recharge","price":"1029","mrp":0,"meta":"2GB/day • 84 Days • Unlimited Calls • 100 SMS/day • Unlimited 5G*","img":"brand:Jio Recharge","off":"","tag":"JIO"},{"name":"Jio Recharge • 1.5GB/day • 28 Days","cat":"Mobile Recharge","price":"299","mrp":0,"meta":"1.5GB/day • 28 Days • Unlimited Calls • 100 SMS/day • Unlimited 5G*","img":"brand:Jio Recharge","off":"","tag":"JIO"},{"name":"Jio Recharge • 1.5GB/day • 30 Days","cat":"Mobile Recharge","price":"319","mrp":0,"meta":"1.5GB/day • 30 Days • Unlimited Calls • 100 SMS/day • Unlimited 5G*","img":"brand:Jio Recharge","off":"","tag":"JIO"},{"name":"Jio Recharge • 1.5GB/day • 56 Days","cat":"Mobile Recharge","price":"579","mrp":0,"meta":"1.5GB/day • 56 Days • Unlimited Calls • 100 SMS/day • Unlimited 5G*","img":"brand:Jio Recharge","off":"","tag":"JIO"},{"name":"Jio Recharge • 1.5GB/day • 84 Days","cat":"Mobile Recharge","price":"799","mrp":0,"meta":"1.5GB/day • 84 Days • Unlimited Calls • 100 SMS/day • Unlimited 5G*","img":"brand:Jio Recharge","off":"","tag":"JIO"},{"name":"Jio Recharge • 1.5GB/day • 84 Days","cat":"Mobile Recharge","price":"889","mrp":0,"meta":"1.5GB/day • 84 Days • Unlimited Calls • 100 SMS/day • Unlimited 5G*","img":"brand:Jio Recharge","off":"","tag":"JIO"},{"name":"Jio Recharge • 1.5GB/day • 90 Days","cat":"Mobile Recharge","price":"999","mrp":0,"meta":"1.5GB/day • 90 Days • Unlimited Calls • 100 SMS/day • Unlimited 5G*","img":"brand:Jio Recharge","off":"","tag":"JIO"},{"name":"Jio Recharge • 1.5GB/day • 84 Days","cat":"Mobile Recharge","price":"1029","mrp":0,"meta":"1.5GB/day • 84 Days • Unlimited Calls • 100 SMS/day • Unlimited 5G*","img":"brand:Jio Recharge","off":"","tag":"JIO"},{"name":"Jio Recharge • 1GB/day • 28 Days","cat":"Mobile Recharge","price":"249","mrp":0,"meta":"1GB/day • 28 Days • Unlimited Calls • 100 SMS/day • Unlimited 5G*","img":"brand:Jio Recharge","off":"","tag":"JIO"},{"name":"Jio Recharge • 1GB/day • 23 Days","cat":"Mobile Recharge","price":"249","mrp":0,"meta":"1GB/day • 23 Days • Unlimited Calls • 100 SMS/day • Unlimited 5G*","img":"brand:Jio Recharge","off":"","tag":"JIO"},{"name":"Jio Recharge • 1GB/day • 84 Days","cat":"Mobile Recharge","price":"799","mrp":0,"meta":"1GB/day • 84 Days • Unlimited Calls • 100 SMS/day • Unlimited 5G*","img":"brand:Jio Recharge","off":"","tag":"JIO"},{"name":"Jio Recharge • 2.5GB/day • 28 Days","cat":"Mobile Recharge","price":"449","mrp":0,"meta":"2.5GB/day • 28 Days • Unlimited Calls • 100 SMS/day • Unlimited 5G*","img":"brand:Jio Recharge","off":"","tag":"JIO"},{"name":"Jio Recharge • 2.5GB/day • 56 Days","cat":"Mobile Recharge","price":"629","mrp":0,"meta":"2.5GB/day • 56 Days • Unlimited Calls • 100 SMS/day • Unlimited 5G*","img":"brand:Jio Recharge","off":"","tag":"JIO"},{"name":"Jio Recharge • 2.5GB/day • 84 Days","cat":"Mobile Recharge","price":"859","mrp":0,"meta":"2.5GB/day • 84 Days • Unlimited Calls • 100 SMS/day • Unlimited 5G*","img":"brand:Jio Recharge","off":"","tag":"JIO"},{"name":"Jio Recharge • 2.5GB/day • 84 Days","cat":"Mobile Recharge","price":"1099","mrp":0,"meta":"2.5GB/day • 84 Days • Unlimited Calls • 100 SMS/day • Unlimited 5G*","img":"brand:Jio Recharge","off":"","tag":"JIO"},{"name":"Jio Recharge • 3GB/day • 28 Days","cat":"Mobile Recharge","price":"449","mrp":0,"meta":"3GB/day • 28 Days • Unlimited Calls • 100 SMS/day • Unlimited 5G*","img":"brand:Jio Recharge","off":"","tag":"JIO"},{"name":"Jio Recharge • 3GB/day • 28 Days","cat":"Mobile Recharge","price":"449","mrp":0,"meta":"3GB/day • 28 Days • Unlimited Calls • 100 SMS/day • Unlimited 5G*","img":"brand:Jio Recharge","off":"","tag":"JIO"},{"name":"Jio Recharge • 3GB/day • 56 Days","cat":"Mobile Recharge","price":"649","mrp":0,"meta":"3GB/day • 56 Days • Unlimited Calls • 100 SMS/day • Unlimited 5G*","img":"brand:Jio Recharge","off":"","tag":"JIO"},{"name":"Jio Recharge • 3GB/day • 84 Days","cat":"Mobile Recharge","price":"859","mrp":0,"meta":"3GB/day • 84 Days • Unlimited Calls • 100 SMS/day • Unlimited 5G*","img":"brand:Jio Recharge","off":"","tag":"JIO"},{"name":"Jio Recharge • 3GB/day • 84 Days","cat":"Mobile Recharge","price":"1199","mrp":0,"meta":"3GB/day • 84 Days • Unlimited Calls • 100 SMS/day • Unlimited 5G*","img":"brand:Jio Recharge","off":"","tag":"JIO"},{"name":"Jio Recharge • 4GB/day • 12 Days","cat":"Mobile Recharge","price":"219","mrp":0,"meta":"4GB/day • 12 Days • Unlimited Calls • 100 SMS/day • Unlimited 5G*","img":"brand:Jio Recharge","off":"","tag":"JIO"},{"name":"Jio Recharge • 5GB/day • 28 Days","cat":"Mobile Recharge","price":"399","mrp":0,"meta":"5GB/day • 28 Days • Unlimited Calls • 100 SMS/day • Unlimited 5G*","img":"brand:Jio Recharge","off":"","tag":"JIO"},{"name":"Jio Data Add-On • 1GB • 1 Day","cat":"Mobile Recharge","price":19,"mrp":0,"meta":"Data Add-On • 1 Day","img":"brand:Jio Recharge","off":"","tag":"DATA"},{"name":"Jio Data Add-On • 2GB • 1 Day","cat":"Mobile Recharge","price":29,"mrp":0,"meta":"Data Add-On • 1 Day","img":"brand:Jio Recharge","off":"","tag":"DATA"},{"name":"Jio Data Add-On • 25GB • 1 Day","cat":"Mobile Recharge","price":49,"mrp":0,"meta":"Data Add-On • 1 Day","img":"brand:Jio Recharge","off":"","tag":"DATA"},{"name":"Jio Data Add-On • 5GB • 7 Days","cat":"Mobile Recharge","price":99,"mrp":0,"meta":"Data Add-On • 7 Days","img":"brand:Jio Recharge","off":"","tag":"DATA"},{"name":"Jio Data Add-On • 15GB • 30 Days","cat":"Mobile Recharge","price":195,"mrp":0,"meta":"Data Add-On • 30 Days","img":"brand:Jio Recharge","off":"","tag":"DATA"},{"name":"Jio Data Add-On • 30GB • 30 Days","cat":"Mobile Recharge","price":219,"mrp":0,"meta":"Data Add-On • 30 Days","img":"brand:Jio Recharge","off":"","tag":"DATA"},{"name":"Jio Data Add-On • 12GB • 7 Days","cat":"Mobile Recharge","price":139,"mrp":0,"meta":"Data Add-On • 7 Days","img":"brand:Jio Recharge","off":"","tag":"DATA"},{"name":"Jio Data Add-On • 40GB • 30 Days","cat":"Mobile Recharge","price":289,"mrp":0,"meta":"Data Add-On • 30 Days","img":"brand:Jio Recharge","off":"","tag":"DATA"},{"name":"Jio Data Add-On • 50GB • 30 Days","cat":"Mobile Recharge","price":359,"mrp":0,"meta":"Data Add-On • 30 Days","img":"brand:Jio Recharge","off":"","tag":"DATA"},{"name":"Jio Data Add-On • 6GB • 7 Days","cat":"Mobile Recharge","price":79,"mrp":0,"meta":"Data Add-On • 7 Days","img":"brand:Jio Recharge","off":"","tag":"DATA"},{"name":"Jio Data Add-On • 5GB • 7 Days","cat":"Mobile Recharge","price":79,"mrp":0,"meta":"Data Add-On • 7 Days","img":"brand:Jio Recharge","off":"","tag":"DATA"},{"name":"Jio Data Add-On • 10GB • 30 Days","cat":"Mobile Recharge","price":149,"mrp":0,"meta":"Data Add-On • 30 Days","img":"brand:Jio Recharge","off":"","tag":"DATA"},{"name":"Jio Data Add-On • 12GB • 30 Days","cat":"Mobile Recharge","price":169,"mrp":0,"meta":"Data Add-On • 30 Days","img":"brand:Jio Recharge","off":"","tag":"DATA"},{"name":"Jio Data Add-On • 50GB • 30 Days","cat":"Mobile Recharge","price":389,"mrp":0,"meta":"Data Add-On • 30 Days","img":"brand:Jio Recharge","off":"","tag":"DATA"},{"name":"Jio Data Add-On • 60GB • 30 Days","cat":"Mobile Recharge","price":589,"mrp":0,"meta":"Data Add-On • 30 Days","img":"brand:Jio Recharge","off":"","tag":"DATA"},{"name":"Jio Data Add-On • 12GB • 30 Days","cat":"Mobile Recharge","price":159,"mrp":0,"meta":"Data Add-On • 30 Days","img":"brand:Jio Recharge","off":"","tag":"DATA"},{"name":"Jio Recharge • OTT + 2GB/day • 28 Days","cat":"Mobile Recharge","price":"349","mrp":0,"meta":"OTT + 2GB/day • 28 Days • Unlimited Calls • 100 SMS/day • Unlimited 5G*","img":"brand:Jio Recharge","off":"","tag":"JIO"},{"name":"Jio Recharge • OTT + 2GB/day • 84 Days","cat":"Mobile Recharge","price":"949","mrp":0,"meta":"OTT + 2GB/day • 84 Days • Unlimited Calls • 100 SMS/day • Unlimited 5G*","img":"brand:Jio Recharge","off":"","tag":"JIO"},{"name":"Jio Recharge • OTT + 2GB/day • 84 Days","cat":"Mobile Recharge","price":"1199","mrp":0,"meta":"OTT + 2GB/day • 84 Days • Unlimited Calls • 100 SMS/day • Unlimited 5G*","img":"brand:Jio Recharge","off":"","tag":"JIO"},{"name":"Jio Recharge • OTT + 1.5GB/day • 28 Days","cat":"Mobile Recharge","price":"449","mrp":0,"meta":"OTT + 1.5GB/day • 28 Days • Unlimited Calls • 100 SMS/day • Unlimited 5G*","img":"brand:Jio Recharge","off":"","tag":"JIO"},{"name":"Jio Recharge • OTT + 1.5GB/day • 28 Days","cat":"Mobile Recharge","price":"399","mrp":0,"meta":"OTT + 1.5GB/day • 28 Days • Unlimited Calls • 100 SMS/day • Unlimited 5G*","img":"brand:Jio Recharge","off":"","tag":"JIO"},{"name":"Jio Entertainment Plan • 100","cat":"Mobile Recharge","price":100,"mrp":0,"meta":"Entertainment • 30 Days","img":"brand:Jio Recharge","off":"","tag":"OTT"},{"name":"Jio Entertainment Plan • 195","cat":"Mobile Recharge","price":195,"mrp":0,"meta":"Entertainment • 30 Days","img":"brand:Jio Recharge","off":"","tag":"OTT"},{"name":"Jio Entertainment Plan • 195","cat":"Mobile Recharge","price":195,"mrp":0,"meta":"Entertainment • 30 Days","img":"brand:Jio Recharge","off":"","tag":"OTT"},{"name":"Jio Entertainment Plan • 195","cat":"Mobile Recharge","price":195,"mrp":0,"meta":"Entertainment • 30 Days","img":"brand:Jio Recharge","off":"","tag":"OTT"},{"name":"Jio Entertainment Plan • 249","cat":"Mobile Recharge","price":249,"mrp":0,"meta":"Entertainment • 30 Days","img":"brand:Jio Recharge","off":"","tag":"OTT"},{"name":"Jio Entertainment Plan • 279","cat":"Mobile Recharge","price":279,"mrp":0,"meta":"Entertainment • 30 Days","img":"brand:Jio Recharge","off":"","tag":"OTT"},{"name":"Jio Entertainment Plan • 269","cat":"Mobile Recharge","price":269,"mrp":0,"meta":"Entertainment • 30 Days","img":"brand:Jio Recharge","off":"","tag":"OTT"},{"name":"Jio Entertainment Plan • 319","cat":"Mobile Recharge","price":319,"mrp":0,"meta":"Entertainment • 30 Days","img":"brand:Jio Recharge","off":"","tag":"OTT"},{"name":"Jio Entertainment Plan • 349","cat":"Mobile Recharge","price":349,"mrp":0,"meta":"Entertainment • 30 Days","img":"brand:Jio Recharge","off":"","tag":"OTT"},{"name":"Jio Calls + SMS • 20 Days","cat":"Mobile Recharge","price":149,"mrp":0,"meta":"Calls + SMS • 20 Days","img":"brand:Jio Recharge","off":"","tag":"CALLS"},{"name":"Jio Calls + SMS • 18 Days","cat":"Mobile Recharge","price":199,"mrp":0,"meta":"Calls + SMS • 18 Days","img":"brand:Jio Recharge","off":"","tag":"CALLS"},{"name":"Jio Calls + SMS • 84 Days","cat":"Mobile Recharge","price":448,"mrp":0,"meta":"Calls + SMS • 84 Days","img":"brand:Jio Recharge","off":"","tag":"CALLS"},{"name":"Jio Calls + SMS • 336 Days","cat":"Mobile Recharge","price":1748,"mrp":0,"meta":"Calls + SMS • 336 Days","img":"brand:Jio Recharge","off":"","tag":"CALLS"},{"name":"Jio Long Validity • 336 Days","cat":"Mobile Recharge","price":895,"mrp":0,"meta":"Long Validity • 336 Days","img":"brand:Jio Recharge","off":"","tag":"VALIDITY"},{"name":"Jio Long Validity • 336 Days","cat":"Mobile Recharge","price":1250,"mrp":0,"meta":"Long Validity • 336 Days","img":"brand:Jio Recharge","off":"","tag":"VALIDITY"},{"name":"Jio Long Validity • 28 Days","cat":"Mobile Recharge","price":359,"mrp":0,"meta":"Long Validity • 28 Days","img":"brand:Jio Recharge","off":"","tag":"VALIDITY"},{"name":"Jio Long Validity • 84 Days","cat":"Mobile Recharge","price":666,"mrp":0,"meta":"Long Validity • 84 Days","img":"brand:Jio Recharge","off":"","tag":"VALIDITY"},{"name":"Jio Long Validity • 90 Days","cat":"Mobile Recharge","price":899,"mrp":0,"meta":"Long Validity • 90 Days","img":"brand:Jio Recharge","off":"","tag":"VALIDITY"},{"name":"Jio Long Validity • 336 Days","cat":"Mobile Recharge","price":1748,"mrp":0,"meta":"Long Validity • 336 Days","img":"brand:Jio Recharge","off":"","tag":"VALIDITY"},{"name":"Jio International Roaming • 7 Days","cat":"Mobile Recharge","price":399,"mrp":0,"meta":"International Roaming • 7 Days","img":"brand:Jio Recharge","off":"","tag":"ROAMING"},{"name":"Jio International Roaming • 10 Days","cat":"Mobile Recharge","price":499,"mrp":0,"meta":"International Roaming • 10 Days","img":"brand:Jio Recharge","off":"","tag":"ROAMING"},{"name":"Jio International Roaming • 15 Days","cat":"Mobile Recharge","price":799,"mrp":0,"meta":"International Roaming • 15 Days","img":"brand:Jio Recharge","off":"","tag":"ROAMING"},{"name":"Jio International Roaming • 30 Days","cat":"Mobile Recharge","price":1199,"mrp":0,"meta":"International Roaming • 30 Days","img":"brand:Jio Recharge","off":"","tag":"ROAMING"},{"name":"Jio International Roaming • 30 Days","cat":"Mobile Recharge","price":299,"mrp":0,"meta":"International Roaming • 30 Days","img":"brand:Jio Recharge","off":"","tag":"ROAMING"},{"name":"Jio International Roaming • 30 Days","cat":"Mobile Recharge","price":499,"mrp":0,"meta":"International Roaming • 30 Days","img":"brand:Jio Recharge","off":"","tag":"ROAMING"},{"name":"Jio International Roaming • 10 Days","cat":"Mobile Recharge","price":2999,"mrp":0,"meta":"International Roaming • 10 Days","img":"brand:Jio Recharge","off":"","tag":"ROAMING"},{"name":"Jio International Roaming • 10 Days","cat":"Mobile Recharge","price":3999,"mrp":0,"meta":"International Roaming • 10 Days","img":"brand:Jio Recharge","off":"","tag":"ROAMING"},{"name":"Jio International Roaming • 10 Days","cat":"Mobile Recharge","price":4999,"mrp":0,"meta":"International Roaming • 10 Days","img":"brand:Jio Recharge","off":"","tag":"ROAMING"},{"name":"Jio International Roaming • 30 Days","cat":"Mobile Recharge","price":1499,"mrp":0,"meta":"International Roaming • 30 Days","img":"brand:Jio Recharge","off":"","tag":"ROAMING"},{"name":"Jio International Roaming • 7 Days","cat":"Mobile Recharge","price":699,"mrp":0,"meta":"International Roaming • 7 Days","img":"brand:Jio Recharge","off":"","tag":"ROAMING"},{"name":"Jio International Roaming • 10 Days","cat":"Mobile Recharge","price":899,"mrp":0,"meta":"International Roaming • 10 Days","img":"brand:Jio Recharge","off":"","tag":"ROAMING"},{"name":"Jio Other Plan • 84 Days","cat":"Mobile Recharge","price":999,"mrp":0,"meta":"Jio Plan • 84 Days","img":"brand:Jio Recharge","off":"","tag":"JIO"},{"name":"Jio Other Plan • 12 Days","cat":"Mobile Recharge","price":139,"mrp":0,"meta":"Jio Plan • 12 Days","img":"brand:Jio Recharge","off":"","tag":"JIO"},{"name":"Jio Other Plan • 22 Days","cat":"Mobile Recharge","price":239,"mrp":0,"meta":"Jio Plan • 22 Days","img":"brand:Jio Recharge","off":"","tag":"JIO"},{"name":"Airtel Recharge","cat":"Mobile Recharge","price":0,"mrp":0,"meta":"Recharge Plans • Coming Soon","img":"brand:Airtel Recharge","off":"","tag":"COMING SOON","comingSoon":true},{"name":"Vi Recharge","cat":"Mobile Recharge","price":0,"mrp":0,"meta":"Recharge Plans • Coming Soon","img":"brand:Vi Recharge","off":"","tag":"COMING SOON","comingSoon":true},{"name":"Spotify Premium","cat":"Music Streaming","price":99,"mrp":0,"meta":"2 Months • Private Account • Ad-Free • Offline Downloads","img":"brand:Spotify Premium","off":"","tag":"PRIVATE"},{"name":"Spotify Premium","cat":"Music Streaming","price":199,"mrp":0,"meta":"3 Months • Private Account • Ad-Free • Offline Downloads","img":"brand:Spotify Premium","off":"","tag":"PRIVATE"},{"name":"Spotify Premium","cat":"Music Streaming","price":299,"mrp":0,"meta":"6 Months • Private Account • Ad-Free • Offline Downloads","img":"brand:Spotify Premium","off":"","tag":"PRIVATE"},{"name":"Spotify Premium","cat":"Music Streaming","price":499,"mrp":0,"meta":"12 Months • Private Account • Ad-Free • Offline Downloads","img":"brand:Spotify Premium","off":"","tag":"PRIVATE"},{"name":"Filmora 15 + AI","cat":"Software & Tools","price":1999,"mrp":0,"meta":"Windows / Mac • 2000 AI Credits • Lifetime • 1 Year Warranty • FilmStock Not Included","img":"brand:Filmora 15 + AI","off":"","tag":"AI"},{"name":"Canva Pro","cat":"Software & Tools","price":199,"mrp":0,"meta":"6 Months • Personal Account • Own Email","img":"brand:Canva Pro","off":"","tag":"PERSONAL"},{"name":"Canva Pro","cat":"Software & Tools","price":299,"mrp":0,"meta":"1 Year • Personal Account • Own Email","img":"brand:Canva Pro","off":"","tag":"PERSONAL"},{"name":"Crunchyroll Premium","cat":"OTT Apps","price":49,"mrp":0,"meta":"1 Month • 4K Ultra HD • TV / Mobile / Laptop","img":"brand:Crunchyroll Premium","off":"","tag":"ANIME"},{"name":"Crunchyroll Premium","cat":"OTT Apps","price":199,"mrp":0,"meta":"6 Months • 4K Ultra HD • TV / Mobile / Laptop","img":"brand:Crunchyroll Premium","off":"","tag":"ANIME"},{"name":"Crunchyroll Premium","cat":"OTT Apps","price":299,"mrp":0,"meta":"12 Months • 4K Ultra HD • TV / Mobile / Laptop","img":"brand:Crunchyroll Premium","off":"","tag":"ANIME"},{"name":"Instagram Followers","cat":"Social Media Growth","price":499,"mrp":0,"meta":"1K Followers • Premium Quality • Non-Drop Guarantee","img":"brand:Instagram Followers","off":"","tag":"FOLLOWERS"},{"name":"Instagram Followers","cat":"Social Media Growth","price":2299,"mrp":0,"meta":"5K Followers • Premium Quality • Non-Drop Guarantee","img":"brand:Instagram Followers","off":"","tag":"FOLLOWERS"},{"name":"Instagram Followers","cat":"Social Media Growth","price":3999,"mrp":0,"meta":"10K Followers • Premium Quality • Non-Drop Guarantee","img":"brand:Instagram Followers","off":"","tag":"FOLLOWERS"},{"name":"Instagram Likes","cat":"Social Media Growth","price":89,"mrp":0,"meta":"1K Likes • Fast Delivery • Safe & Reliable","img":"brand:Instagram Followers","off":"","tag":"LIKES"},{"name":"Instagram Views","cat":"Social Media Growth","price":89,"mrp":0,"meta":"1K Views • Fast Delivery • Safe & Reliable","img":"brand:Instagram Followers","off":"","tag":"VIEWS"},{"name":"Faphouse Premium","cat":"Premium Apps","price":99,"mrp":0,"meta":"1 Month • Fast & Secure Access • Guaranteed Service","img":"brand:Faphouse Premium","off":"","tag":"PREMIUM"},{"name":"Faphouse Premium","cat":"Premium Apps","price":249,"mrp":0,"meta":"3 Months • Fast & Secure Access • Guaranteed Service","img":"brand:Faphouse Premium","off":"","tag":"PREMIUM"},{"name":"Faphouse Premium","cat":"Premium Apps","price":449,"mrp":0,"meta":"6 Months • Fast & Secure Access • Guaranteed Service","img":"brand:Faphouse Premium","off":"","tag":"PREMIUM"},{"name":"Faphouse Premium","cat":"Premium Apps","price":799,"mrp":0,"meta":"12 Months • Fast & Secure Access • Guaranteed Service","img":"brand:Faphouse Premium","off":"","tag":"PREMIUM"},{"name":"ChatGPT Plus","cat":"AI Tools","price":799,"mrp":0,"meta":"1 Month • Shared Access • 28 Days Warranty • No Limitation Issues","img":"brand:ChatGPT Plus","off":"","tag":"AI"},{"name":"Tiger IPTV","cat":"IPTV Services","price":499,"mrp":0,"meta":"3 Months • Premium IPTV Service","img":"tiger-iptv-user.png","off":"","tag":"IPTV"},{"name":"Tiger IPTV","cat":"IPTV Services","price":699,"mrp":0,"meta":"6 Months • Premium IPTV Service","img":"tiger-iptv-user.png","off":"","tag":"IPTV"},{"name":"Tiger IPTV","cat":"IPTV Services","price":1249,"mrp":0,"meta":"12 Months • Premium IPTV Service","img":"tiger-iptv-user.png","off":"","tag":"IPTV"},{"name":"Bigo IPTV","cat":"IPTV Services","price":399,"mrp":0,"meta":"3 Months • Premium IPTV Service","img":"bigo-iptv-user.jpg","off":"","tag":"IPTV"},{"name":"Bigo IPTV","cat":"IPTV Services","price":599,"mrp":0,"meta":"6 Months • Premium IPTV Service","img":"bigo-iptv-user.jpg","off":"","tag":"IPTV"},{"name":"Bigo IPTV","cat":"IPTV Services","price":999,"mrp":0,"meta":"12 Months • Premium IPTV Service","img":"bigo-iptv-user.jpg","off":"","tag":"IPTV"},{"name":"XXX IPTV","cat":"IPTV Services","price":449,"mrp":0,"meta":"3 Months • Premium IPTV Service","img":"brand:XXX IPTV","off":"","tag":"IPTV"},{"name":"XXX IPTV","cat":"IPTV Services","price":699,"mrp":0,"meta":"6 Months • Premium IPTV Service","img":"brand:XXX IPTV","off":"","tag":"IPTV"},{"name":"XXX IPTV","cat":"IPTV Services","price":1049,"mrp":0,"meta":"12 Months • Premium IPTV Service","img":"brand:XXX IPTV","off":"","tag":"IPTV"},{"name":"Umbrella IPTV","cat":"IPTV Services","price":449,"mrp":0,"meta":"3 Months • Premium IPTV Service","img":"umbrella-iptv-user.png","off":"","tag":"IPTV"},{"name":"Umbrella IPTV","cat":"IPTV Services","price":699,"mrp":0,"meta":"6 Months • Premium IPTV Service","img":"umbrella-iptv-user.png","off":"","tag":"IPTV"},{"name":"Umbrella IPTV","cat":"IPTV Services","price":1049,"mrp":0,"meta":"12 Months • Premium IPTV Service","img":"umbrella-iptv-user.png","off":"","tag":"IPTV"},{"name":"Maya TV","cat":"IPTV Services","price":449,"mrp":0,"meta":"3 Months • Premium IPTV Service","img":"maya-tv-user.png","off":"","tag":"IPTV"},{"name":"Maya TV","cat":"IPTV Services","price":699,"mrp":0,"meta":"6 Months • Premium IPTV Service","img":"maya-tv-user.png","off":"","tag":"IPTV"},{"name":"Maya TV","cat":"IPTV Services","price":1049,"mrp":0,"meta":"12 Months • Premium IPTV Service","img":"maya-tv-user.png","off":"","tag":"IPTV"},{"name":"Ziggtv","cat":"IPTV Services","price":449,"mrp":0,"meta":"3 Months • Premium IPTV Service","img":"ziggtv-user.jpg","off":"","tag":"IPTV"},{"name":"Ziggtv","cat":"IPTV Services","price":699,"mrp":0,"meta":"6 Months • Premium IPTV Service","img":"ziggtv-user.jpg","off":"","tag":"IPTV"},{"name":"Ziggtv","cat":"IPTV Services","price":1049,"mrp":0,"meta":"12 Months • Premium IPTV Service","img":"ziggtv-user.jpg","off":"","tag":"IPTV"},{"name":"Fynix IPTV","cat":"IPTV Services","price":449,"mrp":0,"meta":"3 Months • Premium IPTV Service","img":"fynix-iptv-user.jpg","off":"","tag":"IPTV"},{"name":"Fynix IPTV","cat":"IPTV Services","price":699,"mrp":0,"meta":"6 Months • Premium IPTV Service","img":"fynix-iptv-user.jpg","off":"","tag":"IPTV"},{"name":"Fynix IPTV","cat":"IPTV Services","price":1049,"mrp":0,"meta":"12 Months • Premium IPTV Service","img":"fynix-iptv-user.jpg","off":"","tag":"IPTV"},{"name":"Strong 8K","cat":"IPTV Services","price":699,"mrp":0,"meta":"3 Months • Premium IPTV Service","img":"strong-8k-user.jpg","off":"","tag":"IPTV"},{"name":"Strong 8K","cat":"IPTV Services","price":799,"mrp":0,"meta":"6 Months • Premium IPTV Service","img":"strong-8k-user.jpg","off":"","tag":"IPTV"},{"name":"Strong 8K","cat":"IPTV Services","price":1205,"mrp":0,"meta":"12 Months • Premium IPTV Service","img":"strong-8k-user.jpg","off":"","tag":"IPTV"},{"name":"Super IPTV","cat":"IPTV Services","price":449,"mrp":0,"meta":"3 Months • Premium IPTV Service","img":"super-iptv-user.png","off":"","tag":"IPTV"},{"name":"Super IPTV","cat":"IPTV Services","price":699,"mrp":0,"meta":"6 Months • Premium IPTV Service","img":"super-iptv-user.png","off":"","tag":"IPTV"},{"name":"Super IPTV","cat":"IPTV Services","price":1049,"mrp":0,"meta":"12 Months • Premium IPTV Service","img":"super-iptv-user.png","off":"","tag":"IPTV"},{"name":"Crystal TV","cat":"IPTV Services","price":699,"mrp":0,"meta":"3 Months • Premium IPTV Service","img":"crystal-tv-user.png","off":"","tag":"IPTV"},{"name":"Crystal TV","cat":"IPTV Services","price":849,"mrp":0,"meta":"6 Months • Premium IPTV Service","img":"crystal-tv-user.png","off":"","tag":"IPTV"},{"name":"Crystal TV","cat":"IPTV Services","price":1199,"mrp":0,"meta":"12 Months • Premium IPTV Service","img":"crystal-tv-user.png","off":"","tag":"IPTV"},{"name":"Zumtv IPTV","cat":"IPTV Services","price":499,"mrp":0,"meta":"3 Months • Premium IPTV Service","img":"zumtv-user.jpg","off":"","tag":"IPTV"},{"name":"Zumtv IPTV","cat":"IPTV Services","price":649,"mrp":0,"meta":"6 Months • Premium IPTV Service","img":"zumtv-user.jpg","off":"","tag":"IPTV"},{"name":"Zumtv IPTV","cat":"IPTV Services","price":999,"mrp":0,"meta":"12 Months • Premium IPTV Service","img":"zumtv-user.jpg","off":"","tag":"IPTV"},{"name":"ASTV","cat":"IPTV Services","price":399,"mrp":0,"meta":"3 Months • Premium IPTV Service","img":"astv-user.jpg","off":"","tag":"IPTV"},{"name":"ASTV","cat":"IPTV Services","price":649,"mrp":0,"meta":"6 Months • Premium IPTV Service","img":"astv-user.jpg","off":"","tag":"IPTV"},{"name":"ASTV","cat":"IPTV Services","price":899,"mrp":0,"meta":"12 Months • Premium IPTV Service","img":"astv-user.jpg","off":"","tag":"IPTV"},{"name":"Strong 4K IPTV","cat":"IPTV Services","price":449,"mrp":0,"meta":"3 Months • Premium IPTV Service","img":"strong-4k-user.jpg","off":"","tag":"IPTV"},{"name":"Strong 4K IPTV","cat":"IPTV Services","price":699,"mrp":0,"meta":"6 Months • Premium IPTV Service","img":"strong-4k-user.jpg","off":"","tag":"IPTV"},{"name":"Strong 4K IPTV","cat":"IPTV Services","price":1049,"mrp":0,"meta":"12 Months • Premium IPTV Service","img":"strong-4k-user.jpg","off":"","tag":"IPTV"},{"name":"Fiber Stream IPTV","cat":"IPTV Services","price":299,"mrp":0,"meta":"3 Months • Premium IPTV Service","img":"fiber-stream-user.jpg","off":"","tag":"IPTV"},{"name":"Fiber Stream IPTV","cat":"IPTV Services","price":499,"mrp":0,"meta":"6 Months • Premium IPTV Service","img":"fiber-stream-user.jpg","off":"","tag":"IPTV"},{"name":"Fiber Stream IPTV","cat":"IPTV Services","price":799,"mrp":0,"meta":"12 Months • Premium IPTV Service","img":"fiber-stream-user.jpg","off":"","tag":"IPTV"},{"name":"B1G IPTV","cat":"IPTV Services","price":449,"mrp":0,"meta":"3 Months • Premium IPTV Service","img":"b1g-iptv-user.png","off":"","tag":"IPTV"},{"name":"B1G IPTV","cat":"IPTV Services","price":699,"mrp":0,"meta":"6 Months • Premium IPTV Service","img":"b1g-iptv-user.png","off":"","tag":"IPTV"},{"name":"B1G IPTV","cat":"IPTV Services","price":1199,"mrp":0,"meta":"12 Months • Premium IPTV Service","img":"b1g-iptv-user.png","off":"","tag":"IPTV"},{"name":"Filex IPTV","cat":"IPTV Services","price":449,"mrp":0,"meta":"3 Months • Premium IPTV Service","img":"filex-iptv-user.jpg","off":"","tag":"IPTV"},{"name":"Filex IPTV","cat":"IPTV Services","price":699,"mrp":0,"meta":"6 Months • Premium IPTV Service","img":"filex-iptv-user.jpg","off":"","tag":"IPTV"},{"name":"Filex IPTV","cat":"IPTV Services","price":1049,"mrp":0,"meta":"12 Months • Premium IPTV Service","img":"filex-iptv-user.jpg","off":"","tag":"IPTV"},{"name":"Trex IPTV","cat":"IPTV Services","price":449,"mrp":0,"meta":"3 Months • Premium IPTV Service","img":"trex-iptv-user.jpg","off":"","tag":"IPTV"},{"name":"Trex IPTV","cat":"IPTV Services","price":699,"mrp":0,"meta":"6 Months • Premium IPTV Service","img":"trex-iptv-user.jpg","off":"","tag":"IPTV"},{"name":"Trex IPTV","cat":"IPTV Services","price":1049,"mrp":0,"meta":"12 Months • Premium IPTV Service","img":"trex-iptv-user.jpg","off":"","tag":"IPTV"},{"name":"Opplex IPTV","cat":"IPTV Services","price":399,"mrp":0,"meta":"3 Months • Premium IPTV Service","img":"opplex-tv-user.jpg","off":"","tag":"IPTV"},{"name":"Opplex IPTV","cat":"IPTV Services","price":599,"mrp":0,"meta":"6 Months • Premium IPTV Service","img":"opplex-tv-user.jpg","off":"","tag":"IPTV"},{"name":"Opplex IPTV","cat":"IPTV Services","price":999,"mrp":0,"meta":"12 Months • Premium IPTV Service","img":"opplex-tv-user.jpg","off":"","tag":"IPTV"},{"name":"1 Year Business Website","cat":"Business Website","price":1999,"mrp":3998,"meta":"1 Year • Domain + Hosting Included • Google Search Supported • Mobile & Chrome Friendly • Online Enquiry & Order Support","img":"business-website-ganesh.png","off":"50% OFF","tag":"FESTIVAL OFFER"},{"name":"Lifetime Business Website","cat":"Business Website","price":3500,"mrp":7000,"meta":"Lifetime • Domain + Hosting Included • Google Search Supported • Mobile & Chrome Friendly • Online Enquiry & Order Support","img":"business-website-ganesh.png","off":"50% OFF","tag":"BEST VALUE"},{"name":"Star TV IPTV Demo","cat":"IPTV Services","price":99,"mrp":0,"meta":"Demo • 24 Hours","img":"1000174431.jpg","off":"","tag":"DEMO"},{"name":"StarShare IPTV Demo","cat":"IPTV Services","price":99,"mrp":0,"meta":"Demo • 24 Hours","img":"1000174468.png","off":"","tag":"DEMO"},{"name":"BOSTV Prime IPTV Demo","cat":"IPTV Services","price":20,"mrp":0,"meta":"Demo • 24 Hours","img":"1000174469.png","off":"","tag":"DEMO"},{"name":"Rolex TV IPTV Demo","cat":"IPTV Services","price":20,"mrp":0,"meta":"Demo • 24 Hours","img":"1000174459.png","off":"","tag":"DEMO"},{"name":"Tiger IPTV Demo","cat":"IPTV Services","price":99,"mrp":0,"meta":"Demo • 24 Hours","img":"tiger-iptv-user.png","off":"","tag":"DEMO"},{"name":"Bigo IPTV Demo","cat":"IPTV Services","price":99,"mrp":0,"meta":"Demo • 24 Hours","img":"bigo-iptv-user.jpg","off":"","tag":"DEMO"},{"name":"XXX IPTV Demo","cat":"IPTV Services","price":99,"mrp":0,"meta":"Demo • 24 Hours","img":"brand:XXX IPTV","off":"","tag":"DEMO"},{"name":"Umbrella IPTV Demo","cat":"IPTV Services","price":99,"mrp":0,"meta":"Demo • 24 Hours","img":"umbrella-iptv-user.png","off":"","tag":"DEMO"},{"name":"Maya TV Demo","cat":"IPTV Services","price":99,"mrp":0,"meta":"Demo • 24 Hours","img":"maya-tv-user.png","off":"","tag":"DEMO"},{"name":"Ziggtv Demo","cat":"IPTV Services","price":99,"mrp":0,"meta":"Demo • 24 Hours","img":"ziggtv-user.jpg","off":"","tag":"DEMO"},{"name":"Fynix IPTV Demo","cat":"IPTV Services","price":99,"mrp":0,"meta":"Demo • 24 Hours","img":"fynix-iptv-user.jpg","off":"","tag":"DEMO"},{"name":"Strong 8K Demo","cat":"IPTV Services","price":99,"mrp":0,"meta":"Demo • 24 Hours","img":"strong-8k-user.jpg","off":"","tag":"DEMO"},{"name":"Super IPTV Demo","cat":"IPTV Services","price":99,"mrp":0,"meta":"Demo • 24 Hours","img":"super-iptv-user.png","off":"","tag":"DEMO"},{"name":"Crystal TV Demo","cat":"IPTV Services","price":99,"mrp":0,"meta":"Demo • 24 Hours","img":"crystal-tv-user.png","off":"","tag":"DEMO"},{"name":"Zumtv IPTV Demo","cat":"IPTV Services","price":99,"mrp":0,"meta":"Demo • 24 Hours","img":"zumtv-user.jpg","off":"","tag":"DEMO"},{"name":"ASTV Demo","cat":"IPTV Services","price":99,"mrp":0,"meta":"Demo • 24 Hours","img":"astv-user.jpg","off":"","tag":"DEMO"},{"name":"Strong 4K IPTV Demo","cat":"IPTV Services","price":99,"mrp":0,"meta":"Demo • 24 Hours","img":"strong-4k-user.jpg","off":"","tag":"DEMO"},{"name":"Fiber Stream IPTV Demo","cat":"IPTV Services","price":99,"mrp":0,"meta":"Demo • 24 Hours","img":"fiber-stream-user.jpg","off":"","tag":"DEMO"},{"name":"B1G IPTV Demo","cat":"IPTV Services","price":99,"mrp":0,"meta":"Demo • 24 Hours","img":"b1g-iptv-user.png","off":"","tag":"DEMO"},{"name":"Filex IPTV Demo","cat":"IPTV Services","price":99,"mrp":0,"meta":"Demo • 24 Hours","img":"filex-iptv-user.jpg","off":"","tag":"DEMO"},{"name":"Trex IPTV Demo","cat":"IPTV Services","price":50,"mrp":0,"meta":"Demo • 12 Hours","img":"trex-iptv-user.jpg","off":"","tag":"DEMO"},{"name":"Opplex IPTV Demo","cat":"IPTV Services","price":20,"mrp":0,"meta":"Demo • 12 Hours","img":"opplex-tv-user.jpg","off":"","tag":"DEMO"}];
 
 const cats=[
@@ -976,20 +966,37 @@ function card(p,i){
   const mrp=p.mrp?`<span class="mrp">${money(p.mrp)}</span>`:"";
   const off=p.off?`<span class="badge">${p.off}</span>`:"";
   const tag=p.tag?`<span class="tag">${p.tag}</span>`:"";
-  const d=supportFor(p), out=p.active===false;
+  const d=supportFor(p);
   if(p.comingSoon){
     return `<article class="card comingSoonCard"><div class="pic">${tag}<img class="productLogo" src="${asset(p.img)}" alt="${p.name}" loading="lazy"></div><div class="body"><div class="cat">${p.cat}</div><div class="name">${p.name}</div><div class="meta">${p.meta}</div><div class="comingSoonText">🚀 COMING SOON</div><button class="buy comingSoonBtn" disabled>⏳ Coming Soon</button></div></article>`;
   }
-  const actions=out
-    ? `<button class="buy goldBuy stockDisabled" disabled>🛒 Add to Cart</button><button class="buy stockDisabled" disabled>⚡ Buy Now</button>`
-    : `<button class="buy goldBuy" onclick="addToCart(${i})">🛒 Add to Cart</button><button class="buy" onclick="openOrder(${i})">⚡ Buy Now</button>`;
-  return `<article class="card${out?' outOfStockCard':''}"><div class="pic">${off}${tag}<img class="productLogo" src="${asset(p.img)}" alt="${p.name}" loading="lazy"></div><div class="body"><div class="cat">${p.cat}</div><div class="name">${p.name}</div><div class="meta">${p.meta}</div><div class="details"><div class="detail"><b>Activation:</b> ${d.activation}</div><div class="detail"><b>Supported:</b> ${d.supported}</div></div><div class="priceRow"><span class="price">${money(p.price)}</span>${mrp}</div>${out?'<div class="stockBadge">🔴 OUT OF STOCK</div>':''}<div class="cardActions">${actions}</div><button class="sharePlan" onclick="sharePlan(${i})">🔗 Share Plan Link</button></div></article>`;
+  return `<article class="card">
+    <div class="pic">${off}${tag}<img class="productLogo" src="${asset(p.img)}" alt="${p.name}" loading="lazy"></div>
+    <div class="body">
+      <div class="cat">${p.cat}</div>
+      <div class="name">${p.name}</div>
+      <div class="meta">${p.meta}</div>
+      <div class="details">
+        <div class="detail"><b>Activation:</b> ${d.activation}</div>
+        <div class="detail"><b>Supported:</b> ${d.supported}</div>
+      </div>
+      <div class="priceRow"><span class="price">${money(p.price)}</span>${mrp}</div>
+      <div class="cardActions"><button class="buy goldBuy" onclick="addToCart(${i})">🛒 Add to Cart</button><button class="buy" onclick="openOrder(${i})">⚡ Buy Now</button></div><button class="sharePlan" onclick="sharePlan(${i})">🔗 Share Plan Link</button>
+    </div>
+  </article>`;
 }
 function groupedIPTVCard(group){
-  const available=group.filter(x=>x.p.active!==false), first=(available[0]||group[0]).p;
-  if(!available.length)return `<article class="card iptvGroupedCard outOfStockCard"><div class="pic"><span class="tag">3 PLANS</span><img class="productLogo" src="${asset(first.img)}" alt="${first.name}" loading="lazy"></div><div class="body"><div class="cat">${first.cat}</div><div class="name">${first.name}</div><div class="meta">All plans currently unavailable</div><div class="stockBadge">🔴 OUT OF STOCK</div></div></article>`;
-  const rows=available.map(x=>{const months=(x.p.meta.match(/^(\d+) Months?/i)||[])[1]||"",duration=months?months+" Months":x.p.meta.split(" • ")[0];return `<div class="iptvPlanRow"><div class="iptvPlanDuration"><b>${duration}</b><span>${x.p.meta.replace(/^\d+ Months? • /i,"")}</span></div><strong class="iptvPlanPrice">${money(x.p.price)}</strong><button class="buy iptvMiniBuy" onclick="openOrder(${x.i})">⚡ Buy</button><button class="iptvMiniCart" onclick="addToCart(${x.i})">🛒</button></div>`;}).join("");
-  const share=available.map(x=>{const months=(x.p.meta.match(/^(\d+) Months?/i)||[])[1]||"",duration=months?months+" Months":x.p.meta.split(" • ")[0];return `<button class="sharePlan iptvShare" onclick="sharePlan(${x.i})">🔗 ${duration}</button>`;}).join("");
+  const first=group[0].p;
+  const rows=group.map(x=>{
+    const months=(x.p.meta.match(/^(\d+) Months?/i)||[])[1]||"";
+    const duration=months?months+" Months":x.p.meta.split(" • ")[0];
+    return `<div class="iptvPlanRow"><div class="iptvPlanDuration"><b>${duration}</b><span>${x.p.meta.replace(/^\d+ Months? • /i,"")}</span></div><strong class="iptvPlanPrice">${money(x.p.price)}</strong><button class="buy iptvMiniBuy" onclick="openOrder(${x.i})">⚡ Buy</button><button class="iptvMiniCart" onclick="addToCart(${x.i})">🛒</button></div>`;
+  }).join("");
+  const share=group.map(x=>{
+    const months=(x.p.meta.match(/^(\d+) Months?/i)||[])[1]||"";
+    const duration=months?months+" Months":x.p.meta.split(" • ")[0];
+    return `<button class="sharePlan iptvShare" onclick="sharePlan(${x.i})">🔗 ${duration}</button>`;
+  }).join("");
   return `<article class="card iptvGroupedCard"><div class="pic"><span class="tag">3 PLANS</span><img class="productLogo" src="${asset(first.img)}" alt="${first.name}" loading="lazy"></div><div class="body"><div class="cat">${first.cat}</div><div class="name">${first.name}</div><div class="meta">Choose your duration • 3 Months / 6 Months / 12 Months</div><div class="iptvPlanList">${rows}</div><div class="iptvShareRow">${share}</div></div></article>`;
 }
 function planKey(p){return p.name+"||"+p.cat}
@@ -1012,30 +1019,11 @@ function planSortValue(p){
   return 9999;
 }
 function groupedProductCard(group,gid){
-  const available=group.filter(x=>x.p.active!==false), first=(available[0]||group[0]).p;
+  const first=group[0].p;
   const mrp=first.mrp?`<span class="mrp">${money(first.mrp)}</span>`:"";
   const off=first.off?`<span class="badge">${first.off}</span>`:"";
   const tag=first.tag?`<span class="tag">${first.tag}</span>`:"";
   const d=supportFor(first);
-  const target=(available[0]||group[0]).i;
-  if(!available.length){
-    return `<article class="card groupedPlanCard outOfStockCard" id="gpc-${gid}">
-      <div class="pic">${off}${tag}<img class="productLogo" src="${asset(first.img)}" alt="${first.name}" loading="lazy"></div>
-      <div class="body">
-        <div class="cat">${first.cat}</div>
-        <div class="name">${first.name}</div>
-        <div class="meta">All plans currently unavailable</div>
-        <div class="details">
-          <div class="detail"><b>Activation:</b> ${d.activation}</div>
-          <div class="detail"><b>Supported:</b> ${d.supported}</div>
-        </div>
-        <div class="priceRow"><span class="price">${money(first.price)}</span>${mrp}</div>
-        <div class="stockBadge">🔴 OUT OF STOCK</div>
-        <div class="groupActions"><button class="buy stockDisabled" disabled>⚡ Buy Now</button></div>
-        <button class="sharePlan" onclick="sharePlan(${group[0].i})">🔗 Share Plan Link</button>
-      </div>
-    </article>`;
-  }
   return `<article class="card groupedPlanCard" id="gpc-${gid}">
     <div class="pic">${off}${tag}<img class="productLogo" src="${asset(first.img)}" alt="${first.name}" loading="lazy"></div>
     <div class="body">
@@ -1047,8 +1035,8 @@ function groupedProductCard(group,gid){
         <div class="detail"><b>Supported:</b> ${d.supported}</div>
       </div>
       <div class="priceRow"><span class="price">${money(first.price)}</span>${mrp}</div>
-      <div class="groupActions"><button class="buy goldBuy" onclick="openOrder(${target})">🛒 Add to Cart</button><button class="buy" onclick="openOrder(${target})">⚡ Buy Now</button></div>
-      <button class="sharePlan" onclick="sharePlan(${target})">🔗 Share Plan Link</button>
+      <div class="groupActions"><button class="buy goldBuy" onclick="openOrder(${group[0].i})">🛒 Add to Cart</button><button class="buy" onclick="openOrder(${group[0].i})">⚡ Buy Now</button></div>
+      <button class="sharePlan" onclick="sharePlan(${group[0].i})">🔗 Share Plan Link</button>
     </div>
   </article>`;
 }
@@ -1076,24 +1064,39 @@ function render(){
   document.getElementById("grid").innerHTML=html;
 }
 
-function productKey(p){return [p.name,p.cat,p.price,p.meta].map(v=>String(v??' ').trim().toLowerCase()).join("|");}
-function shortCode(p){const str=productKey(p);let h=2166136261;for(let i=0;i<str.length;i++){h^=str.charCodeAt(i);h=Math.imul(h,16777619)}h^=h>>>13;h=Math.imul(h,1274126177);h^=h>>>16;return (h>>>0).toString(36).padStart(4,"0").slice(0,4)}
+function productKey(p){return [p.name,p.cat,p.price,p.meta].map(v=>String(v??"").trim().toLowerCase()).join("|");}
 function encodeKey(v){return btoa(unescape(encodeURIComponent(v))).replace(/\+/g,"-").replace(/\//g,"_").replace(/=+$/g,"");}
 function decodeKey(v){try{return decodeURIComponent(escape(atob(v.replace(/-/g,"+").replace(/_/g,"/")+"=".repeat((4-v.length%4)%4))))}catch(e){return ""}}
-function productUrl(i){const p=products[i],base=window.location.origin+window.location.pathname;return base+"?p="+encodeURIComponent(shortCode(p));}
-async function sharePlan(i){const p=products[i],url=productUrl(i),text=`${p.name} • ${p.meta} • ${money(p.price)}\n\nOpen / Buy: ${url}`;try{if(navigator.share){await navigator.share({title:p.name,text,url});}else if(navigator.clipboard){await navigator.clipboard.writeText(url);alert("Plan link copied\n\n"+url);}else{prompt("Copy plan link:",url);}}catch(e){try{prompt("Copy plan link:",url)}catch(_){} }}
-async function openLinkedProduct(){
-  const qs=new URLSearchParams(location.search),code=qs.get("p"),pid=qs.get("pid"),encoded=qs.get("plan"),raw=qs.get("product");
-  if(code===null&&!pid&&encoded===null&&raw===null)return;
-  try{await window.__ownerDataReady}catch(e){}
-  let i=-1;
-  if(code)i=products.findIndex(p=>shortCode(p)===code);
-  if(i<0&&pid)i=products.findIndex(p=>String(p.id||"")===String(pid));
-  if(i<0&&encoded){const k=decodeKey(encoded);i=products.findIndex(p=>productKey(p)===k);}
-  if(i<0&&raw!==null&&/^\d+$/.test(raw))i=Number(raw);
-  if(Number.isInteger(i)&&i>=0&&products[i]&&!products[i].comingSoon){active="All";render();setTimeout(()=>{scrollToId("products");openOrder(i);},180);}
-  else if(code||encoded||pid)setTimeout(()=>openLinkedProduct(),900);
+function productUrl(i){
+  const p=products[i];
+  const base=window.location.origin+window.location.pathname;
+  const key=encodeURIComponent(encodeKey(productKey(p)));
+  // Always include the portable product key; Firebase ID is an additional fast lookup.
+  return p&&p.id ? base+"?plan="+key+"&pid="+encodeURIComponent(String(p.id)) : base+"?plan="+key;
 }
+async function sharePlan(i){
+  const p=products[i], url=productUrl(i);
+  const text=`${p.name} • ${p.meta} • ${money(p.price)}\n\nOpen / Buy: ${url}`;
+  try{if(navigator.share){await navigator.share({title:p.name,text,url});}else if(navigator.clipboard){await navigator.clipboard.writeText(url);alert("Plan link copied\n\n"+url);}else{prompt("Copy plan link:",url);}}catch(e){try{prompt("Copy plan link:",url)}catch(_){}}
+}
+async function openLinkedProduct(){
+  const qs=new URLSearchParams(location.search), pid=qs.get("pid"), encoded=qs.get("plan"), raw=qs.get("product");
+  if(!pid && encoded===null && raw===null) return;
+  // Wait until Firebase products have been merged into the static catalogue.
+  try{await window.__ownerDataReady;}catch(e){}
+  let i=-1;
+  if(pid)i=products.findIndex(p=>String(p.id||"")===String(pid));
+  if(i<0 && encoded){const k=decodeKey(encoded);i=products.findIndex(p=>productKey(p)===k);}
+  if(i<0 && raw!==null && /^\d+$/.test(raw))i=Number(raw);
+  if(Number.isInteger(i)&&i>=0&&products[i]&&!products[i].comingSoon){
+    active="All"; render();
+    setTimeout(()=>{scrollToId("products"); openOrder(i);},180);
+  }else if(encoded){
+    // One final retry for slow mobile Firebase/network loads.
+    setTimeout(()=>openLinkedProduct(),900);
+  }
+}
+
 function getFinalAmount(){
   if(!selected)return 0;
   return Math.max(0, Number(selected.price||0)-Number(couponDiscount||0));
@@ -1103,6 +1106,7 @@ function updateOrderTotal(){
   const final=getFinalAmount();
   const priceEl=document.getElementById("mPrice");
   if(priceEl) priceEl.innerHTML=couponApplied ? `<span class="oldTotal">${money(base)}</span>${money(final)}` : money(base);
+  const qrAmountEl=document.getElementById("qrAmount"); if(qrAmountEl) qrAmountEl.textContent=money(final);
   const line=document.getElementById("couponDiscountLine");
   if(line){line.style.display=couponApplied?"flex":"none";document.getElementById("couponDiscountAmount").textContent="−"+money(couponDiscount);const label=document.getElementById("couponDiscountLabel");if(label)label.textContent=`Coupon Discount (${couponPercent}%)`; }
 }
@@ -1112,43 +1116,34 @@ function applyCoupon(){
   const msg=document.getElementById("couponMsg");
   const code=(input?.value||"").trim().toUpperCase();
   couponApplied=false; couponDiscount=0; couponCodeApplied=""; couponPercent=0;
-  const s=window.OWNER_SETTINGS||{};
-  const c1=String(s.coupon1Code||"").trim().toUpperCase(), p1=Number(s.coupon1Percent||0);
-  const c2=String(s.coupon2Code||"").trim().toUpperCase(), p2=Number(s.coupon2Percent||0);
-  let matched=false;
-  if(code && s.coupon1Enabled!==false && c1 && code===c1 && p1>0){couponPercent=p1;couponCodeApplied=c1;matched=true;}
-  else if(code && s.coupon2Enabled!==false && c2 && code===c2 && p2>0){couponPercent=p2;couponCodeApplied=c2;matched=true;}
-  if(matched){
-    couponDiscount=Math.round(Number(selected.price||0)*couponPercent/100);
+  if(code==="PREMIUMPLAN"){
+    couponPercent=10;
+    couponDiscount=Math.round(Number(selected.price||0)*0.10);
+    couponCodeApplied="PREMIUMPLAN";
     couponApplied=true;
-    msg.textContent=`✓ ${couponCodeApplied} applied — ${couponPercent}% OFF (${money(couponDiscount)} saved)`;
+    msg.textContent=`✓ PREMIUMPLAN applied — 10% OFF (${money(couponDiscount)} saved)`;
     msg.className="couponMsg ok";
-  }else if(!code){msg.textContent="Enter coupon code to apply the discount.";msg.className="couponMsg err";}
-  else{msg.textContent="Invalid or inactive coupon code.";msg.className="couponMsg err";}
+  }else if(code==="PREMIUM25"){
+    couponPercent=25;
+    couponDiscount=Math.round(Number(selected.price||0)*0.25);
+    couponCodeApplied="PREMIUM25";
+    couponApplied=true;
+    msg.textContent=`✓ PREMIUM25 applied — 25% OFF (${money(couponDiscount)} saved)`;
+    msg.className="couponMsg ok";
+  }else if(!code){
+    msg.textContent="Enter coupon code to apply the discount.";
+    msg.className="couponMsg err";
+  }else{
+    msg.textContent="Invalid coupon code.";
+    msg.className="couponMsg err";
+  }
   updateOrderTotal();
-}
-
-function updateOrderProductHero(p){
-  const img=document.getElementById("mLogo");
-  const fallback=document.getElementById("mLogoFallback");
-  const name=document.getElementById("mLogoName");
-  const meta=document.getElementById("mLogoMeta");
-  if(!img||!fallback||!name||!meta)return;
-  name.textContent=p?.name||"Subscription";
-  meta.textContent=p?.meta||"Selected subscription";
-  fallback.textContent=initials(p?.name||"Subscription");
-  fallback.style.display="none";
-  img.style.display="block";
-  const src=p?.img?asset(p.img):"";
-  img.src=src||"";
-  if(!src){img.style.display="none";fallback.style.display="grid";}
 }
 
 function openOrder(i){
   const base=products[i]; if(!base)return;
-  if(base.active===false){showPurchasePopup("This plan is currently Out of Stock");return;}
   const variants=products.map((p,idx)=>({p,i:idx}))
-    .filter(x=>x.p.name===base.name && x.p.cat===base.cat && !x.p.comingSoon && x.p.active!==false)
+    .filter(x=>x.p.name===base.name && x.p.cat===base.cat && !x.p.comingSoon)
     .sort((a,b)=>planSortValue(a.p)-planSortValue(b.p));
   const currentIndex=variants.findIndex(x=>x.i===i);
   selected=(currentIndex>=0?variants[currentIndex]:variants[0]).p;
@@ -1156,7 +1151,6 @@ function openOrder(i){
   document.getElementById("modalTitle").textContent="Order • "+selected.name;
   document.getElementById("mPlan").textContent=selected.name;
   document.getElementById("mMeta").textContent=selected.meta;
-  updateOrderProductHero(selected);
   const picker=document.getElementById("modalVariantPicker");
   if(picker && variants.length>1){
     picker.style.display="block";
@@ -1174,7 +1168,6 @@ function chooseModalVariant(i){
   document.getElementById("modalTitle").textContent="Order • "+selected.name;
   document.getElementById("mPlan").textContent=selected.name;
   document.getElementById("mMeta").textContent=selected.meta;
-  updateOrderProductHero(selected);
   document.querySelectorAll("#modalVariantPicker .variantBtn").forEach(btn=>btn.classList.toggle("active",Number(btn.dataset.index)===i));
   const ci=document.getElementById("couponCode"); if(ci)ci.value="";
   const cm=document.getElementById("couponMsg"); if(cm){cm.textContent="";cm.className="couponMsg";}
@@ -1195,6 +1188,14 @@ WhatsApp: ${phone||"Not provided"}
 Email: ${email||"Not provided"}`;
 }
 
+function payWithUPI(appName){
+  if(!selected){alert("Please select a plan first.");return;}
+  const amount=Number(getFinalAmount()).toFixed(2);
+  const note=`Premium Entertainment - ${selected.name}`;
+  const upiUrl=`upi://pay?pa=${encodeURIComponent(UPI)}&pn=${encodeURIComponent("Premium Entertainment Store")}&am=${encodeURIComponent(amount)}&cu=INR&tn=${encodeURIComponent(note)}`;
+  try{ window.location.href=upiUrl; }catch(e){ alert("UPI app link could not be opened. Please scan the QR code and enter amount ₹"+amount+"."); }
+}
+
 function sendOrder(){
   if(!selected)return;
   const name=document.getElementById("name").value.trim();
@@ -1204,17 +1205,6 @@ function sendOrder(){
   setTimeout(()=>{showPurchaseSuccess(name,phone,selected);showSidePurchase(name,phone,selected);addActivity(name,phone,selected);},700);
 }
 
-function payUPI(){
-  if(!selected)return;
-  const name=document.getElementById("name").value.trim();
-  const phone=document.getElementById("phone").value.trim();
-  if(!name||!phone){alert("Please enter Full Name and WhatsApp Number first.");return;}
-  const params=new URLSearchParams({
-    pa:UPI,pn:"Premium Entertainment",am:String(getFinalAmount()),cu:"INR",
-    tn:selected.name+" - "+selected.meta+(couponApplied?` - ${couponCodeApplied} ${couponPercent}% OFF`:"")
-  });
-  window.location.href="upi://pay?"+params.toString();
-}
 
 renderCategories();renderRecent();render();openLinkedProduct();
 </script>
@@ -1260,8 +1250,7 @@ function renderActivity(){
 function escapeHtml(v){return String(v).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
 function money2(n){return '₹'+Number(n||0).toLocaleString('en-IN')}
 function addToCart(i){
-  const p=products[i]; if(!p)return;
-  if(p.active===false){showPurchasePopup("This plan is currently Out of Stock");return;}
+  const p=products[i];
   const found=cart.find(x=>x.i===i);
   if(found) found.qty++;
   else cart.push({i,qty:1});
@@ -1389,8 +1378,8 @@ function hideSidePurchase(){document.getElementById("sidePurchase").classList.re
 </script>
 
 <!-- Background Music: autoplay when allowed; otherwise unlock on the first user gesture -->
-<audio id="siteMusic" preload="none" autoplay loop playsinline muted>
-  <source src="./aaj-ki-raat-stree-2.mp3" type="audio/mpeg">
+<audio id="siteMusic" preload="auto" autoplay loop playsinline muted>
+  <source src="./music.mp3" type="audio/mpeg">
 </audio>
 <div id="musicHint" style="position:fixed;left:50%;bottom:82px;transform:translateX(-50%);z-index:99999;background:#7d163f;color:#fff;border:1px solid #d6a62e;border-radius:999px;padding:9px 14px;font:800 12px system-ui;box-shadow:0 8px 24px rgba(0,0,0,.2);display:none;white-space:nowrap">🎵 Tap anywhere to start music</div>
 <script>
@@ -1398,14 +1387,12 @@ function hideSidePurchase(){document.getElementById("sidePurchase").classList.re
   const a=document.getElementById('siteMusic');
   const hint=document.getElementById('musicHint');
   if(!a)return;
-  async function loadRemoteSong(){const path=a.dataset.remoteSongRef;if(!path)return false;try{const cfg=window.FIREBASE_CONFIG;if(!cfg)return false;const {initializeApp,getApps,getApp}=await import('https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js');const {getDatabase,ref,get}=await import('https://www.gstatic.com/firebasejs/12.1.0/firebase-database.js');const app=getApps().length?getApp():initializeApp(cfg);const snap=await get(ref(getDatabase(app),path));const v=snap.val();if(v&&v.data){a.querySelector('source').src=v.data;a.src=v.data;a.load();return true}}catch(e){console.warn('Remote song load failed',e)}return false;}
-  a.loop=true; a.preload='none'; a.volume=1;
+  a.loop=true; a.preload='auto'; a.volume=1;
   let unlocked=false;
   function hide(){if(hint)hint.style.display='none';}
-  async function unlock(){
+  function unlock(){
     if(unlocked)return;
     unlocked=true;
-    if(a.dataset.remoteSongRef) await loadRemoteSong();
     a.muted=false;
     a.volume=1;
     const p=a.play();
@@ -1414,7 +1401,7 @@ function hideSidePurchase(){document.getElementById("sidePurchase").classList.re
     hide();
   }
   function tryAuto(){
-    if(!a.src){a.src='aaj-ki-raat-stree-2.mp3';a.load();}
+    if(!a.src){a.src='music.mp3';a.load();}
     a.muted=false;
     const p=a.play();
     if(p && p.catch)p.catch(function(){ if(hint)hint.style.display='block'; });
@@ -1564,12 +1551,10 @@ body.layout-grid .grid{grid-template-columns:repeat(4,minmax(0,1fr))!important}.
   (async()=>{try{
     const {initializeApp,getApps,getApp}=await import('https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js');
     const {getFirestore,collection,getDocs,doc,getDoc}=await import('https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js');
-    const {getDatabase,ref,get}=await import('https://www.gstatic.com/firebasejs/12.1.0/firebase-database.js');
-    const app=getApps().length?getApp():initializeApp(cfg), db=getFirestore(app), rtdb=getDatabase(app);
-    async function mediaValue(refPath){try{const snap=await get(ref(rtdb,refPath));const v=snap.val();return v&&v.data?v.data:''}catch(e){console.warn('Owner media read failed',e);return ''}}
+    const app=getApps().length?getApp():initializeApp(cfg), db=getFirestore(app);
     const snap=await getDocs(collection(db,'products'));
     if(!snap.empty){
-      const remote=snap.docs.map(d=>({id:d.id,...d.data()}));
+      const remote=snap.docs.map(d=>({id:d.id,...d.data()})).filter(p=>p.active!==false);
       if(remote.length){
         // Keep the original catalogue visible and add/update owner-managed Firebase plans.
         // This prevents the catalogue from disappearing when Firebase contains only a test/new plan.
@@ -1585,31 +1570,9 @@ body.layout-grid .grid{grid-template-columns:repeat(4,minmax(0,1fr))!important}.
     const settings=await getDoc(doc(db,'siteSettings','main'));
     if(settings.exists()){
       const x=settings.data();
-      window.OWNER_SETTINGS={...window.OWNER_SETTINGS,...x};
-      (function applyOwnerAppearance(cfg){
-        const root=document.documentElement, body=document.body;
-        const theme=cfg.theme||'auto';
-        let dark=theme==='dark';
-        if(theme==='auto') dark=window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches;
-        body.classList.toggle('owner-light',!dark); body.classList.toggle('owner-dark',dark);
-        if(cfg.bg) root.style.setProperty('--owner-bg',cfg.bg);
-        if(cfg.text) root.style.setProperty('--owner-text',cfg.text);
-        if(cfg.accent) root.style.setProperty('--accent',cfg.accent);
-        if(cfg.accent) root.style.setProperty('--accent2',cfg.accent);
-        const fonts={system:'system-ui,-apple-system,Segoe UI,Roboto,Arial',poppins:'Poppins,system-ui,sans-serif',roboto:'Roboto,Arial,sans-serif',serif:'Georgia,serif'};
-        root.style.setProperty('--owner-font',fonts[cfg.font]||fonts.system);
-        root.style.setProperty('--owner-weight',cfg.bold?'800':'400');
-        document.documentElement.lang=cfg.language==='hi'?'hi':'en';
-        if(cfg.language==='hi'){
-          const map={'Search':'खोजें','Buy Now':'अभी खरीदें','Add to Cart':'कार्ट में जोड़ें','Share':'शेयर','Home':'होम','Categories':'श्रेणियाँ','All Plans':'सभी प्लान','Offers':'ऑफर्स','Login':'लॉगिन','Weekly Offer':'साप्ताहिक ऑफर','Appearance':'दिखावट','Theme':'थीम','Layout':'लेआउट','Accent Colour':'मुख्य रंग'};
-          document.querySelectorAll('button,a,h1,h2,h3,h4,label,span').forEach(el=>{const t=el.textContent.trim();if(map[t])el.textContent=map[t]});
-        }
-      })(x);
       if(x.whatsapp) WHATSAPP=String(x.whatsapp).replace(/\D/g,'');
       if(x.upi) UPI=String(x.upi);
-      if(x.logo){const u=String(x.logo).startsWith('rtdb://')?await mediaValue('siteMedia/logo'):x.logo;if(u)document.querySelectorAll('.brandMark img').forEach(i=>i.src=u)}
-      if(x.poster){const u=String(x.poster).startsWith('rtdb://')?await mediaValue('siteMedia/poster'):x.poster;const pi=document.querySelector('.navratriFest img');if(pi&&u)pi.src=u;}
-      if(x.song){const audio=document.getElementById('siteMusic');if(audio){if(String(x.song).startsWith('rtdb://')){window.__OWNER_SONG_REF='siteMedia/song';audio.dataset.remoteSongRef='siteMedia/song';}else{audio.querySelector('source').src=x.song;audio.src=x.song;audio.load();}}}
+      if(x.logo){document.querySelectorAll('.brandMark img').forEach(i=>i.src=x.logo)}
       if(x.offerTitle||x.offerText){
         const b=document.querySelector('.pinkPromo .promoCopy b'); const sp=document.querySelector('.pinkPromo .promoCopy span');
         if(b&&x.offerTitle)b.textContent=x.offerTitle;
