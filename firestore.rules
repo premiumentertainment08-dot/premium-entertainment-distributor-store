@@ -21,16 +21,13 @@ service cloud.firestore {
       allow create, update, delete: if isAdmin();
     }
 
-    // Checkout writes to `orders/{orderId}` and tracking reads one exact order.
-    match /orders/{orderId} {
-      allow create: if request.resource.data.orderId == orderId
+    match /paymentOrders/{orderId} {
+      allow create: if request.resource.data.status == "PENDING"
                     && request.resource.data.amount is number
                     && request.resource.data.amount >= 0
-                    && request.resource.data.status == "Payment Pending"
-                    && request.resource.data.paymentStatus == "Pending";
-      allow get: if resource.data.orderId == orderId;
-      allow list: if isAdmin();
-      allow update, delete: if isAdmin();
+                    && request.resource.data.orderId == orderId
+                    && request.resource.data.screenshotPath is string;
+      allow read, update, delete: if isAdmin();
     }
   }
 }
