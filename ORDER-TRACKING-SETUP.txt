@@ -1,0 +1,14 @@
+ORDER PAYMENT + TRACKING UPDATE
+
+UPI ID: Q00403870@ybl
+QR: payment-qr.jpg (cropped to exclude the phone number)
+
+Batch 1 contains the store checkout and admin Orders tab. Batch 2 contains track-order.html, payment-qr.jpg, and Firestore rules aligned to the `orders/{orderId}` collection used by checkout/tracking/admin.
+
+BEFORE PUBLISHING
+1. In firestore.rules, replace YOUR_ADMIN_EMAIL@example.com with the exact email used to sign in to the owner/admin panel. Do not leave the placeholder.
+2. Publish the rules in Firebase Console > Firestore Database > Rules. Review the rules against your existing app before replacing live rules.
+3. Test a small checkout: confirm an `orders/{Order ID}` document appears, then test Track Order and an admin status update.
+4. Never enable public writes or public order listing. The supplied rules permit public creation of constrained pending orders and exact-document reads for tracking; order listing and updates require the configured admin email.
+
+Note: Payment is not automatically verified by UPI. The admin must verify the payment before changing Payment Status to Verified.
