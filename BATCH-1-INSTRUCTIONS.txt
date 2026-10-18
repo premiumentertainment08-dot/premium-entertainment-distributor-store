@@ -1,0 +1,6 @@
+PAYMENT / CHECKOUT BATCH 1
+Files: index.html, payment-qr.jpg
+Includes the supplied QR, UPI ID Q00403870@ybl, order ID checkout integration, and delivery estimate 1–6 hours after payment verification.
+
+IMPORTANT:
+This is a replacement patch based on the integration reference prepared for this project. It may not include any edits made to the live index.html after that reference was created. Keep a backup first. Firebase configuration is not included or changed.

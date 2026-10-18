@@ -1,0 +1,12 @@
+PREMIUM ENTERTAINMENT STORE — PAYMENT / ORDER TRACKING PATCH
+
+Files included: index.html, payment-qr.jpg, admin.html, track-order.html and instructions.
+
+IMPORTANT SAFETY NOTES
+- Make a backup of your currently working website files before uploading anything.
+- This patch was prepared from the available integration reference files; it has NOT been deployed to GitHub and has NOT been verified against the latest live website.
+- index.html and admin.html are replacement files. If your live files were edited after the reference was prepared, uploading these may overwrite those edits. Do not upload blindly if you need to preserve those changes.
+- firebase-config.js and product data are intentionally NOT included. Keep your existing versions.
+- UPI ID: Q00403870@ybl. The QR image is included.
+- Order creation/tracking depends on Firestore permissions and the admin login. Merge the orders permissions into your existing Firestore rules; do not replace all rules with a generic rules file.
+- Verify test order creation, customer lookup by Order ID, admin status update, and mobile checkout before treating the site as production-ready.
