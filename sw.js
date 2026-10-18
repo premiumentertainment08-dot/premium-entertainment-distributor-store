@@ -1,4 +1,4 @@
-const CACHE = 'premium-entertainment-pwa-v3';
+const CACHE = 'premium-entertainment-pwa-v2';
 const APP_SHELL = './';
 self.addEventListener('install', event => {
   self.skipWaiting();
